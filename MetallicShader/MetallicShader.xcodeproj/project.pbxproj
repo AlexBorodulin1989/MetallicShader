@@ -25,6 +25,16 @@
 		55AC9AEE260658C000165003 /* MainViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AED260658C000165003 /* MainViewOutput.swift */; };
 		55AC9AF9260658EE00165003 /* MainRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AF8260658EE00165003 /* MainRouterInput.swift */; };
 		55AC9B0226065CF700165003 /* MainAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B0126065CF700165003 /* MainAssembler.swift */; };
+		55AC9B132606636A00165003 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B122606636A00165003 /* ProjectViewController.swift */; };
+		55AC9B18260663CE00165003 /* Project.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55AC9B17260663CE00165003 /* Project.storyboard */; };
+		55AC9B1E2606693B00165003 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B1D2606693A00165003 /* Renderer.swift */; };
+		55AC9B262606766000165003 /* ProjectAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B252606766000165003 /* ProjectAssembler.swift */; };
+		55AC9B2B260677F500165003 /* VolumeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B2A260677F500165003 /* VolumeItem.swift */; };
+		55AC9B3026067C2400165003 /* ProjectPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B2F26067C2400165003 /* ProjectPresenter.swift */; };
+		55AC9B3526067C6600165003 /* ProjectViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B3426067C6600165003 /* ProjectViewOutput.swift */; };
+		55AC9B3A26067D7300165003 /* ProjectInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B3926067D7300165003 /* ProjectInteractor.swift */; };
+		55AC9B4226067EF500165003 /* ProjectInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B4126067EF500165003 /* ProjectInteractorInput.swift */; };
+		55AC9B472606812600165003 /* ProjectInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B462606812600165003 /* ProjectInteractorOutput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +79,16 @@
 		55AC9AED260658C000165003 /* MainViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewOutput.swift; sourceTree = "<group>"; };
 		55AC9AF8260658EE00165003 /* MainRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouterInput.swift; sourceTree = "<group>"; };
 		55AC9B0126065CF700165003 /* MainAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAssembler.swift; sourceTree = "<group>"; };
+		55AC9B122606636A00165003 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
+		55AC9B17260663CE00165003 /* Project.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Project.storyboard; sourceTree = "<group>"; };
+		55AC9B1D2606693A00165003 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		55AC9B252606766000165003 /* ProjectAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectAssembler.swift; sourceTree = "<group>"; };
+		55AC9B2A260677F500165003 /* VolumeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeItem.swift; sourceTree = "<group>"; };
+		55AC9B2F26067C2400165003 /* ProjectPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectPresenter.swift; sourceTree = "<group>"; };
+		55AC9B3426067C6600165003 /* ProjectViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewOutput.swift; sourceTree = "<group>"; };
+		55AC9B3926067D7300165003 /* ProjectInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInteractor.swift; sourceTree = "<group>"; };
+		55AC9B4126067EF500165003 /* ProjectInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInteractorInput.swift; sourceTree = "<group>"; };
+		55AC9B462606812600165003 /* ProjectInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInteractorOutput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,8 +139,10 @@
 		557494782605FF18007E6468 /* MetallicShader */ = {
 			isa = PBXGroup;
 			children = (
+				55AC9B1C260668F400165003 /* Renderer */,
 				55AC9AAF2606546300165003 /* AppDelegate */,
 				55AC9AAE2606543200165003 /* MainModule */,
+				55AC9B0C260662CB00165003 /* ProjectModule */,
 				557494852605FF1A007E6468 /* Assets.xcassets */,
 				557494872605FF1A007E6468 /* LaunchScreen.storyboard */,
 				5574948A2605FF1A007E6468 /* Info.plist */,
@@ -212,6 +234,62 @@
 				55AC9B0126065CF700165003 /* MainAssembler.swift */,
 			);
 			path = Assembler;
+			sourceTree = "<group>";
+		};
+		55AC9B0C260662CB00165003 /* ProjectModule */ = {
+			isa = PBXGroup;
+			children = (
+				55AC9B0D260662F500165003 /* View */,
+				55AC9B0E260662FD00165003 /* Interactor */,
+				55AC9B0F2606630F00165003 /* Presenter */,
+				55AC9B112606633D00165003 /* Assembler */,
+			);
+			path = ProjectModule;
+			sourceTree = "<group>";
+		};
+		55AC9B0D260662F500165003 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				55AC9B122606636A00165003 /* ProjectViewController.swift */,
+				55AC9B3426067C6600165003 /* ProjectViewOutput.swift */,
+				55AC9B17260663CE00165003 /* Project.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		55AC9B0E260662FD00165003 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				55AC9B3926067D7300165003 /* ProjectInteractor.swift */,
+				55AC9B4126067EF500165003 /* ProjectInteractorInput.swift */,
+				55AC9B462606812600165003 /* ProjectInteractorOutput.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		55AC9B0F2606630F00165003 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				55AC9B2F26067C2400165003 /* ProjectPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		55AC9B112606633D00165003 /* Assembler */ = {
+			isa = PBXGroup;
+			children = (
+				55AC9B252606766000165003 /* ProjectAssembler.swift */,
+			);
+			path = Assembler;
+			sourceTree = "<group>";
+		};
+		55AC9B1C260668F400165003 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				55AC9B1D2606693A00165003 /* Renderer.swift */,
+				55AC9B2A260677F500165003 /* VolumeItem.swift */,
+			);
+			path = Renderer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +395,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55AC9B18260663CE00165003 /* Project.storyboard in Resources */,
 				557494892605FF1A007E6468 /* LaunchScreen.storyboard in Resources */,
 				557494862605FF1A007E6468 /* Assets.xcassets in Resources */,
 				557494812605FF18007E6468 /* Main.storyboard in Resources */,
@@ -345,17 +424,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				55AC9AC32606577D00165003 /* MainInteractorInput.swift in Sources */,
+				55AC9B4226067EF500165003 /* ProjectInteractorInput.swift in Sources */,
 				5574947E2605FF18007E6468 /* MainViewController.swift in Sources */,
 				55AC9AE9260658AE00165003 /* MainViewInput.swift in Sources */,
 				557494842605FF18007E6468 /* MetallicShader.xcdatamodeld in Sources */,
 				55AC9ACE260657B900165003 /* MainPresenter.swift in Sources */,
 				55AC9AF9260658EE00165003 /* MainRouterInput.swift in Sources */,
+				55AC9B262606766000165003 /* ProjectAssembler.swift in Sources */,
 				55AC9B0226065CF700165003 /* MainAssembler.swift in Sources */,
+				55AC9B3A26067D7300165003 /* ProjectInteractor.swift in Sources */,
 				5574947A2605FF18007E6468 /* AppDelegate.swift in Sources */,
 				55AC9AC82606579100165003 /* MainInteractorOutput.swift in Sources */,
+				55AC9B3526067C6600165003 /* ProjectViewOutput.swift in Sources */,
+				55AC9B3026067C2400165003 /* ProjectPresenter.swift in Sources */,
 				55AC9ABA2606575C00165003 /* MainInteractor.swift in Sources */,
 				55AC9AE12606584200165003 /* MainRouter.swift in Sources */,
 				55AC9AEE260658C000165003 /* MainViewOutput.swift in Sources */,
+				55AC9B472606812600165003 /* ProjectInteractorOutput.swift in Sources */,
+				55AC9B2B260677F500165003 /* VolumeItem.swift in Sources */,
+				55AC9B132606636A00165003 /* ProjectViewController.swift in Sources */,
+				55AC9B1E2606693B00165003 /* Renderer.swift in Sources */,
 				5574947C2605FF18007E6468 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

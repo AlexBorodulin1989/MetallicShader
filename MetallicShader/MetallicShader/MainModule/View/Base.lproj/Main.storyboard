@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PEC-ZU-Cgm">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Projects-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="MetallicShader" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,6 +22,7 @@
                                 <state key="normal" title="Add new project"/>
                                 <connections>
                                     <action selector="newProjectAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="baH-Wp-nTl"/>
+                                    <segue destination="iro-0y-KnW" kind="show" id="PwM-Aa-mvL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -32,15 +33,44 @@
                             <constraint firstItem="GgK-cH-ZVq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="twS-fD-Lco"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Projects" id="hfu-KS-akC"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <customObject id="nMZ-dF-gd4" customClass="MainAssembler" customModule="MetallicShader" customModuleProvider="target">
                     <connections>
-                        <outlet property="viewController" destination="BYZ-38-t0r" id="SU9-hR-FTK"/>
+                        <outlet property="viewController" destination="BYZ-38-t0r" id="lsc-WL-zPi"/>
                     </connections>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="91" y="80"/>
+            <point key="canvasLocation" x="1000.0000000000001" y="79.6875"/>
+        </scene>
+        <!--Project-->
+        <scene sceneID="dSr-Gv-SB7">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Project" id="iro-0y-KnW" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="mPs-4v-xtD"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bwE-4D-PLz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1718.840579710145" y="78.348214285714278"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EMY-lE-8Kw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PEC-ZU-Cgm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iPo-bH-mIk">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Yqg-Ar-Dcm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MKg-o2-dnx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="89.855072463768124" y="79.6875"/>
         </scene>
     </scenes>
     <resources>
