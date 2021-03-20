@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol ProjectInteractorOutput {
-    func viewDidLoad()
+protocol ProjectInteractorOutput: AnyObject {
+    func initialShaderFetched(shader: String)
 }

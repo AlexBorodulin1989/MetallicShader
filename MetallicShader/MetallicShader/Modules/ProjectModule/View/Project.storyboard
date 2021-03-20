@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,20 +19,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mtkView contentMode="scaleToFill" colorPixelFormat="BGRA8Unorm" depthStencilPixelFormat="Depth32Float" translatesAutoresizingMaskIntoConstraints="NO" id="YQN-8Z-zsA">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="726"/>
                             </mtkView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pih-xW-WGo">
+                                <rect key="frame" x="0.0" y="770" width="414" height="92"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="92" id="hPy-6S-EgX"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o2j-7f-csL"/>
                         <color key="backgroundColor" name="AccentColor"/>
                         <constraints>
                             <constraint firstItem="YQN-8Z-zsA" firstAttribute="top" secondItem="o2j-7f-csL" secondAttribute="top" id="0GO-ln-aOL"/>
                             <constraint firstItem="YQN-8Z-zsA" firstAttribute="trailing" secondItem="o2j-7f-csL" secondAttribute="trailing" id="1fl-BC-q0p"/>
-                            <constraint firstItem="YQN-8Z-zsA" firstAttribute="bottom" secondItem="o2j-7f-csL" secondAttribute="bottom" id="6d5-fu-HPq"/>
+                            <constraint firstItem="Pih-xW-WGo" firstAttribute="leading" secondItem="o2j-7f-csL" secondAttribute="leading" id="Mct-lo-NL2"/>
+                            <constraint firstItem="Pih-xW-WGo" firstAttribute="trailing" secondItem="o2j-7f-csL" secondAttribute="trailing" id="UY4-tD-8UC"/>
+                            <constraint firstItem="Pih-xW-WGo" firstAttribute="bottom" secondItem="o2j-7f-csL" secondAttribute="bottom" id="Wwc-Nd-tnE"/>
                             <constraint firstItem="YQN-8Z-zsA" firstAttribute="leading" secondItem="o2j-7f-csL" secondAttribute="leading" id="kYR-wF-MaB"/>
+                            <constraint firstItem="Pih-xW-WGo" firstAttribute="top" secondItem="YQN-8Z-zsA" secondAttribute="bottom" id="qFN-bW-sao"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mtkView" destination="YQN-8Z-zsA" id="ZXw-7Z-qKg"/>
+                        <outlet property="shaderEditorView" destination="Pih-xW-WGo" id="qVZ-OT-0dB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7y3-4Q-oKa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -48,5 +64,11 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

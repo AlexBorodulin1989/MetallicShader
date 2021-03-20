@@ -35,6 +35,8 @@
 		55AC9B3A26067D7300165003 /* ProjectInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B3926067D7300165003 /* ProjectInteractor.swift */; };
 		55AC9B4226067EF500165003 /* ProjectInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B4126067EF500165003 /* ProjectInteractorInput.swift */; };
 		55AC9B472606812600165003 /* ProjectInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B462606812600165003 /* ProjectInteractorOutput.swift */; };
+		55AC9B5526068A9400165003 /* InitialShader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 55AC9B5426068A9400165003 /* InitialShader.txt */; };
+		55AC9B5D2606902900165003 /* ProjectViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B5C2606902900165003 /* ProjectViewInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		55AC9B3926067D7300165003 /* ProjectInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInteractor.swift; sourceTree = "<group>"; };
 		55AC9B4126067EF500165003 /* ProjectInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInteractorInput.swift; sourceTree = "<group>"; };
 		55AC9B462606812600165003 /* ProjectInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInteractorOutput.swift; sourceTree = "<group>"; };
+		55AC9B5426068A9400165003 /* InitialShader.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = InitialShader.txt; sourceTree = "<group>"; };
+		55AC9B5C2606902900165003 /* ProjectViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,14 +143,10 @@
 		557494782605FF18007E6468 /* MetallicShader */ = {
 			isa = PBXGroup;
 			children = (
-				55AC9B1C260668F400165003 /* Renderer */,
 				55AC9AAF2606546300165003 /* AppDelegate */,
-				55AC9AAE2606543200165003 /* MainModule */,
-				55AC9B0C260662CB00165003 /* ProjectModule */,
-				557494852605FF1A007E6468 /* Assets.xcassets */,
-				557494872605FF1A007E6468 /* LaunchScreen.storyboard */,
-				5574948A2605FF1A007E6468 /* Info.plist */,
-				557494822605FF18007E6468 /* MetallicShader.xcdatamodeld */,
+				55AC9B4B2606885700165003 /* Services */,
+				55AC9B4C2606886600165003 /* Modules */,
+				55AC9B4D2606889900165003 /* Resources */,
 			);
 			path = MetallicShader;
 			sourceTree = "<group>";
@@ -251,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				55AC9B122606636A00165003 /* ProjectViewController.swift */,
+				55AC9B5C2606902900165003 /* ProjectViewInput.swift */,
 				55AC9B3426067C6600165003 /* ProjectViewOutput.swift */,
 				55AC9B17260663CE00165003 /* Project.storyboard */,
 			);
@@ -290,6 +291,35 @@
 				55AC9B2A260677F500165003 /* VolumeItem.swift */,
 			);
 			path = Renderer;
+			sourceTree = "<group>";
+		};
+		55AC9B4B2606885700165003 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				55AC9B1C260668F400165003 /* Renderer */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		55AC9B4C2606886600165003 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				55AC9AAE2606543200165003 /* MainModule */,
+				55AC9B0C260662CB00165003 /* ProjectModule */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		55AC9B4D2606889900165003 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				557494852605FF1A007E6468 /* Assets.xcassets */,
+				557494872605FF1A007E6468 /* LaunchScreen.storyboard */,
+				5574948A2605FF1A007E6468 /* Info.plist */,
+				557494822605FF18007E6468 /* MetallicShader.xcdatamodeld */,
+				55AC9B5426068A9400165003 /* InitialShader.txt */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,6 +427,7 @@
 			files = (
 				55AC9B18260663CE00165003 /* Project.storyboard in Resources */,
 				557494892605FF1A007E6468 /* LaunchScreen.storyboard in Resources */,
+				55AC9B5526068A9400165003 /* InitialShader.txt in Resources */,
 				557494862605FF1A007E6468 /* Assets.xcassets in Resources */,
 				557494812605FF18007E6468 /* Main.storyboard in Resources */,
 			);
@@ -429,6 +460,7 @@
 				55AC9AE9260658AE00165003 /* MainViewInput.swift in Sources */,
 				557494842605FF18007E6468 /* MetallicShader.xcdatamodeld in Sources */,
 				55AC9ACE260657B900165003 /* MainPresenter.swift in Sources */,
+				55AC9B5D2606902900165003 /* ProjectViewInput.swift in Sources */,
 				55AC9AF9260658EE00165003 /* MainRouterInput.swift in Sources */,
 				55AC9B262606766000165003 /* ProjectAssembler.swift in Sources */,
 				55AC9B0226065CF700165003 /* MainAssembler.swift in Sources */,
@@ -622,7 +654,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H9CR65Y9WK;
-				INFOPLIST_FILE = MetallicShader/Info.plist;
+				INFOPLIST_FILE = MetallicShader/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -642,7 +674,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H9CR65Y9WK;
-				INFOPLIST_FILE = MetallicShader/Info.plist;
+				INFOPLIST_FILE = MetallicShader/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

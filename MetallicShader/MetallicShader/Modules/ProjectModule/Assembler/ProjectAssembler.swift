@@ -22,5 +22,8 @@ class ProjectAssembler: NSObject {
         view.output = presenter
         
         presenter.interactor = interactor
+        presenter.view = view
+        
+        interactor.output = presenter
     }
 }

@@ -11,6 +11,7 @@ import MetalKit
 class ProjectViewController: UIViewController {
 
     @IBOutlet weak var mtkView: MTKView!
+    @IBOutlet weak var shaderEditorView: UITextView!
     
     var output: ProjectViewOutput!
     
@@ -18,5 +19,11 @@ class ProjectViewController: UIViewController {
         super.viewDidLoad()
 
         output.mtkViewDidLoad(mtkView)
+    }
+}
+
+extension ProjectViewController: ProjectViewInput {
+    func showInitialShader(shader: String) {
+        shaderEditorView.text = shader
     }
 }

@@ -18,7 +18,7 @@ class Renderer: NSObject {
     unowned var mtkView: MTKView!
     
     var timer: Float = 0
-    
+    /*
     let shader = """
     #include <metal_stdlib>
     using namespace metal;
@@ -34,9 +34,10 @@ class Renderer: NSObject {
     fragment float4 fragment_main() {
     return float4(0, 0.4, 0.21, 1);
     }
-    """
+    """*/
+    var shader: String = ""
     
-    init(metalView: MTKView) {
+    init(metalView: MTKView, shader: String) {
         super.init()
         
         guard
@@ -44,6 +45,8 @@ class Renderer: NSObject {
             let commandQueue = device.makeCommandQueue() else {
             fatalError("GPU not available")
         }
+        
+        self.shader = shader
         
         self.device = device
         self.commandQueue = commandQueue
