@@ -10,8 +10,9 @@ import MetalKit
 
 class ProjectViewController: UIViewController {
 
-    @IBOutlet weak var mtkView: MTKView!
-    @IBOutlet weak var shaderEditorView: UITextView!
+    @IBOutlet fileprivate weak var mtkView: MTKView!
+    @IBOutlet fileprivate weak var shaderEditorView: UITextView!
+    @IBOutlet fileprivate weak var keyboardHeight: NSLayoutConstraint!
     
     var output: ProjectViewOutput!
     
@@ -27,6 +28,14 @@ class ProjectViewController: UIViewController {
 extension ProjectViewController: ProjectViewInput {
     func showInitialShader(shader: String) {
         shaderEditorView.text = shader
+    }
+    
+    func willShowKeyboard(frame: CGRect) {
+        keyboardHeight.constant = -frame.size.height
+    }
+    
+    func willHideKeyboard() {
+        keyboardHeight.constant = 0
     }
 }
 

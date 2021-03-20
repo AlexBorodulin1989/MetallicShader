@@ -26,4 +26,12 @@ extension ProjectPresenter: ProjectInteractorOutput {
     func initialShaderFetched(shader: String) {
         view.showInitialShader(shader: shader)
     }
+    
+    func willShowKeyboard(frame: CGRect) {
+        view.willShowKeyboard(frame: frame)
+    }
+    
+    func willHideKeyboard() {
+        view.willHideKeyboard()
+    }
 }

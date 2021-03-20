@@ -98,8 +98,6 @@ extension Renderer: MTKViewDelegate {
 
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         
-        //renderEncoder.setTriangleFillMode(.lines)
-        
         for submesh in mesh.submeshes {
             renderEncoder.drawIndexedPrimitives(type: .triangle,
                                                 indexCount: submesh.indexCount,
