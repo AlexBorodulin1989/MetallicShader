@@ -37,6 +37,7 @@
 		55AC9B472606812600165003 /* ProjectInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B462606812600165003 /* ProjectInteractorOutput.swift */; };
 		55AC9B5526068A9400165003 /* InitialShader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 55AC9B5426068A9400165003 /* InitialShader.txt */; };
 		55AC9B5D2606902900165003 /* ProjectViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B5C2606902900165003 /* ProjectViewInput.swift */; };
+		55AC9B652606933300165003 /* RendererProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B642606933300165003 /* RendererProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		55AC9B462606812600165003 /* ProjectInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInteractorOutput.swift; sourceTree = "<group>"; };
 		55AC9B5426068A9400165003 /* InitialShader.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = InitialShader.txt; sourceTree = "<group>"; };
 		55AC9B5C2606902900165003 /* ProjectViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewInput.swift; sourceTree = "<group>"; };
+		55AC9B642606933300165003 /* RendererProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +289,7 @@
 		55AC9B1C260668F400165003 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
+				55AC9B642606933300165003 /* RendererProtocol.swift */,
 				55AC9B1D2606693A00165003 /* Renderer.swift */,
 				55AC9B2A260677F500165003 /* VolumeItem.swift */,
 			);
@@ -472,6 +475,7 @@
 				55AC9ABA2606575C00165003 /* MainInteractor.swift in Sources */,
 				55AC9AE12606584200165003 /* MainRouter.swift in Sources */,
 				55AC9AEE260658C000165003 /* MainViewOutput.swift in Sources */,
+				55AC9B652606933300165003 /* RendererProtocol.swift in Sources */,
 				55AC9B472606812600165003 /* ProjectInteractorOutput.swift in Sources */,
 				55AC9B2B260677F500165003 /* VolumeItem.swift in Sources */,
 				55AC9B132606636A00165003 /* ProjectViewController.swift in Sources */,

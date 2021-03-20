@@ -23,4 +23,8 @@ extension ProjectInteractor: ProjectInteractorInput {
             fatalError("Initial file not found")
         }
     }
+    
+    func refreshShader(shader: String) {
+        renderer.refreshShader(shader: shader)
+    }
 }

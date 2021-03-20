@@ -22,8 +22,18 @@ class ProjectViewController: UIViewController {
     }
 }
 
+// MARK: Input
+
 extension ProjectViewController: ProjectViewInput {
     func showInitialShader(shader: String) {
         shaderEditorView.text = shader
+    }
+}
+
+//MARK: - Actions
+
+extension ProjectViewController {
+    @IBAction func refreshPressed(_ sender: Any) {
+        output.refreshShader(shader: shaderEditorView.text)
     }
 }

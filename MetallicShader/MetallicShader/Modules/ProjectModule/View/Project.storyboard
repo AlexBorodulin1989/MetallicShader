@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mtkView contentMode="scaleToFill" colorPixelFormat="BGRA8Unorm" depthStencilPixelFormat="Depth32Float" translatesAutoresizingMaskIntoConstraints="NO" id="YQN-8Z-zsA">
-                                <rect key="frame" x="0.0" y="44" width="414" height="726"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="682"/>
                             </mtkView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pih-xW-WGo">
                                 <rect key="frame" x="0.0" y="770" width="414" height="92"/>
@@ -32,13 +32,35 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GAe-B3-lOY">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgz-D4-T35">
+                                        <rect key="frame" x="8" y="0.0" width="53" height="44"/>
+                                        <state key="normal" title="Refresh"/>
+                                        <connections>
+                                            <action selector="refreshPressed:" destination="AFt-qy-9OM" eventType="touchUpInside" id="TqS-Bc-VY6"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="bgz-D4-T35" firstAttribute="leading" secondItem="GAe-B3-lOY" secondAttribute="leading" constant="8" id="3US-Vm-Dff"/>
+                                    <constraint firstItem="bgz-D4-T35" firstAttribute="top" secondItem="GAe-B3-lOY" secondAttribute="top" id="HHz-KK-PWe"/>
+                                    <constraint firstAttribute="bottom" secondItem="bgz-D4-T35" secondAttribute="bottom" id="K0v-2i-ofM"/>
+                                    <constraint firstAttribute="height" constant="44" id="p3P-Yn-NpF"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="o2j-7f-csL"/>
                         <color key="backgroundColor" name="AccentColor"/>
                         <constraints>
-                            <constraint firstItem="YQN-8Z-zsA" firstAttribute="top" secondItem="o2j-7f-csL" secondAttribute="top" id="0GO-ln-aOL"/>
                             <constraint firstItem="YQN-8Z-zsA" firstAttribute="trailing" secondItem="o2j-7f-csL" secondAttribute="trailing" id="1fl-BC-q0p"/>
+                            <constraint firstItem="GAe-B3-lOY" firstAttribute="top" secondItem="o2j-7f-csL" secondAttribute="top" id="2rX-zM-Ozi"/>
+                            <constraint firstItem="GAe-B3-lOY" firstAttribute="trailing" secondItem="o2j-7f-csL" secondAttribute="trailing" id="Djr-Y9-B8x"/>
+                            <constraint firstItem="YQN-8Z-zsA" firstAttribute="top" secondItem="GAe-B3-lOY" secondAttribute="bottom" id="E69-UA-O0K"/>
                             <constraint firstItem="Pih-xW-WGo" firstAttribute="leading" secondItem="o2j-7f-csL" secondAttribute="leading" id="Mct-lo-NL2"/>
+                            <constraint firstItem="GAe-B3-lOY" firstAttribute="leading" secondItem="o2j-7f-csL" secondAttribute="leading" id="ODV-Qe-1bN"/>
                             <constraint firstItem="Pih-xW-WGo" firstAttribute="trailing" secondItem="o2j-7f-csL" secondAttribute="trailing" id="UY4-tD-8UC"/>
                             <constraint firstItem="Pih-xW-WGo" firstAttribute="bottom" secondItem="o2j-7f-csL" secondAttribute="bottom" id="Wwc-Nd-tnE"/>
                             <constraint firstItem="YQN-8Z-zsA" firstAttribute="leading" secondItem="o2j-7f-csL" secondAttribute="leading" id="kYR-wF-MaB"/>

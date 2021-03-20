@@ -16,6 +16,10 @@ extension ProjectPresenter: ProjectViewOutput {
     func mtkViewDidLoad(_ mtkView: MTKView) {
         interactor.mtkViewDidLoad(mtkView)
     }
+    
+    func refreshShader(shader: String) {
+        interactor.refreshShader(shader: shader)
+    }
 }
 
 extension ProjectPresenter: ProjectInteractorOutput {
