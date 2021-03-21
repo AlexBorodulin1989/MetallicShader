@@ -10,6 +10,7 @@ import MetalKit
 class ProjectPresenter {
     var interactor: ProjectInteractorInput!
     weak var view: ProjectViewInput!
+    var router: ProjectRouterInput!
 }
 
 extension ProjectPresenter: ProjectViewOutput {
@@ -19,6 +20,10 @@ extension ProjectPresenter: ProjectViewOutput {
     
     func refreshShader(shader: String) {
         interactor.refreshShader(shader: shader)
+    }
+    
+    func backPressed() {
+        router.back()
     }
 }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		556AF1E1260713380007DDDD /* ProjectRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AF1E0260713380007DDDD /* ProjectRouter.swift */; };
+		556AF1E62607147C0007DDDD /* ProjectRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AF1E52607147C0007DDDD /* ProjectRouterInput.swift */; };
 		5574947A2605FF18007E6468 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557494792605FF18007E6468 /* AppDelegate.swift */; };
 		5574947C2605FF18007E6468 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5574947B2605FF18007E6468 /* SceneDelegate.swift */; };
 		5574947E2605FF18007E6468 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5574947D2605FF18007E6468 /* MainViewController.swift */; };
@@ -58,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		556AF1E0260713380007DDDD /* ProjectRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRouter.swift; sourceTree = "<group>"; };
+		556AF1E52607147C0007DDDD /* ProjectRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRouterInput.swift; sourceTree = "<group>"; };
 		557494762605FF18007E6468 /* MetallicShader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetallicShader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		557494792605FF18007E6468 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5574947B2605FF18007E6468 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +126,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		556AF1DF260713190007DDDD /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				556AF1E0260713380007DDDD /* ProjectRouter.swift */,
+				556AF1E52607147C0007DDDD /* ProjectRouterInput.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		5574946D2605FF18007E6468 = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +257,7 @@
 				55AC9B0D260662F500165003 /* View */,
 				55AC9B0E260662FD00165003 /* Interactor */,
 				55AC9B0F2606630F00165003 /* Presenter */,
+				556AF1DF260713190007DDDD /* Router */,
 				55AC9B112606633D00165003 /* Assembler */,
 			);
 			path = ProjectModule;
@@ -459,6 +473,8 @@
 			files = (
 				55AC9AC32606577D00165003 /* MainInteractorInput.swift in Sources */,
 				55AC9B4226067EF500165003 /* ProjectInteractorInput.swift in Sources */,
+				556AF1E1260713380007DDDD /* ProjectRouter.swift in Sources */,
+				556AF1E62607147C0007DDDD /* ProjectRouterInput.swift in Sources */,
 				5574947E2605FF18007E6468 /* MainViewController.swift in Sources */,
 				55AC9AE9260658AE00165003 /* MainViewInput.swift in Sources */,
 				557494842605FF18007E6468 /* MetallicShader.xcdatamodeld in Sources */,

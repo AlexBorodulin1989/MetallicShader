@@ -21,6 +21,16 @@ class ProjectViewController: UIViewController {
 
         output.mtkViewDidLoad(mtkView)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
 }
 
 // MARK: Input
@@ -42,6 +52,10 @@ extension ProjectViewController: ProjectViewInput {
 //MARK: - Actions
 
 extension ProjectViewController {
+    @IBAction func backPressed(_ sender: Any) {
+        output.backPressed()
+    }
+    
     @IBAction func refreshPressed(_ sender: Any) {
         output.refreshShader(shader: shaderEditorView.text)
     }
