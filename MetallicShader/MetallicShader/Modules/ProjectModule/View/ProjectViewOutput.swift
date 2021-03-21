@@ -11,4 +11,5 @@ protocol ProjectViewOutput {
     func mtkViewDidLoad(_ mtkView: MTKView)
     func refreshShader(shader: String)
     func backPressed()
+    func resizeEditorPressed()
 }

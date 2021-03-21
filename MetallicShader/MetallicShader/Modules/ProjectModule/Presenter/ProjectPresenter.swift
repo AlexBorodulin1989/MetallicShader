@@ -25,6 +25,10 @@ extension ProjectPresenter: ProjectViewOutput {
     func backPressed() {
         router.back()
     }
+    
+    func resizeEditorPressed() {
+        interactor.resizeEditorPressed()
+    }
 }
 
 extension ProjectPresenter: ProjectInteractorOutput {
@@ -32,11 +36,19 @@ extension ProjectPresenter: ProjectInteractorOutput {
         view.showInitialShader(shader: shader)
     }
     
-    func willShowKeyboard(frame: CGRect) {
-        view.willShowKeyboard(frame: frame)
+    func willShowKeyboard(frame: CGRect, duration: Double, curve: UInt) {
+        view.willShowKeyboard(frame: frame, duration: duration, curve: curve)
     }
     
     func willHideKeyboard() {
         view.willHideKeyboard()
+    }
+    
+    func showEditorFullSize(_ fullSize: Bool) {
+        if fullSize {
+            view.expandEditor()
+        } else {
+            view.collapseEditor()
+        }
     }
 }

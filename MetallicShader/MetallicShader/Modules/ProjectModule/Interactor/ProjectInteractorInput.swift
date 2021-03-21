@@ -10,4 +10,5 @@ import MetalKit
 protocol ProjectInteractorInput {
     func mtkViewDidLoad(_ mtkView: MTKView)
     func refreshShader(shader: String)
+    func resizeEditorPressed()
 }

@@ -9,6 +9,8 @@ import UIKit
 
 protocol ProjectViewInput: AnyObject {
     func showInitialShader(shader: String)
-    func willShowKeyboard(frame: CGRect)
+    func willShowKeyboard(frame: CGRect, duration: Double, curve: UInt)
     func willHideKeyboard()
+    func expandEditor()
+    func collapseEditor()
 }

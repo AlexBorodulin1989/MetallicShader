@@ -11,6 +11,8 @@ class ProjectInteractor {
     private var renderer: Renderer!
     weak var output: ProjectInteractorOutput!
     
+    var editorFullSize = false
+    
     deinit {
         unsubscribeKeyboardNotify()
     }
@@ -34,6 +36,11 @@ extension ProjectInteractor: ProjectInteractorInput {
     func refreshShader(shader: String) {
         renderer.refreshShader(shader: shader)
     }
+    
+    func resizeEditorPressed() {
+        editorFullSize = !editorFullSize
+        output.showEditorFullSize(editorFullSize)
+    }
 }
 
 // MARK: Keyboard State
@@ -50,8 +57,10 @@ private extension ProjectInteractor {
     }
     
     @objc func willShowKeyboard(_ notification: Notification) {
+        let duration = notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as! Double
+        let curve = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! UInt
         guard let frame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        output.willShowKeyboard(frame: frame)
+        output.willShowKeyboard(frame: frame, duration: duration, curve: curve)
     }
     
     @objc func willHideKeyboard() {
