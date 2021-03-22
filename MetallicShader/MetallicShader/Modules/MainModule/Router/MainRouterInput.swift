@@ -8,5 +8,6 @@
 import Foundation
 
 protocol MainRouterInput {
-    func moveToNewProject()
+    func addNewProjectAlert()
+    func showProject()
 }

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CoreData
 
 protocol MainViewInput: AnyObject {
+    func injectFetchController(fetchController: NSFetchedResultsController<Project>)
 }

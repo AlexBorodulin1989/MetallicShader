@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import CoreData
+
+protocol MainInteractorOutput: AnyObject {
+    func createFetchController(fetchController: NSFetchedResultsController<Project>)
+}

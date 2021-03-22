@@ -15,12 +15,18 @@ class MainAssembler: NSObject {
         
         guard let view = viewController as? MainViewController else { return }
         let presenter = MainPresenter()
+        let interactor = MainInteractor()
         let router = MainRouter()
         
         view.output = presenter
         
+        interactor.output = presenter
+        
+        presenter.view = view
         presenter.router = router
+        presenter.interactor = interactor
         
         router.view = view
+        router.output = presenter
     }
 }

@@ -17,23 +17,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GgK-cH-ZVq">
-                                <rect key="frame" x="151" y="433" width="112" height="30"/>
-                                <state key="normal" title="Add new project"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B0c-wn-kc7">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
-                                    <action selector="newProjectAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="baH-Wp-nTl"/>
-                                    <segue destination="iro-0y-KnW" kind="show" id="PwM-Aa-mvL"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="LSa-zp-fCb"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="e7P-X9-YJm"/>
                                 </connections>
-                            </button>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="GgK-cH-ZVq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="b9O-8U-0ec"/>
-                            <constraint firstItem="GgK-cH-ZVq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="twS-fD-Lco"/>
+                            <constraint firstItem="B0c-wn-kc7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="4NI-rK-rRq"/>
+                            <constraint firstItem="B0c-wn-kc7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Nw2-Jx-eNk"/>
+                            <constraint firstItem="B0c-wn-kc7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fFl-9U-bI9"/>
+                            <constraint firstAttribute="bottom" secondItem="B0c-wn-kc7" secondAttribute="bottom" id="jey-pi-wrY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Projects" id="hfu-KS-akC"/>
+                    <navigationItem key="navigationItem" title="Projects" id="hfu-KS-akC">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="iEf-EQ-bOt">
+                            <connections>
+                                <action selector="newProjectAction:" destination="BYZ-38-t0r" id="qip-l1-6kX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="B0c-wn-kc7" id="y11-mv-Bz0"/>
+                        <segue destination="iro-0y-KnW" kind="show" identifier="ProjectSegue" id="rXU-Ma-sqL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <customObject id="nMZ-dF-gd4" customClass="MainAssembler" customModule="MetallicShader" customModuleProvider="target">
