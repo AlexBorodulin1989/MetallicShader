@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H524" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Project" representedClassName=".Project" syncable="YES">
+        <attribute name="createdAt" attributeType="Date" defaultDateTimeInterval="638175420" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" defaultValueString="New project"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="Project" positionX="-45" positionY="0" width="128" height="58"/>
+        <element name="Project" positionX="-45" positionY="0" width="128" height="88"/>
     </elements>
 </model>

@@ -20,7 +20,7 @@ extension MainInteractor: MainInteractorInput {
     func initFetchController() {
         let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
         fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "name", ascending: true)]
+            NSSortDescriptor(key: "createdAt", ascending: false)]
 
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:CoreDataManager.shared.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         

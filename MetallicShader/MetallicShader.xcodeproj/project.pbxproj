@@ -20,8 +20,8 @@
 		5574949F2605FF1A007E6468 /* MetallicShaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5574949E2605FF1A007E6468 /* MetallicShaderUITests.swift */; };
 		557709E72609056700395B7E /* MainRouterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557709E62609056700395B7E /* MainRouterOutput.swift */; };
 		557709EC260908D000395B7E /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557709EB260908D000395B7E /* CoreDataManager.swift */; };
-		55770A1526090CCA00395B7E /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55770A1326090CCA00395B7E /* Project+CoreDataClass.swift */; };
-		55770A1626090CCA00395B7E /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55770A1426090CCA00395B7E /* Project+CoreDataProperties.swift */; };
+		557BED892609C94400225CA1 /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557BED872609C94400225CA1 /* Project+CoreDataClass.swift */; };
+		557BED8A2609C94400225CA1 /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557BED882609C94400225CA1 /* Project+CoreDataProperties.swift */; };
 		55AC9ABA2606575C00165003 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AB92606575C00165003 /* MainInteractor.swift */; };
 		55AC9AC32606577D00165003 /* MainInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AC22606577D00165003 /* MainInteractorInput.swift */; };
 		55AC9AC82606579100165003 /* MainInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AC72606579100165003 /* MainInteractorOutput.swift */; };
@@ -83,8 +83,8 @@
 		557494A02605FF1A007E6468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557709E62609056700395B7E /* MainRouterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouterOutput.swift; sourceTree = "<group>"; };
 		557709EB260908D000395B7E /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		55770A1326090CCA00395B7E /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
-		55770A1426090CCA00395B7E /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		557BED872609C94400225CA1 /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
+		557BED882609C94400225CA1 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		55AC9AB92606575C00165003 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		55AC9AC22606577D00165003 /* MainInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorInput.swift; sourceTree = "<group>"; };
 		55AC9AC72606579100165003 /* MainInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorOutput.swift; sourceTree = "<group>"; };
@@ -198,8 +198,8 @@
 			children = (
 				557494822605FF18007E6468 /* MetallicShader.xcdatamodeld */,
 				557709EB260908D000395B7E /* CoreDataManager.swift */,
-				55770A1326090CCA00395B7E /* Project+CoreDataClass.swift */,
-				55770A1426090CCA00395B7E /* Project+CoreDataProperties.swift */,
+				557BED872609C94400225CA1 /* Project+CoreDataClass.swift */,
+				557BED882609C94400225CA1 /* Project+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -497,9 +497,9 @@
 				556AF1E62607147C0007DDDD /* ProjectRouterInput.swift in Sources */,
 				5574947E2605FF18007E6468 /* MainViewController.swift in Sources */,
 				55AC9AE9260658AE00165003 /* MainViewInput.swift in Sources */,
-				55770A1526090CCA00395B7E /* Project+CoreDataClass.swift in Sources */,
 				557494842605FF18007E6468 /* MetallicShader.xcdatamodeld in Sources */,
 				55AC9ACE260657B900165003 /* MainPresenter.swift in Sources */,
+				557BED892609C94400225CA1 /* Project+CoreDataClass.swift in Sources */,
 				55AC9B5D2606902900165003 /* ProjectViewInput.swift in Sources */,
 				55AC9AF9260658EE00165003 /* MainRouterInput.swift in Sources */,
 				55AC9B262606766000165003 /* ProjectAssembler.swift in Sources */,
@@ -513,9 +513,9 @@
 				55AC9AE12606584200165003 /* MainRouter.swift in Sources */,
 				55AC9AEE260658C000165003 /* MainViewOutput.swift in Sources */,
 				55AC9B652606933300165003 /* RendererProtocol.swift in Sources */,
-				55770A1626090CCA00395B7E /* Project+CoreDataProperties.swift in Sources */,
 				55AC9B472606812600165003 /* ProjectInteractorOutput.swift in Sources */,
 				55AC9B2B260677F500165003 /* VolumeItem.swift in Sources */,
+				557BED8A2609C94400225CA1 /* Project+CoreDataProperties.swift in Sources */,
 				55AC9B132606636A00165003 /* ProjectViewController.swift in Sources */,
 				557709E72609056700395B7E /* MainRouterOutput.swift in Sources */,
 				55AC9B1E2606693B00165003 /* Renderer.swift in Sources */,

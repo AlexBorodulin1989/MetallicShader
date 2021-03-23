@@ -62,6 +62,7 @@ class CoreDataManager {
     func createProject(name: String) {
         let project = Project(context: viewContext)
         project.name = name
+        project.createdAt = Date()
         
         do {
             try viewContext.save()

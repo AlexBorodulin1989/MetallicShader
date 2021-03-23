@@ -2,7 +2,7 @@
 //  Project+CoreDataProperties.swift
 //  MetallicShader
 //
-//  Created by Aleks on 22.03.2021.
+//  Created by Aleks on 23.03.2021.
 //
 //
 
@@ -17,5 +17,7 @@ extension Project {
     }
 
     @NSManaged public var name: String?
+    @NSManaged public var createdAt: Date?
+    @NSManaged public var updatedAt: Date?
 
 }
