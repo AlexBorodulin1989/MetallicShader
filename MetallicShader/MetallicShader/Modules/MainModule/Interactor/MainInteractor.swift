@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import RealmSwift
 
 class MainInteractor {
     weak var output: MainInteractorOutput!
@@ -14,22 +15,11 @@ class MainInteractor {
 
 extension MainInteractor: MainInteractorInput {
     func addProject(name: String) {
-        CoreDataManager.shared.createProject(name: name)
     }
     
-    func initFetchController() {
-        let fetchRequest = NSFetchRequest<Project>(entityName: "Project")
-        fetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "createdAt", ascending: false)]
-
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext:CoreDataManager.shared.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        
-        output.createFetchController(fetchController: fetchedResultsController)
-        
-        do {
-            try fetchedResultsController.performFetch()
-        } catch {
-            fatalError("\(error)")
-        }
+    func initRealm() {
+        guard let realm = try? Realm() else { return }
+        let results = realm.objects(Project.self)
+        output.projectResultsFetched(results: results)
     }
 }

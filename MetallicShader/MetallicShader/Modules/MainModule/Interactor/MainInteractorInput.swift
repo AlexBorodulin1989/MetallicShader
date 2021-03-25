@@ -9,5 +9,5 @@ import Foundation
 
 protocol MainInteractorInput: AnyObject {
     func addProject(name: String)
-    func initFetchController()
+    func initRealm()
 }

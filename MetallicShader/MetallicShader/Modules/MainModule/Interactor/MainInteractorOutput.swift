@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import CoreData
+import RealmSwift
 
 protocol MainInteractorOutput: AnyObject {
-    func createFetchController(fetchController: NSFetchedResultsController<Project>)
+    func projectResultsFetched(results: Results<Project>)
 }

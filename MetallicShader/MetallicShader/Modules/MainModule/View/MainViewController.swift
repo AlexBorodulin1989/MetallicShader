@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import RealmSwift
 
 class MainViewController: UIViewController {
     
@@ -14,7 +15,8 @@ class MainViewController: UIViewController {
     
     var output: MainViewOutput!
     
-    fileprivate var fetchedResultsController: NSFetchedResultsController<Project>!
+    var notificationToken: NotificationToken? = nil
+    var results: Results<Project>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +28,27 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController: MainViewInput {
-    func injectFetchController(fetchController: NSFetchedResultsController<Project>) {
-        self.fetchedResultsController = fetchController
-        self.fetchedResultsController.delegate = self
+    func injectProjectResults(results: Results<Project>) {
+        self.results = results
+        
+        notificationToken = results.observe { [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                tableView.beginUpdates()
+                tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
+                                     with: .automatic)
+                tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
+                                     with: .automatic)
+                tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
+                                     with: .automatic)
+                tableView.endUpdates()
+            case .error(let error):
+                fatalError("\(error)")
+            }
+        }
     }
 }
 
@@ -52,15 +72,13 @@ extension MainViewController: NSFetchedResultsControllerDelegate {
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        return self.results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let project = fetchedResultsController.object(at: indexPath)
-        
-        cell.textLabel?.text = project.name
+        cell.textLabel?.text = self.results[indexPath.row].name
         
         return cell
     }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreData
+import RealmSwift
 
 class MainPresenter {
     weak var view: MainViewInput!
@@ -16,7 +16,7 @@ class MainPresenter {
 
 extension MainPresenter: MainViewOutput {
     func onViewDidLoad() {
-        interactor.initFetchController()
+        interactor.initRealm()
     }
     
     func addProjectPressed() {
@@ -29,8 +29,8 @@ extension MainPresenter: MainViewOutput {
 }
 
 extension MainPresenter: MainInteractorOutput {
-    func createFetchController(fetchController: NSFetchedResultsController<Project>) {
-        view.injectFetchController(fetchController: fetchController)
+    func projectResultsFetched(results: Results<Project>) {
+        view.injectProjectResults(results: results)
     }
 }
 

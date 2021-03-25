@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import CoreData
+import RealmSwift
 
 protocol MainViewInput: AnyObject {
-    func injectFetchController(fetchController: NSFetchedResultsController<Project>)
+    func injectProjectResults(results: Results<Project>)
 }
