@@ -25,6 +25,7 @@ protocol URLSessionProtocol {
 protocol HTTPServiceProtocol {
     init(session: URLSessionProtocol)
     func get(request: URLRequest, completion: @escaping (Result<Data, HTTPError>) -> Void)
+    func post(request: URLRequest, completion: @escaping (Result<Data, HTTPError>) -> Void)
 }
 
 class HTTPService: HTTPServiceProtocol {
@@ -40,7 +41,26 @@ class HTTPService: HTTPServiceProtocol {
         
         urlRequest.httpMethod = "GET"
         
-        session.dataTask(with: request) { data, _, error in
+        session.dataTask(with: urlRequest) { data, _, error in
+            if let error = error {
+                completion(.failure(.unknown(error.localizedDescription)))
+            } else if data == nil {
+                completion(.failure(.dataNotExists))
+            } else {
+                completion(.success(data!))
+            }
+        }.resume()
+    }
+    
+    func post(request: URLRequest, completion: @escaping (Result<Data, HTTPError>) -> Void) {
+        var urlRequest = request
+        
+        urlRequest.httpMethod = "POST"
+        
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        session.dataTask(with: urlRequest) { data, _, error in
             if let error = error {
                 completion(.failure(.unknown(error.localizedDescription)))
             } else if data == nil {

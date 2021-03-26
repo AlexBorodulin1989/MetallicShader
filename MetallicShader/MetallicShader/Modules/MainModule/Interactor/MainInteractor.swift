@@ -15,6 +15,16 @@ class MainInteractor {
 
 extension MainInteractor: MainInteractorInput {
     func addProject(name: String) {
+        guard let realm = try? Realm() else { return }
+        
+        try? realm.write {
+            let newProject = Project(name: name)
+            realm.add(newProject, update: .modified)
+            
+            ProjectNetworkService.defaultItem.postProject(project: newProject) { result in
+                
+            }
+        }
     }
     
     func initRealm() {
