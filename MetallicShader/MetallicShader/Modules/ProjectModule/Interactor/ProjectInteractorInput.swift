@@ -11,4 +11,5 @@ protocol ProjectInteractorInput {
     func mtkViewDidLoad(_ mtkView: MTKView)
     func refreshShader(shader: String)
     func resizeEditorPressed()
+    func switchTextSource(_ currentText: String)
 }

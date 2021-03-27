@@ -69,13 +69,25 @@
                                                     <action selector="resizeEditorPressed:" destination="AFt-qy-9OM" eventType="touchUpInside" id="tGk-yF-dYW"/>
                                                 </connections>
                                             </button>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gvT-AS-txa">
+                                                <rect key="frame" x="8" y="6.5" width="127" height="32"/>
+                                                <segments>
+                                                    <segment title="Shader"/>
+                                                    <segment title="Script"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="switchTextEditingType:" destination="AFt-qy-9OM" eventType="valueChanged" id="aVs-ec-Cwi"/>
+                                                </connections>
+                                            </segmentedControl>
                                         </subviews>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="5dq-Kz-GhG"/>
                                             <constraint firstAttribute="trailing" secondItem="nwu-vp-w2C" secondAttribute="trailing" constant="8" id="DvT-VC-Fva"/>
+                                            <constraint firstItem="gvT-AS-txa" firstAttribute="centerY" secondItem="HPF-1g-SOG" secondAttribute="centerY" id="ck1-ei-Ulp"/>
                                             <constraint firstAttribute="bottom" secondItem="nwu-vp-w2C" secondAttribute="bottom" id="oOp-HI-VZt"/>
                                             <constraint firstItem="nwu-vp-w2C" firstAttribute="top" secondItem="HPF-1g-SOG" secondAttribute="top" id="qyZ-j4-v8u"/>
+                                            <constraint firstItem="gvT-AS-txa" firstAttribute="leading" secondItem="HPF-1g-SOG" secondAttribute="leading" constant="8" id="xXT-jq-U9G"/>
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pih-xW-WGo">

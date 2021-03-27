@@ -13,6 +13,9 @@ class ProjectInteractor {
     
     var editorFullSize = false
     
+    var textInputShader = true
+    var tempText: String!
+    
     deinit {
         unsubscribeKeyboardNotify()
     }
@@ -23,11 +26,14 @@ extension ProjectInteractor: ProjectInteractorInput {
         
         subscribeKeyboardNotify()
         
-        let path = Bundle.main.path(forResource: "InitialShader", ofType: "txt")
+        let mtlpath = Bundle.main.path(forResource: "InitialShader", ofType: "txt")
+        let jspath = Bundle.main.path(forResource: "InitialJavaScript", ofType: "js")
         do {
-            let shader = try String(contentsOfFile:path!, encoding: String.Encoding.utf8)
+            let shader = try String(contentsOfFile:mtlpath!, encoding: String.Encoding.utf8)
+            tempText = try String(contentsOfFile:jspath!, encoding: String.Encoding.utf8)
+            
             renderer = Renderer(metalView: mtkView, shader: shader)
-            output.initialShaderFetched(shader: shader)
+            output.setEditingText(shader)
         } catch {
             fatalError("Initial file not found")
         }
@@ -40,6 +46,12 @@ extension ProjectInteractor: ProjectInteractorInput {
     func resizeEditorPressed() {
         editorFullSize = !editorFullSize
         output.showEditorFullSize(editorFullSize)
+    }
+    
+    func switchTextSource(_ currentText: String) {
+        textInputShader = !textInputShader
+        output.setEditingText(tempText)
+        tempText = currentText
     }
 }
 

@@ -29,11 +29,15 @@ extension ProjectPresenter: ProjectViewOutput {
     func resizeEditorPressed() {
         interactor.resizeEditorPressed()
     }
+    
+    func switchTextSource(_ currentText: String) {
+        interactor.switchTextSource(currentText)
+    }
 }
 
 extension ProjectPresenter: ProjectInteractorOutput {
-    func initialShaderFetched(shader: String) {
-        view.showInitialShader(shader: shader)
+    func setEditingText(_ text: String) {
+        view.showText(text)
     }
     
     func willShowKeyboard(frame: CGRect, duration: Double, curve: UInt) {

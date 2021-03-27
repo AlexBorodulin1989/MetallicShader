@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5550EAAE260F6377000AF565 /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550EAAD260F6376000AF565 /* MathLibrary.swift */; };
+		5550EB02260FAF4A000AF565 /* InitialJavaScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 5550EB01260FAF4A000AF565 /* InitialJavaScript.js */; };
 		556AF1E1260713380007DDDD /* ProjectRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AF1E0260713380007DDDD /* ProjectRouter.swift */; };
 		556AF1E62607147C0007DDDD /* ProjectRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AF1E52607147C0007DDDD /* ProjectRouterInput.swift */; };
 		556FF7CA260D1107008021DD /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556FF7C9260D1107008021DD /* Project.swift */; };
@@ -68,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		5550EAAD260F6376000AF565 /* MathLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
+		5550EB01260FAF4A000AF565 /* InitialJavaScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = InitialJavaScript.js; sourceTree = "<group>"; };
 		556AF1E0260713380007DDDD /* ProjectRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRouter.swift; sourceTree = "<group>"; };
 		556AF1E52607147C0007DDDD /* ProjectRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRouterInput.swift; sourceTree = "<group>"; };
 		556FF7C9260D1107008021DD /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 				557494872605FF1A007E6468 /* LaunchScreen.storyboard */,
 				5574948A2605FF1A007E6468 /* Info.plist */,
 				55AC9B5426068A9400165003 /* InitialShader.txt */,
+				5550EB01260FAF4A000AF565 /* InitialJavaScript.js */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 			files = (
 				55AC9B18260663CE00165003 /* Project.storyboard in Resources */,
 				557494892605FF1A007E6468 /* LaunchScreen.storyboard in Resources */,
+				5550EB02260FAF4A000AF565 /* InitialJavaScript.js in Resources */,
 				55AC9B5526068A9400165003 /* InitialShader.txt in Resources */,
 				557494862605FF1A007E6468 /* Assets.xcassets in Resources */,
 				557494812605FF18007E6468 /* Main.storyboard in Resources */,

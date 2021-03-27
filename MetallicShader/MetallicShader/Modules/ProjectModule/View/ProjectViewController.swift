@@ -40,8 +40,8 @@ class ProjectViewController: UIViewController {
 // MARK: Input
 
 extension ProjectViewController: ProjectViewInput {
-    func showInitialShader(shader: String) {
-        shaderEditorView.text = shader
+    func showText(_ text: String) {
+        shaderEditorView.text = text
     }
     
     func willShowKeyboard(frame: CGRect, duration: Double, curve: UInt) {
@@ -94,5 +94,9 @@ extension ProjectViewController {
     
     @IBAction func resizeEditorPressed(_ sender: Any) {
         output.resizeEditorPressed()
+    }
+    
+    @IBAction func switchTextEditingType(_ sender: Any) {
+        output.switchTextSource(shaderEditorView.text)
     }
 }

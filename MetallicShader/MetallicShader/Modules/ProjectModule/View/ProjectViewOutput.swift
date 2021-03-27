@@ -12,4 +12,5 @@ protocol ProjectViewOutput {
     func refreshShader(shader: String)
     func backPressed()
     func resizeEditorPressed()
+    func switchTextSource(_ currentText: String)
 }
