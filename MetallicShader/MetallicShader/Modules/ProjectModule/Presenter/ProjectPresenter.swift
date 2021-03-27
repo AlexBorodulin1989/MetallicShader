@@ -19,7 +19,7 @@ extension ProjectPresenter: ProjectViewOutput {
     }
     
     func refreshShader(shader: String) {
-        interactor.refreshShader(shader: shader)
+        interactor.refreshProject(shader)
     }
     
     func backPressed() {

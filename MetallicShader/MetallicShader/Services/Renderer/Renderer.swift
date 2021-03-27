@@ -32,6 +32,8 @@ class Renderer: NSObject {
     init(metalView: MTKView, shader: String) {
         super.init()
         
+        ScriptService.shared.mtkView = metalView
+        
         guard
             let device = MTLCreateSystemDefaultDevice(),
             let commandQueue = device.makeCommandQueue() else {

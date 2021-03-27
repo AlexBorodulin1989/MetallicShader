@@ -39,8 +39,14 @@ extension ProjectInteractor: ProjectInteractorInput {
         }
     }
     
-    func refreshShader(shader: String) {
-        renderer.refreshShader(shader: shader)
+    func refreshProject(_ currentText: String) {
+        if textInputShader {
+            renderer.refreshShader(shader: currentText)
+            ScriptService.shared.reloadService(script: tempText)
+        } else {
+            renderer.refreshShader(shader: tempText)
+            ScriptService.shared.reloadService(script: currentText)
+        }
     }
     
     func resizeEditorPressed() {
