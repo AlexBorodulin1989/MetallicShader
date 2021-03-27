@@ -1,12 +1,25 @@
 #include <metal_stdlib>
+#import <simd/simd.h>
 using namespace metal;
+
+typedef struct {
+    matrix_float4x4 modelMatrix;
+    matrix_float4x4 viewMatrix;
+    matrix_float4x4 projectionMatrix;
+} Uniforms;
 
 struct VertexIn {
     float4 position [[ attribute(0) ]];
 };
 
-vertex float4 vertex_main(const VertexIn vertex_in [[stage_in]]) {
-    return vertex_in.position;
+vertex float4 vertex_main(const VertexIn vertex_in [[stage_in]],
+                          constant Uniforms &uniforms [[buffer(1)]]) {
+    float4 position = uniforms.projectionMatrix *
+                        uniforms.viewMatrix *
+                        uniforms.modelMatrix *
+                        vertex_in.position;
+                            
+    return position;
 }
 
 fragment float4 fragment_main() {

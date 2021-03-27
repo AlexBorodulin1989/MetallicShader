@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5550EAAE260F6377000AF565 /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550EAAD260F6376000AF565 /* MathLibrary.swift */; };
 		556AF1E1260713380007DDDD /* ProjectRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AF1E0260713380007DDDD /* ProjectRouter.swift */; };
 		556AF1E62607147C0007DDDD /* ProjectRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AF1E52607147C0007DDDD /* ProjectRouterInput.swift */; };
 		556FF7CA260D1107008021DD /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556FF7C9260D1107008021DD /* Project.swift */; };
@@ -66,6 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5550EAAD260F6376000AF565 /* MathLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
 		556AF1E0260713380007DDDD /* ProjectRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRouter.swift; sourceTree = "<group>"; };
 		556AF1E52607147C0007DDDD /* ProjectRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRouterInput.swift; sourceTree = "<group>"; };
 		556FF7C9260D1107008021DD /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		556FF7D6260D1512008021DD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				5550EAAD260F6376000AF565 /* MathLibrary.swift */,
 				556FF7D7260D1522008021DD /* AsyncLegacy.swift */,
 			);
 			path = Helpers;
@@ -541,6 +544,7 @@
 				55AC9AEE260658C000165003 /* MainViewOutput.swift in Sources */,
 				55AC9B652606933300165003 /* RendererProtocol.swift in Sources */,
 				55AC9B472606812600165003 /* ProjectInteractorOutput.swift in Sources */,
+				5550EAAE260F6377000AF565 /* MathLibrary.swift in Sources */,
 				55AC9B2B260677F500165003 /* VolumeItem.swift in Sources */,
 				55AC9B132606636A00165003 /* ProjectViewController.swift in Sources */,
 				556FF7D8260D1522008021DD /* AsyncLegacy.swift in Sources */,

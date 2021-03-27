@@ -8,6 +8,13 @@
 import Foundation
 
 import MetalKit
+import simd
+
+struct Uniforms {
+    let modelMatrix: float4x4
+    let viewMatrix: float4x4
+    let projectionMatrix: float4x4
+}
 
 class Renderer: NSObject {
     private(set) var device: MTLDevice!
@@ -19,6 +26,8 @@ class Renderer: NSObject {
     
     var timer: Float = 0
     var shader: String = ""
+    
+    var uniforms: Uniforms!
     
     init(metalView: MTKView, shader: String) {
         super.init()
@@ -47,6 +56,7 @@ class Renderer: NSObject {
             fatalError(error.localizedDescription)
         }
         
+        setupMVP(viewSize: metalView.bounds.size)
     }
     
     func addMesh() {
@@ -81,6 +91,7 @@ class Renderer: NSObject {
 
 extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+        setupMVP(viewSize: size)
     }
     
     func draw(in view: MTKView) {
@@ -89,10 +100,7 @@ extension Renderer: MTKViewDelegate {
               let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
         else { return }
         
-        timer += 0.05
-        var currentTime = sin(timer)
-        
-        renderEncoder.setVertexBytes(&currentTime, length: MemoryLayout<Float>.stride, index: 1)
+        renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 1)
         
         renderEncoder.setRenderPipelineState(pipelineState)
 
@@ -125,5 +133,23 @@ extension Renderer: RendererProtocol {
         } catch {
             fatalError(error.localizedDescription)
         }
+    }
+}
+
+// MARK:- Setup MVP
+
+extension Renderer {
+    func setupMVP(viewSize: CGSize) {
+        let translation = float4x4(translation: [0, -0.3, 0])
+        let rotation = float4x4(rotation: [0, Float(45).degreesToRadians, 0])
+        let modelMatrix = translation * rotation;
+        let viewMatrix = float4x4(translation: [0.0, 0, -3]).inverse
+        let ratio = Float(viewSize.width) / Float(viewSize.height)
+        let projectionMatrix = float4x4(projectionFov: Float(45).degreesToRadians,
+                                        near: 0.1,
+                                        far: 100,
+                                        aspect: ratio)
+        
+        uniforms = Uniforms(modelMatrix: modelMatrix, viewMatrix: viewMatrix, projectionMatrix: projectionMatrix)
     }
 }
