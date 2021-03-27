@@ -10,4 +10,6 @@ import Foundation
 protocol MainInteractorInput: AnyObject {
     func addProject(name: String)
     func initRealm()
+    func deleteProject(_ project: Project)
+    func deleteProjectAccepted()
 }

@@ -23,10 +23,24 @@ class MainRouter: MainRouterInput {
             self?.output.addNewProject(name: text)
         }))
         
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
         view.present(alert, animated: true, completion: nil)
     }
     
     func showProject() {
         view.performSegue(withIdentifier: "ProjectSegue", sender: nil)
+    }
+    
+    func makeSureDeleteProject() {
+        let alert = UIAlertController(title: "Delete project", message: "Are you sure that you want to delete project?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] (_) in
+            self?.output.deleteProjectAccepted()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        view.present(alert, animated: true, completion: nil)
     }
 }

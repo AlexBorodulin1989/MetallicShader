@@ -7,6 +7,10 @@
 
 import Foundation
 
+let localHost = "localhost:3012"
+let globalHost = "194.87.95.43:3012"
+let host = localHost
+
 enum HTTPError: Error {
     case dataNotExists
     case notCorrectURL
@@ -26,6 +30,7 @@ protocol HTTPServiceProtocol {
     init(session: URLSessionProtocol)
     func get(request: URLRequest, completion: @escaping (Result<Data, HTTPError>) -> Void)
     func post(request: URLRequest, completion: @escaping (Result<Data, HTTPError>) -> Void)
+    func delete(request: URLRequest, completion: @escaping (Result<Bool, HTTPError>) -> Void)
 }
 
 class HTTPService: HTTPServiceProtocol {
@@ -67,6 +72,25 @@ class HTTPService: HTTPServiceProtocol {
                 completion(.failure(.dataNotExists))
             } else {
                 completion(.success(data!))
+            }
+        }.resume()
+    }
+    
+    func delete(request: URLRequest, completion: @escaping (Result<Bool, HTTPError>) -> Void) {
+        var urlRequest = request
+        
+        urlRequest.httpMethod = "DELETE"
+        
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        session.dataTask(with: urlRequest) { data, _, error in
+            if let error = error {
+                completion(.failure(.unknown(error.localizedDescription)))
+            } else if data == nil {
+                completion(.failure(.dataNotExists))
+            } else {
+                completion(.success(true))
             }
         }.resume()
     }

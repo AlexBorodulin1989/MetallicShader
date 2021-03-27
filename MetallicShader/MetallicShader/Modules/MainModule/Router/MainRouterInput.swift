@@ -10,4 +10,5 @@ import Foundation
 protocol MainRouterInput {
     func addNewProjectAlert()
     func showProject()
+    func makeSureDeleteProject()
 }

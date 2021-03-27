@@ -9,4 +9,5 @@ import Foundation
 
 protocol MainRouterOutput: AnyObject {
     func addNewProject(name: String)
+    func deleteProjectAccepted()
 }

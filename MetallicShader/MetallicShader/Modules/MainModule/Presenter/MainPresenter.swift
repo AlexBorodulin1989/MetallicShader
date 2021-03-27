@@ -15,6 +15,10 @@ class MainPresenter {
 }
 
 extension MainPresenter: MainViewOutput {
+    func deleteProject(_ project: Project) {
+        interactor.deleteProject(project)
+    }
+    
     func onViewDidLoad() {
         interactor.initRealm()
     }
@@ -32,11 +36,19 @@ extension MainPresenter: MainInteractorOutput {
     func projectResultsFetched(results: Results<Project>) {
         view.injectProjectResults(results: results)
     }
+    
+    func makeSureDeleteProject() {
+        router.makeSureDeleteProject()
+    }
 }
 
 extension MainPresenter: MainRouterOutput {
     func addNewProject(name: String) {
         interactor.addProject(name: name)
         router.showProject()
+    }
+    
+    func deleteProjectAccepted() {
+        interactor.deleteProjectAccepted()
     }
 }

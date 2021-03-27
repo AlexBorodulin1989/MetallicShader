@@ -27,7 +27,7 @@ class ProjectNetworkService : ProjectNetworkServiceProtocol {
     
     func getProjectList(completion: @escaping (Result<Bool, HTTPError>) -> Void) {
         
-        guard let url = URL(string: "http://localhost:3012/projects") else {
+        guard let url = URL(string: "http://\(host)/projects") else {
             completion(.failure(HTTPError.notCorrectURL))
             return
         }
@@ -62,38 +62,47 @@ class ProjectNetworkService : ProjectNetworkServiceProtocol {
         }
     }
     
-    func postProject(project: Project, completion: @escaping (Result<Bool, HTTPError>) -> Void) {
+    func postProjects(_ projects: [Project], completion: @escaping (Result<Bool, HTTPError>) -> Void) {
         
-        guard let url = URL(string: "http://localhost:3012/projects") else {
+        guard let url = URL(string: "http://\(host)/projects") else {
             completion(.failure(HTTPError.notCorrectURL))
             return
         }
         
         var request = URLRequest(url: url)
         
-        request.httpBody = try? JSONEncoder().encode(project)
+        request.httpBody = try? JSONEncoder().encode(projects)
         
         httpService.post(request: request) { result in
             switch result {
-            case .success(let data):
+            case .success( _):
                 foreground {
-                    let decoder = JSONDecoder()
-                    do {
-                        guard let realm = try? Realm()
-                        else {
-                            completion(.failure(HTTPError.unknown("Cannot create realm")))
-                            return
-                        }
-                        
-                        let projects = try decoder.decode([Project].self, from: data)
-                        
-                        try? realm.write {
-                            realm.add(projects, update: .modified)
-                        }
-                        completion(.success(true))
-                    } catch {
-                        completion(.failure(HTTPError.unknown(error.localizedDescription)))
-                    }
+                    completion(.success(true))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func deleteProjects(_ projects: [Project], completion: @escaping (Result<Bool, HTTPError>) -> Void) {
+        
+        guard let url = URL(string: "http://\(host)/projects/") else {
+            completion(.failure(HTTPError.notCorrectURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        let projectIDs = projects.map{ $0.id }
+        
+        request.httpBody = try? JSONEncoder().encode(projectIDs)
+        
+        httpService.delete(request: request) { result in
+            switch result {
+            case .success( _):
+                foreground {
+                    completion(.success(true))
                 }
             case .failure(let error):
                 completion(.failure(error))

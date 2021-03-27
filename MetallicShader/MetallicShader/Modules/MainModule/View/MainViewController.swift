@@ -83,6 +83,11 @@ extension MainViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            output.deleteProject(self.results[indexPath.row])
+        }
+    }
 }
 
 extension MainViewController: UITableViewDelegate {

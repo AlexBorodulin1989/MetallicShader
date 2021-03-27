@@ -11,4 +11,5 @@ protocol MainViewOutput {
     func onViewDidLoad()
     func addProjectPressed()
     func selectRow()
+    func deleteProject(_ project: Project)
 }

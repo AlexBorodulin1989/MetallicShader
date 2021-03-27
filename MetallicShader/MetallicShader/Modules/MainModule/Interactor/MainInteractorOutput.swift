@@ -10,4 +10,5 @@ import RealmSwift
 
 protocol MainInteractorOutput: AnyObject {
     func projectResultsFetched(results: Results<Project>)
+    func makeSureDeleteProject()
 }
