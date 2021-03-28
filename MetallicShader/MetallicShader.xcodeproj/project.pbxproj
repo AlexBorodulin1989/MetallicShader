@@ -28,6 +28,7 @@
 		55844D2E260BC2A1006E68FF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 55844D2D260BC2A1006E68FF /* Realm */; };
 		55844D30260BC2A1006E68FF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 55844D2F260BC2A1006E68FF /* RealmSwift */; };
 		55877E5C26107EE1000D9C8D /* math.js in Resources */ = {isa = PBXBuildFile; fileRef = 55877E5B26107EE1000D9C8D /* math.js */; };
+		55877E672610D5C6000D9C8D /* Helper.js in Resources */ = {isa = PBXBuildFile; fileRef = 55877E662610D5C6000D9C8D /* Helper.js */; };
 		55AC9ABA2606575C00165003 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AB92606575C00165003 /* MainInteractor.swift */; };
 		55AC9AC32606577D00165003 /* MainInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AC22606577D00165003 /* MainInteractorInput.swift */; };
 		55AC9AC82606579100165003 /* MainInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AC72606579100165003 /* MainInteractorOutput.swift */; };
@@ -95,6 +96,7 @@
 		557494A02605FF1A007E6468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		557709E62609056700395B7E /* MainRouterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouterOutput.swift; sourceTree = "<group>"; };
 		55877E5B26107EE1000D9C8D /* math.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = math.js; sourceTree = "<group>"; };
+		55877E662610D5C6000D9C8D /* Helper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Helper.js; sourceTree = "<group>"; };
 		55AC9AB92606575C00165003 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		55AC9AC22606577D00165003 /* MainInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorInput.swift; sourceTree = "<group>"; };
 		55AC9AC72606579100165003 /* MainInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorOutput.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				5574948A2605FF1A007E6468 /* Info.plist */,
 				55AC9B5426068A9400165003 /* InitialShader.txt */,
 				5550EB01260FAF4A000AF565 /* InitialJavaScript.js */,
+				55877E662610D5C6000D9C8D /* Helper.js */,
 				55877E5B26107EE1000D9C8D /* math.js */,
 			);
 			path = Resources;
@@ -513,6 +516,7 @@
 				557494892605FF1A007E6468 /* LaunchScreen.storyboard in Resources */,
 				5550EB02260FAF4A000AF565 /* InitialJavaScript.js in Resources */,
 				55AC9B5526068A9400165003 /* InitialShader.txt in Resources */,
+				55877E672610D5C6000D9C8D /* Helper.js in Resources */,
 				55877E5C26107EE1000D9C8D /* math.js in Resources */,
 				557494862605FF1A007E6468 /* Assets.xcassets in Resources */,
 				557494812605FF18007E6468 /* Main.storyboard in Resources */,

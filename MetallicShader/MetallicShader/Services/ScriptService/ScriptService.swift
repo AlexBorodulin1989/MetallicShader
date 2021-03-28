@@ -21,7 +21,7 @@ class ScriptService {
     
     weak var renderer: Renderer!
     
-    func reloadService(script: String) {
+    func reloadService(script: String? = nil) {
         ScriptService.shared.jsContext = JSContext()
         
         ScriptService.shared.jsContext.exceptionHandler = { context, exception in
@@ -30,17 +30,26 @@ class ScriptService {
             }
         }
         
+        var mainScript = script
+        
         let mathjspath = Bundle.main.path(forResource: "math", ofType: "js")
+        let helperjspath = Bundle.main.path(forResource: "Helper", ofType: "js")
+        let mainjspath = Bundle.main.path(forResource: "InitialJavaScript", ofType: "js")
         do {
             let math = try String(contentsOfFile:mathjspath!, encoding: String.Encoding.utf8)
+            let helper = try String(contentsOfFile:helperjspath!, encoding: String.Encoding.utf8)
+            if mainScript == nil {
+                mainScript = try String(contentsOfFile:mainjspath!, encoding: String.Encoding.utf8)
+            }
             ScriptService.shared.jsContext.evaluateScript(math)
+            ScriptService.shared.jsContext.evaluateScript(helper)
         } catch {
             fatalError("Initial file not found")
         }
         initSystemLogger()
         initMatrixSetter()
         initBackgroundColorHandler()
-        ScriptService.shared.jsContext.evaluateScript(script)
+        ScriptService.shared.jsContext.evaluateScript(mainScript)
     }
     
     let systemLog: @convention(block) (String) -> Void = { log in

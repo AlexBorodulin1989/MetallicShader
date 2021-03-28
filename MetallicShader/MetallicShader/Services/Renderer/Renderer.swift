@@ -34,8 +34,6 @@ class Renderer: NSObject {
     init(metalView: MTKView, shader: String) {
         super.init()
         
-        ScriptService.shared.renderer = self
-        
         guard
             let device = MTLCreateSystemDefaultDevice(),
             let commandQueue = device.makeCommandQueue() else {
@@ -62,14 +60,8 @@ class Renderer: NSObject {
         
         setupMVP(viewSize: metalView.bounds.size)
         
-        let transformMat = float4x4(
-            [1, 0, 0, 0],
-            [0, 1, 0, 0],
-            [0, 0, 1, 0],
-            [0, 0, 0, 1]
-        )
-        
-        setMatrixBuffer(transformMat, 2)
+        ScriptService.shared.renderer = self
+        ScriptService.shared.reloadService()
     }
     
     func addMesh() {
