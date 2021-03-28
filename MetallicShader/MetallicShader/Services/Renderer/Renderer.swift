@@ -40,7 +40,7 @@ class Renderer: NSObject {
             fatalError("GPU not available")
         }
         
-        self.shader = shader
+        setShader(shader: shader)
         
         self.device = device
         self.commandQueue = commandQueue
@@ -138,7 +138,7 @@ extension Renderer: MTKViewDelegate {
 
 extension Renderer: RendererProtocol {
     func refreshShader(shader: String) {
-        self.shader = shader
+        setShader(shader: shader)
         do {
             try createPipeline()
         } catch {
@@ -176,5 +176,17 @@ extension Renderer {
             
             uniformDict[index] = uniformBuffer
         }
+    }
+}
+
+// MARK:- Set Shader
+
+extension Renderer {
+    func setShader(shader: String) {
+        let preprocessor = Preprocessor()
+        
+        let paramStr = "const VertexIn vertex_in [[stage_in]],constant Uniforms &uniforms [[buffer(1)]],constant matrix_float4x4 &translateMat [[buffer(2)]]"
+        
+        self.shader = preprocessor.replaceParamsToFunc(program: shader, funcName: "vertex_main", replaceParams: paramStr)
     }
 }

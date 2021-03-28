@@ -29,6 +29,8 @@
 		55844D30260BC2A1006E68FF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 55844D2F260BC2A1006E68FF /* RealmSwift */; };
 		55877E5C26107EE1000D9C8D /* math.js in Resources */ = {isa = PBXBuildFile; fileRef = 55877E5B26107EE1000D9C8D /* math.js */; };
 		55877E672610D5C6000D9C8D /* Helper.js in Resources */ = {isa = PBXBuildFile; fileRef = 55877E662610D5C6000D9C8D /* Helper.js */; };
+		55877E712610F765000D9C8D /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55877E702610F765000D9C8D /* Lexer.swift */; };
+		55877E7626110865000D9C8D /* Preprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55877E7526110865000D9C8D /* Preprocessor.swift */; };
 		55AC9ABA2606575C00165003 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AB92606575C00165003 /* MainInteractor.swift */; };
 		55AC9AC32606577D00165003 /* MainInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AC22606577D00165003 /* MainInteractorInput.swift */; };
 		55AC9AC82606579100165003 /* MainInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AC72606579100165003 /* MainInteractorOutput.swift */; };
@@ -97,6 +99,8 @@
 		557709E62609056700395B7E /* MainRouterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouterOutput.swift; sourceTree = "<group>"; };
 		55877E5B26107EE1000D9C8D /* math.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = math.js; sourceTree = "<group>"; };
 		55877E662610D5C6000D9C8D /* Helper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Helper.js; sourceTree = "<group>"; };
+		55877E702610F765000D9C8D /* Lexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
+		55877E7526110865000D9C8D /* Preprocessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preprocessor.swift; sourceTree = "<group>"; };
 		55AC9AB92606575C00165003 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		55AC9AC22606577D00165003 /* MainInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorInput.swift; sourceTree = "<group>"; };
 		55AC9AC72606579100165003 /* MainInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorOutput.swift; sourceTree = "<group>"; };
@@ -152,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				5550EB07260FB30B000AF565 /* ScriptService.swift */,
+				55877E702610F765000D9C8D /* Lexer.swift */,
+				55877E7526110865000D9C8D /* Preprocessor.swift */,
 			);
 			path = ScriptService;
 			sourceTree = "<group>";
@@ -560,6 +566,7 @@
 				55AC9B3A26067D7300165003 /* ProjectInteractor.swift in Sources */,
 				5574947A2605FF18007E6468 /* AppDelegate.swift in Sources */,
 				55AC9AC82606579100165003 /* MainInteractorOutput.swift in Sources */,
+				55877E712610F765000D9C8D /* Lexer.swift in Sources */,
 				55AC9B3526067C6600165003 /* ProjectViewOutput.swift in Sources */,
 				55AC9B3026067C2400165003 /* ProjectPresenter.swift in Sources */,
 				55AC9ABA2606575C00165003 /* MainInteractor.swift in Sources */,
@@ -575,6 +582,7 @@
 				557709E72609056700395B7E /* MainRouterOutput.swift in Sources */,
 				55AC9B1E2606693B00165003 /* Renderer.swift in Sources */,
 				5574947C2605FF18007E6468 /* SceneDelegate.swift in Sources */,
+				55877E7626110865000D9C8D /* Preprocessor.swift in Sources */,
 				556FF7CA260D1107008021DD /* Project.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
