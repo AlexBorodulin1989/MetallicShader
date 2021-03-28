@@ -8,5 +8,5 @@
 import MetalKit
 
 protocol RendererProtocol {
-    func refreshShader(shader: String)
+    func refresh(shader: String, script: String)
 }

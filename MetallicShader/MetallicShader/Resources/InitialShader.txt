@@ -13,7 +13,7 @@ struct VertexIn {
 };
 
 vertex float4 vertex_main() {
-    float4 position = translateMat *
+    float4 position = projectionMatrix *
                         uniforms.viewMatrix *
                         uniforms.modelMatrix *
                         vertex_in.position;

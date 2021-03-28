@@ -4,4 +4,4 @@ var projection = fovProjection(0.785398, 0.1, 100, 0.95)
 
 systemLog(projection);
 
-setMatrix(projection, 2);
+setMatrix(projection, "projectionMatrix");

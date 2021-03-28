@@ -16,6 +16,11 @@ struct Uniforms {
     let projectionMatrix: float4x4
 }
 
+struct Uniform {
+    let name: String
+    let buffer: MTLBuffer
+}
+
 class Renderer: NSObject {
     private(set) var device: MTLDevice!
     private(set) var commandQueue: MTLCommandQueue!
@@ -24,7 +29,7 @@ class Renderer: NSObject {
     private(set) var pipelineState: MTLRenderPipelineState!
     unowned var mtkView: MTKView!
     
-    var uniformDict = [Int: MTLBuffer]()
+    var uniformArr = [Uniform]()
     
     var timer: Float = 0
     var shader: String = ""
@@ -40,8 +45,6 @@ class Renderer: NSObject {
             fatalError("GPU not available")
         }
         
-        setShader(shader: shader)
-        
         self.device = device
         self.commandQueue = commandQueue
         metalView.device = device
@@ -50,6 +53,13 @@ class Renderer: NSObject {
         metalView.delegate = self
         mtkView = metalView
         
+        setupMVP(viewSize: metalView.bounds.size)
+        
+        ScriptService.shared.renderer = self
+        ScriptService.shared.reloadService()
+        
+        setShader(shader: shader)
+        
         do {
             addMesh()
             addVertexBuffer()
@@ -57,11 +67,6 @@ class Renderer: NSObject {
         } catch {
             fatalError(error.localizedDescription)
         }
-        
-        setupMVP(viewSize: metalView.bounds.size)
-        
-        ScriptService.shared.renderer = self
-        ScriptService.shared.reloadService()
     }
     
     func addMesh() {
@@ -111,8 +116,8 @@ extension Renderer: MTKViewDelegate {
 
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         
-        for (key, value) in uniformDict {
-            renderEncoder.setVertexBuffer(value, offset: 0, index: key)
+        for (index, element) in uniformArr.enumerated() {
+            renderEncoder.setVertexBuffer(element.buffer, offset: 0, index: index + 2)
         }
         
         for submesh in mesh.submeshes {
@@ -137,7 +142,9 @@ extension Renderer: MTKViewDelegate {
 }
 
 extension Renderer: RendererProtocol {
-    func refreshShader(shader: String) {
+    func refresh(shader: String, script: String) {
+        uniformArr = [Uniform]()
+        ScriptService.shared.reloadService(script: script)
         setShader(shader: shader)
         do {
             try createPipeline()
@@ -168,13 +175,12 @@ extension Renderer {
 // MARK:- Set Matrix buffer
 
 extension Renderer {
-    func setMatrixBuffer(_ buffer: float4x4, _ index : Int) {
-        if index > 0 {
-            let uniformBuffer = device.makeBuffer(length: MemoryLayout<float4x4>.size,
-                                                  options: [])
-            memcpy(uniformBuffer!.contents(), [buffer], MemoryLayout<float4x4>.size)
+    func setMatrixBuffer(_ buffer: float4x4, _ name : String) {
+        if let uniformBuffer = device.makeBuffer(length: MemoryLayout<float4x4>.size,
+                                                 options: []) {
+            memcpy(uniformBuffer.contents(), [buffer], MemoryLayout<float4x4>.size)
             
-            uniformDict[index] = uniformBuffer
+            uniformArr.append(Uniform(name: name, buffer: uniformBuffer))
         }
     }
 }
@@ -185,7 +191,11 @@ extension Renderer {
     func setShader(shader: String) {
         let preprocessor = Preprocessor()
         
-        let paramStr = "const VertexIn vertex_in [[stage_in]],constant Uniforms &uniforms [[buffer(1)]],constant matrix_float4x4 &translateMat [[buffer(2)]]"
+        var paramStr = "const VertexIn vertex_in [[stage_in]],constant Uniforms &uniforms [[buffer(1)]]"
+        
+        for (index, element) in uniformArr.enumerated() {
+            paramStr += ",constant matrix_float4x4 &\(element.name) [[buffer(\(index + 2))]]"
+        }
         
         self.shader = preprocessor.replaceParamsToFunc(program: shader, funcName: "vertex_main", replaceParams: paramStr)
     }

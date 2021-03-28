@@ -80,7 +80,7 @@ class ScriptService {
     
     // MARK:- Get projection matrix
     
-    let setMatrix: @convention(block) ([[Double]], Int32) -> Void = { matrix, index in
+    let setMatrix: @convention(block) ([[Double]], String) -> Void = { matrix, name in
         var resMatrix = float4x4.identity()
         
         if matrix.count == 4 {
@@ -93,7 +93,7 @@ class ScriptService {
             }
         }
         
-        ScriptService.shared.renderer.setMatrixBuffer(resMatrix, 2)
+        ScriptService.shared.renderer.setMatrixBuffer(resMatrix, name)
     }
     
     func initMatrixSetter() {
