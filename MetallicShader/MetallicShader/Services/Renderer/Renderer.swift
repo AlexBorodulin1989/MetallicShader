@@ -24,6 +24,8 @@ class Renderer: NSObject {
     private(set) var pipelineState: MTLRenderPipelineState!
     unowned var mtkView: MTKView!
     
+    var uniformDict = [Int: MTLBuffer]()
+    
     var timer: Float = 0
     var shader: String = ""
     
@@ -32,7 +34,7 @@ class Renderer: NSObject {
     init(metalView: MTKView, shader: String) {
         super.init()
         
-        ScriptService.shared.mtkView = metalView
+        ScriptService.shared.renderer = self
         
         guard
             let device = MTLCreateSystemDefaultDevice(),
@@ -59,6 +61,15 @@ class Renderer: NSObject {
         }
         
         setupMVP(viewSize: metalView.bounds.size)
+        
+        let transformMat = float4x4(
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]
+        )
+        
+        setMatrixBuffer(transformMat, 2)
     }
     
     func addMesh() {
@@ -108,6 +119,10 @@ extension Renderer: MTKViewDelegate {
 
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         
+        for (key, value) in uniformDict {
+            renderEncoder.setVertexBuffer(value, offset: 0, index: key)
+        }
+        
         for submesh in mesh.submeshes {
             renderEncoder.drawIndexedPrimitives(type: .triangle,
                                                 indexCount: submesh.indexCount,
@@ -123,6 +138,8 @@ extension Renderer: MTKViewDelegate {
         }
 
         commandBuffer.present(drawable)
+        
+        
         commandBuffer.commit()
     }
 }
@@ -153,5 +170,19 @@ extension Renderer {
                                         aspect: ratio)
         
         uniforms = Uniforms(modelMatrix: modelMatrix, viewMatrix: viewMatrix, projectionMatrix: projectionMatrix)
+    }
+}
+
+// MARK:- Set Matrix buffer
+
+extension Renderer {
+    func setMatrixBuffer(_ buffer: float4x4, _ index : Int) {
+        if index > 0 {
+            let uniformBuffer = device.makeBuffer(length: MemoryLayout<float4x4>.size,
+                                                  options: [])
+            memcpy(uniformBuffer!.contents(), [buffer], MemoryLayout<float4x4>.size)
+            
+            uniformDict[index] = uniformBuffer
+        }
     }
 }

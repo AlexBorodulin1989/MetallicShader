@@ -47,17 +47,17 @@
                                 </constraints>
                             </view>
                             <mtkView contentMode="scaleToFill" colorPixelFormat="BGRA8Unorm" depthStencilPixelFormat="Depth32Float" translatesAutoresizingMaskIntoConstraints="NO" id="YQN-8Z-zsA">
-                                <rect key="frame" x="0.0" y="88" width="414" height="567"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="556"/>
                             </mtkView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="llv-i1-3NS" userLabel="EditorSizeView">
-                                <rect key="frame" x="0.0" y="655" width="414" height="207"/>
+                                <rect key="frame" x="0.0" y="644" width="414" height="218"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="llv-i1-3NS" secondAttribute="height" multiplier="2:1" id="Zxx-wl-pcJ"/>
+                                    <constraint firstAttribute="width" secondItem="llv-i1-3NS" secondAttribute="height" multiplier="1.9:1" id="Zxx-wl-pcJ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4D-pi-cWN" userLabel="TextViewEditor">
-                                <rect key="frame" x="0.0" y="655" width="414" height="207"/>
+                                <rect key="frame" x="0.0" y="644" width="414" height="218"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPF-1g-SOG" userLabel="ButtonsContainer">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -91,11 +91,11 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pih-xW-WGo">
-                                        <rect key="frame" x="0.0" y="44" width="414" height="163"/>
+                                        <rect key="frame" x="0.0" y="44" width="414" height="174"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
                                     </textView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
