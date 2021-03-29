@@ -4,6 +4,4 @@ var projection = fovProjection(0.785398, 0.1, 100, 0.95)
 
 setMatrix(projection, "projectionMatrix");
 
-while (true) {
-    systemLog("Success");
-}
+systemLog("Success perform script");

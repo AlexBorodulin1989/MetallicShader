@@ -30,11 +30,14 @@ class ScriptService {
         currentInitBlock = BlockOperation { [weak self] in
             ScriptService.shared.jsContext = JSContext()
             
+            // Need to use context as weak value to prevent blocking java context when it need to be reset from other init closure in refresh
             weak var context = ScriptService.shared.jsContext
             
             context?.exceptionHandler = { context, exception in
                 if let exc = exception {
-                    print("JS Exception", exc.toString() ?? "")
+                    foreground {
+                        print("JS Exception", exc.toString() ?? "")
+                    }
                 }
             }
             
@@ -49,8 +52,8 @@ class ScriptService {
                 if mainScript == nil {
                     mainScript = try String(contentsOfFile:mainjspath!, encoding: String.Encoding.utf8)
                 }
-                ScriptService.shared.jsContext.evaluateScript(math)
-                ScriptService.shared.jsContext.evaluateScript(helper)
+                context?.evaluateScript(math)
+                context?.evaluateScript(helper)
             } catch {
                 fatalError("Initial file not found")
             }
