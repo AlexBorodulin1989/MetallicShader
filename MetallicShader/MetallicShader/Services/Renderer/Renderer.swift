@@ -51,13 +51,15 @@ class Renderer: NSObject {
         
         metalView.clearColor = MTLClearColor(red: 1.0, green: 1.0, blue: 0.8, alpha: 1.0)
         mtkView = metalView
+        mtkView.isPaused = true
+        mtkView.delegate = self
         
         setupMVP(viewSize: metalView.bounds.size)
         
         ScriptService.shared.renderer = self
         ScriptService.shared.reloadService {[weak self] in
             self?.setShader(shader: shader)
-            self?.mtkView.delegate = self
+            self?.mtkView.isPaused = false
             do {
                 self?.addMesh()
                 self?.addVertexBuffer()
@@ -146,10 +148,21 @@ extension Renderer: RendererProtocol {
         uniformArr = [Uniform]()
         ScriptService.shared.reloadService(script: script) {[weak self] in
             self?.setShader(shader: shader)
-            do {
-                try self?.createPipeline()
-            } catch {
-                fatalError(error.localizedDescription)
+            
+            if self?.pipelineState == nil {
+                do {
+                    self?.addMesh()
+                    self?.addVertexBuffer()
+                    try self?.createPipeline()
+                } catch {
+                    fatalError(error.localizedDescription)
+                }
+            } else {
+                do {
+                    try self?.createPipeline()
+                } catch {
+                    fatalError(error.localizedDescription)
+                }
             }
             
             self?.mtkView.isPaused = false

@@ -15,21 +15,24 @@ class ScriptService {
     static var shared: ScriptService = {
         let instance = ScriptService()
         
-        instance.queue.maxConcurrentOperationCount = 1
-        
         return instance
     }()
     
     fileprivate var jsContext: JSContext!
     
+    var currentInitBlock: BlockOperation?
+    var initBlockID: Int = 0
+    
     weak var renderer: Renderer!
     
     func reloadService(script: String? = nil, completion: @escaping () -> Void){
         
-        let initOperation = BlockOperation { [weak self] in
+        currentInitBlock = BlockOperation { [weak self] in
             ScriptService.shared.jsContext = JSContext()
             
-            ScriptService.shared.jsContext.exceptionHandler = { context, exception in
+            weak var context = ScriptService.shared.jsContext
+            
+            context?.exceptionHandler = { context, exception in
                 if let exc = exception {
                     print("JS Exception", exc.toString() ?? "")
                 }
@@ -54,16 +57,22 @@ class ScriptService {
             self?.initSystemLogger()
             self?.initMatrixSetter()
             self?.initBackgroundColorHandler()
-            ScriptService.shared.jsContext.evaluateScript(mainScript)
+            context?.evaluateScript(mainScript)
         }
         
-        initOperation.completionBlock = {
-            foreground {
-                completion()
+        initBlockID += 1
+        let blockID = initBlockID
+        
+        currentInitBlock?.completionBlock = {[weak self, blockID] in
+            if blockID == self?.initBlockID ?? 0 {
+                foreground {
+                    completion()
+                }
             }
+            
         }
         
-        queue.addOperation(initOperation)
+        queue.addOperation(currentInitBlock!)
     }
     
     let systemLog: @convention(block) (String) -> Void = { log in
