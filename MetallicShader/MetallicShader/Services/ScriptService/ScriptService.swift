@@ -10,9 +10,12 @@ import MetalKit
 import JavaScriptCore
 
 class ScriptService {
+    private let queue = OperationQueue()
+    
     static var shared: ScriptService = {
         let instance = ScriptService()
-        instance.jsContext = JSContext()
+        
+        instance.queue.maxConcurrentOperationCount = 1
         
         return instance
     }()
@@ -21,39 +24,52 @@ class ScriptService {
     
     weak var renderer: Renderer!
     
-    func reloadService(script: String? = nil) {
-        ScriptService.shared.jsContext = JSContext()
+    func reloadService(script: String? = nil, completion: @escaping () -> Void){
         
-        ScriptService.shared.jsContext.exceptionHandler = { context, exception in
-            if let exc = exception {
-                print("JS Exception", exc.toString() ?? "")
+        let initOperation = BlockOperation { [weak self] in
+            ScriptService.shared.jsContext = JSContext()
+            
+            ScriptService.shared.jsContext.exceptionHandler = { context, exception in
+                if let exc = exception {
+                    print("JS Exception", exc.toString() ?? "")
+                }
+            }
+            
+            var mainScript = script
+            
+            let mathjspath = Bundle.main.path(forResource: "math", ofType: "js")
+            let helperjspath = Bundle.main.path(forResource: "Helper", ofType: "js")
+            let mainjspath = Bundle.main.path(forResource: "InitialJavaScript", ofType: "js")
+            do {
+                let math = try String(contentsOfFile:mathjspath!, encoding: String.Encoding.utf8)
+                let helper = try String(contentsOfFile:helperjspath!, encoding: String.Encoding.utf8)
+                if mainScript == nil {
+                    mainScript = try String(contentsOfFile:mainjspath!, encoding: String.Encoding.utf8)
+                }
+                ScriptService.shared.jsContext.evaluateScript(math)
+                ScriptService.shared.jsContext.evaluateScript(helper)
+            } catch {
+                fatalError("Initial file not found")
+            }
+            self?.initSystemLogger()
+            self?.initMatrixSetter()
+            self?.initBackgroundColorHandler()
+            ScriptService.shared.jsContext.evaluateScript(mainScript)
+        }
+        
+        initOperation.completionBlock = {
+            foreground {
+                completion()
             }
         }
         
-        var mainScript = script
-        
-        let mathjspath = Bundle.main.path(forResource: "math", ofType: "js")
-        let helperjspath = Bundle.main.path(forResource: "Helper", ofType: "js")
-        let mainjspath = Bundle.main.path(forResource: "InitialJavaScript", ofType: "js")
-        do {
-            let math = try String(contentsOfFile:mathjspath!, encoding: String.Encoding.utf8)
-            let helper = try String(contentsOfFile:helperjspath!, encoding: String.Encoding.utf8)
-            if mainScript == nil {
-                mainScript = try String(contentsOfFile:mainjspath!, encoding: String.Encoding.utf8)
-            }
-            ScriptService.shared.jsContext.evaluateScript(math)
-            ScriptService.shared.jsContext.evaluateScript(helper)
-        } catch {
-            fatalError("Initial file not found")
-        }
-        initSystemLogger()
-        initMatrixSetter()
-        initBackgroundColorHandler()
-        ScriptService.shared.jsContext.evaluateScript(mainScript)
+        queue.addOperation(initOperation)
     }
     
     let systemLog: @convention(block) (String) -> Void = { log in
-        print(log)
+        foreground {
+            print(log)
+        }
     }
     
     func initSystemLogger() {
@@ -67,7 +83,9 @@ class ScriptService {
     // MARK:- Set background color
     
     let setBackground: @convention(block) ([Double]) -> Void = { color in
-        ScriptService.shared.renderer.mtkView.clearColor = MTLClearColor(red: color[0], green: color[1], blue: color[2], alpha: 1.0)
+        foreground {
+            ScriptService.shared.renderer.mtkView.clearColor = MTLClearColor(red: color[0], green: color[1], blue: color[2], alpha: 1.0)
+        }
     }
     
     func initBackgroundColorHandler() {
@@ -81,19 +99,21 @@ class ScriptService {
     // MARK:- Get projection matrix
     
     let setMatrix: @convention(block) ([[Double]], String) -> Void = { matrix, name in
-        var resMatrix = float4x4.identity()
-        
-        if matrix.count == 4 {
-            for i in 0...3 {
-                if matrix[i].count == 4 {
-                    for c in 0...3 {
-                        resMatrix[i][c] = Float(matrix[i][c]);
+        foreground {
+            var resMatrix = float4x4.identity()
+            
+            if matrix.count == 4 {
+                for i in 0...3 {
+                    if matrix[i].count == 4 {
+                        for c in 0...3 {
+                            resMatrix[i][c] = Float(matrix[i][c]);
+                        }
                     }
                 }
             }
+            
+            ScriptService.shared.renderer.setMatrixBuffer(resMatrix, name)
         }
-        
-        ScriptService.shared.renderer.setMatrixBuffer(resMatrix, name)
     }
     
     func initMatrixSetter() {

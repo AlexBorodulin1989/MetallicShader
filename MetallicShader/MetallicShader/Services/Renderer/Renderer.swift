@@ -50,22 +50,21 @@ class Renderer: NSObject {
         metalView.device = device
         
         metalView.clearColor = MTLClearColor(red: 1.0, green: 1.0, blue: 0.8, alpha: 1.0)
-        metalView.delegate = self
         mtkView = metalView
         
         setupMVP(viewSize: metalView.bounds.size)
         
         ScriptService.shared.renderer = self
-        ScriptService.shared.reloadService()
-        
-        setShader(shader: shader)
-        
-        do {
-            addMesh()
-            addVertexBuffer()
-            try createPipeline()
-        } catch {
-            fatalError(error.localizedDescription)
+        ScriptService.shared.reloadService {[weak self] in
+            self?.setShader(shader: shader)
+            self?.mtkView.delegate = self
+            do {
+                self?.addMesh()
+                self?.addVertexBuffer()
+                try self?.createPipeline()
+            } catch {
+                fatalError(error.localizedDescription)
+            }
         }
     }
     
@@ -143,13 +142,17 @@ extension Renderer: MTKViewDelegate {
 
 extension Renderer: RendererProtocol {
     func refresh(shader: String, script: String) {
+        mtkView.isPaused = true
         uniformArr = [Uniform]()
-        ScriptService.shared.reloadService(script: script)
-        setShader(shader: shader)
-        do {
-            try createPipeline()
-        } catch {
-            fatalError(error.localizedDescription)
+        ScriptService.shared.reloadService(script: script) {[weak self] in
+            self?.setShader(shader: shader)
+            do {
+                try self?.createPipeline()
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+            
+            self?.mtkView.isPaused = false
         }
     }
 }
