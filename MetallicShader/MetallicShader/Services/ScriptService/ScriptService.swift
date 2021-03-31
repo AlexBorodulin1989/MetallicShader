@@ -9,8 +9,12 @@ import Foundation
 import MetalKit
 import JavaScriptCore
 
+enum ScriptValue {
+    case notExists
+    case value(JSValue)
+}
+
 class ScriptService {
-    private let queue = OperationQueue()
     
     static var shared: ScriptService = {
         let instance = ScriptService()
@@ -20,15 +24,28 @@ class ScriptService {
     
     fileprivate var jsContext: JSContext!
     
-    var currentInitBlock: BlockOperation?
     var initBlockID: Int = 0
     
     weak var renderer: Renderer!
     
+    var scriptValues = [String : ScriptValue]()
+    
+    
+    var queue: DispatchQueue!
+    
     func reloadService(script: String? = nil, completion: @escaping () -> Void){
         
-        currentInitBlock = BlockOperation { [weak self] in
+        initBlockID += 1
+        
+        queue = DispatchQueue(label: "Queue (\(initBlockID)")
+        let key = DispatchSpecificKey<Void>()
+        queue.setSpecific(key:key, value:())
+        
+        let blockID = initBlockID
+        
+        queue.async { [weak self, blockID] in
             ScriptService.shared.jsContext = JSContext()
+            self?.scriptValues = [:]
             
             // Need to use context as weak value to prevent blocking java context when it need to be reset from other init closure in refresh
             weak var context = ScriptService.shared.jsContext
@@ -61,21 +78,13 @@ class ScriptService {
             self?.initMatrixSetter()
             self?.initBackgroundColorHandler()
             context?.evaluateScript(mainScript)
-        }
-        
-        initBlockID += 1
-        let blockID = initBlockID
-        
-        currentInitBlock?.completionBlock = {[weak self, blockID] in
+            
             if blockID == self?.initBlockID ?? 0 {
                 foreground {
                     completion()
                 }
             }
-            
         }
-        
-        queue.addOperation(currentInitBlock!)
     }
     
     let systemLog: @convention(block) (String) -> Void = { log in
@@ -134,5 +143,30 @@ class ScriptService {
         self.jsContext.setObject(setMatrixObject, forKeyedSubscript: "setMatrix" as (NSCopying & NSObjectProtocol))
         
         _ = self.jsContext.evaluateScript("setMatrix")
+    }
+}
+
+// MARK:- Java Script Function handler
+
+extension ScriptService {
+    func requestFunction(name functionName: String, completion: @escaping (_ function: JSValue?) -> Void) {
+        queue.async {  [weak jsContext, weak self] in
+            let val = self?.scriptValues[functionName]
+            if val == nil {
+                if let function = jsContext?.objectForKeyedSubscript(functionName), !function.isUndefined {
+                    completion(function)
+                } else {
+                    self?.scriptValues[functionName] = .notExists
+                    completion(nil)
+                }
+            } else {
+                switch val {
+                case .value(let function):
+                    completion(function)
+                default:
+                    completion(nil)
+                }
+            }
+        }
     }
 }

@@ -36,6 +36,8 @@ class Renderer: NSObject {
     
     var uniforms: Uniforms!
     
+    let viewSizeService = ViewSizeService()
+    
     init(metalView: MTKView, shader: String) {
         super.init()
         
@@ -60,6 +62,7 @@ class Renderer: NSObject {
         ScriptService.shared.reloadService {[weak self] in
             self?.setShader(shader: shader)
             self?.mtkView.isPaused = false
+            self?.viewSizeService.setSize(self?.mtkView.bounds.size ?? CGSize())
             do {
                 self?.addMesh()
                 self?.addVertexBuffer()
@@ -102,7 +105,7 @@ class Renderer: NSObject {
 
 extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        setupMVP(viewSize: size)
+        self.viewSizeService.setSize(size)
     }
     
     func draw(in view: MTKView) {
