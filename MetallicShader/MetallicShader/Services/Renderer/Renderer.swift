@@ -58,6 +58,9 @@ class Renderer: NSObject {
         
         setupMVP(viewSize: metalView.bounds.size)
         
+        ScriptService.shared.subscribeToFunct("setViewBackground")
+        NotificationCenter.default.addObserver(self, selector: #selector(setViewBackground), name: NSNotification.Name(rawValue: "setViewBackground"), object: nil)
+        
         ScriptService.shared.renderer = self
         ScriptService.shared.reloadService {[weak self] in
             self?.setShader(shader: shader)
@@ -71,6 +74,10 @@ class Renderer: NSObject {
                 fatalError(error.localizedDescription)
             }
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func addMesh() {
@@ -217,5 +224,13 @@ extension Renderer {
         }
         
         self.shader = preprocessor.replaceParamsToFunc(program: shader, funcName: "vertex_main", replaceParams: paramStr)
+    }
+}
+
+// MARK:- Notifications
+
+extension Renderer {
+    @objc fileprivate func setViewBackground(with notification: Notification) {
+        print("Set background called")
     }
 }

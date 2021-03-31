@@ -17,18 +17,14 @@ class Preprocessor {
                 var token = try lexer.nextToken()
                 if token.type == .VERTEX {
                     token = try lexer.nextToken()
-                    while token.type == .SPACE || token.type == .LINEBREAK { token = try lexer.nextToken() }
                     if token.type == .VALUE_TYPE {
                         token = try lexer.nextToken()
-                        while token.type == .SPACE || token.type == .LINEBREAK { token = try lexer.nextToken() }
                         if token.type == .IDENTIFIER {
                             if token.value != funcName { continue }
                             token = try lexer.nextToken()
-                            while token.type == .SPACE || token.type == .LINEBREAK { token = try lexer.nextToken() }
                             if token.type == .LEFT_BRACKET {
                                 let startIndex = token.start
                                 token = try lexer.nextToken()
-                                while token.type == .SPACE || token.type == .LINEBREAK { token = try lexer.nextToken() }
                                 if token.type == .RIGHT_BRACKET {
                                     var resultProg = program
                                     resultProg.insert(contentsOf: replaceParams, at: program.index(program.startIndex, offsetBy: startIndex))

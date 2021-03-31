@@ -30,10 +30,27 @@ class ScriptService {
     
     var scriptValues = [String : ScriptValue]()
     
+    let interpreter = TLInterpreter()
     
     var queue: DispatchQueue!
     
+    func interpretFile() {
+        
+    }
+    
+    func subscribeToFunct(_ name: String) {
+        interpreter.subscribeToFunction(name)
+    }
+    
     func reloadService(script: String? = nil, completion: @escaping () -> Void){
+        
+        let progpath = Bundle.main.path(forResource: "Test", ofType: "tl")
+        do {
+            let prog = try String(contentsOfFile:progpath!, encoding: String.Encoding.utf8)
+            interpreter.analizeFunctionCall(lexer: Lexer(program: prog))
+        } catch {
+            fatalError("Initial file not found")
+        }
         
         initBlockID += 1
         

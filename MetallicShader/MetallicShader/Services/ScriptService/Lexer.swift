@@ -16,16 +16,17 @@ struct Token {
 
 enum TokenType {
     case UNKNOWN
+    case EMPTY
     case IDENTIFIER
     case VERTEX
     case FRAGMENT
     case VALUE_TYPE
-    case SPACE
-    case LINEBREAK
     case LEFT_BRACKET
     case RIGHT_BRACKET
     case LEFT_CURLY_BRACE
     case RIGHT_CURLY_BRACE
+    case SEMICOLON
+    case COMMA
 };
 
 enum LexerError: Error {
@@ -48,6 +49,8 @@ class Lexer {
         
         throw LexerError.endTokens
     }
+    
+    func getTokens() -> [Token] { return tokens }
     
     init(program: String) {
         
@@ -76,20 +79,24 @@ class Lexer {
                 let endIndex = charIndex
                 let startIndex = endIndex - (buffer.count - 1)
                 let val = "\(char)"
-                if (val == " ") {
-                    tokens.append(Token(type: .SPACE, start: startIndex, end: endIndex, value: val))
-                } else if (val == "(") {
-                    tokens.append(Token(type: .LEFT_BRACKET, start: startIndex, end: endIndex, value: val))
-                } else if (val == ")") {
-                    tokens.append(Token(type: .RIGHT_BRACKET, start: startIndex, end: endIndex, value: val))
-                } else if (val == "{") {
-                    tokens.append(Token(type: .LEFT_CURLY_BRACE, start: startIndex, end: endIndex, value: val))
-                } else if (val == "}") {
-                    tokens.append(Token(type: .RIGHT_CURLY_BRACE, start: startIndex, end: endIndex, value: val))
-                } else if (val == "\n") {
-                    tokens.append(Token(type: .LINEBREAK, start: startIndex, end: endIndex, value: val))
-                } else {
-                    tokens.append(Token(type: .UNKNOWN, start: startIndex, end: endIndex, value: val))
+                
+                //Space will not take part in sintax
+                if (val != " " && val != "\n") {
+                    if (val == "(") {
+                        tokens.append(Token(type: .LEFT_BRACKET, start: startIndex, end: endIndex, value: val))
+                    } else if (val == ")") {
+                        tokens.append(Token(type: .RIGHT_BRACKET, start: startIndex, end: endIndex, value: val))
+                    } else if (val == "{") {
+                        tokens.append(Token(type: .LEFT_CURLY_BRACE, start: startIndex, end: endIndex, value: val))
+                    } else if (val == "}") {
+                        tokens.append(Token(type: .RIGHT_CURLY_BRACE, start: startIndex, end: endIndex, value: val))
+                    } else if (val == ";") {
+                        tokens.append(Token(type: .SEMICOLON, start: startIndex, end: endIndex, value: val))
+                    } else if (val == ",") {
+                        tokens.append(Token(type: .COMMA, start: startIndex, end: endIndex, value: val))
+                    } else {
+                        tokens.append(Token(type: .UNKNOWN, start: startIndex, end: endIndex, value: val))
+                    }
                 }
             }
             

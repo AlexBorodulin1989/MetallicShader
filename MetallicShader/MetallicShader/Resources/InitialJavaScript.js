@@ -9,7 +9,3 @@ function UpdateViewSize(width) {
 }*/
 
 systemLog("Success perform script");
-
-while (true) {
-    systemLog("Fail");
-}
