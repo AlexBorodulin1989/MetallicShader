@@ -21,12 +21,14 @@ enum TokenType {
     case VERTEX
     case FRAGMENT
     case VALUE_TYPE
+    case LINEBREAK
     case LEFT_BRACKET
     case RIGHT_BRACKET
     case LEFT_CURLY_BRACE
     case RIGHT_CURLY_BRACE
     case SEMICOLON
     case COMMA
+    case POINT
 };
 
 enum LexerError: Error {
@@ -38,7 +40,7 @@ class Lexer {
     
     private var tokens = [Token]()
     
-    var currentIndex = 0
+    private var currentIndex = 0
     
     func nextToken() throws -> Token {
         if currentIndex < tokens.count {
@@ -49,8 +51,6 @@ class Lexer {
         
         throw LexerError.endTokens
     }
-    
-    func getTokens() -> [Token] { return tokens }
     
     init(program: String) {
         
@@ -81,7 +81,7 @@ class Lexer {
                 let val = "\(char)"
                 
                 //Space will not take part in sintax
-                if (val != " " && val != "\n") {
+                if (val != " ") {
                     if (val == "(") {
                         tokens.append(Token(type: .LEFT_BRACKET, start: startIndex, end: endIndex, value: val))
                     } else if (val == ")") {
@@ -94,6 +94,10 @@ class Lexer {
                         tokens.append(Token(type: .SEMICOLON, start: startIndex, end: endIndex, value: val))
                     } else if (val == ",") {
                         tokens.append(Token(type: .COMMA, start: startIndex, end: endIndex, value: val))
+                    }else if (val == ".") {
+                        tokens.append(Token(type: .POINT, start: startIndex, end: endIndex, value: val))
+                    } else if (val == "\n") {
+                        tokens.append(Token(type: .LINEBREAK, start: startIndex, end: endIndex, value: val))
                     } else {
                         tokens.append(Token(type: .UNKNOWN, start: startIndex, end: endIndex, value: val))
                     }

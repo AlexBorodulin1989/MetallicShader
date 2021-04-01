@@ -62,17 +62,16 @@ class Renderer: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(setViewBackground), name: NSNotification.Name(rawValue: "setViewBackground"), object: nil)
         
         ScriptService.shared.renderer = self
-        ScriptService.shared.reloadService {[weak self] in
-            self?.setShader(shader: shader)
-            self?.mtkView.isPaused = false
-            self?.viewSizeService.setSize(self?.mtkView.bounds.size ?? CGSize())
-            do {
-                self?.addMesh()
-                self?.addVertexBuffer()
-                try self?.createPipeline()
-            } catch {
-                fatalError(error.localizedDescription)
-            }
+        ScriptService.shared.reloadService {[weak self] in }
+        self.setShader(shader: shader)
+        self.mtkView.isPaused = false
+        self.viewSizeService.setSize(self.mtkView.bounds.size)
+        do {
+            self.addMesh()
+            self.addVertexBuffer()
+            try self.createPipeline()
+        } catch {
+            fatalError(error.localizedDescription)
         }
     }
     
@@ -157,26 +156,26 @@ extension Renderer: RendererProtocol {
         mtkView.isPaused = true
         uniformArr = [Uniform]()
         ScriptService.shared.reloadService(script: script) {[weak self] in
-            self?.setShader(shader: shader)
-            
-            if self?.pipelineState == nil {
-                do {
-                    self?.addMesh()
-                    self?.addVertexBuffer()
-                    try self?.createPipeline()
-                } catch {
-                    fatalError(error.localizedDescription)
-                }
-            } else {
-                do {
-                    try self?.createPipeline()
-                } catch {
-                    fatalError(error.localizedDescription)
-                }
-            }
-            
-            self?.mtkView.isPaused = false
         }
+        self.setShader(shader: shader)
+        
+        if self.pipelineState == nil {
+            do {
+                self.addMesh()
+                self.addVertexBuffer()
+                try self.createPipeline()
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        } else {
+            do {
+                try self.createPipeline()
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        }
+        
+        self.mtkView.isPaused = false
     }
 }
 
@@ -231,6 +230,8 @@ extension Renderer {
 
 extension Renderer {
     @objc fileprivate func setViewBackground(with notification: Notification) {
-        print("Set background called")
+        if let params = notification.object as? [Float] {
+            mtkView.clearColor = MTLClearColor(red: Double(params[0]), green: Double(params[1]), blue: Double(params[2]), alpha: 1.0)
+        }
     }
 }

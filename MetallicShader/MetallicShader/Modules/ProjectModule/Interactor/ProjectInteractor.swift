@@ -27,10 +27,10 @@ extension ProjectInteractor: ProjectInteractorInput {
         subscribeKeyboardNotify()
         
         let mtlpath = Bundle.main.path(forResource: "InitialShader", ofType: "txt")
-        let jspath = Bundle.main.path(forResource: "InitialJavaScript", ofType: "js")
+        let screptpath = Bundle.main.path(forResource: "Test", ofType: "tl")
         do {
             let shader = try String(contentsOfFile:mtlpath!, encoding: String.Encoding.utf8)
-            tempText = try String(contentsOfFile:jspath!, encoding: String.Encoding.utf8)
+            tempText = try String(contentsOfFile:screptpath!, encoding: String.Encoding.utf8)
             
             renderer = Renderer(metalView: mtkView, shader: shader)
             output.setEditingText(shader)

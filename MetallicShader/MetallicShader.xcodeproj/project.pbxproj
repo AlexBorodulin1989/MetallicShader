@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550E07A22615E1E00018699C /* StringIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550E07A12615E1E00018699C /* StringIterator.swift */; };
 		5550EAAE260F6377000AF565 /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550EAAD260F6376000AF565 /* MathLibrary.swift */; };
 		5550EB02260FAF4A000AF565 /* InitialJavaScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 5550EB01260FAF4A000AF565 /* InitialJavaScript.js */; };
 		5550EB08260FB30B000AF565 /* ScriptService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550EB07260FB30B000AF565 /* ScriptService.swift */; };
+		55621395261569600032FF00 /* StringProtocolExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55621394261569600032FF00 /* StringProtocolExtension.swift */; };
 		556AF1E1260713380007DDDD /* ProjectRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AF1E0260713380007DDDD /* ProjectRouter.swift */; };
 		556AF1E62607147C0007DDDD /* ProjectRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AF1E52607147C0007DDDD /* ProjectRouterInput.swift */; };
 		556E6F8E26148030005B2D24 /* Test.tl in Resources */ = {isa = PBXBuildFile; fileRef = 556E6F8D26148030005B2D24 /* Test.tl */; };
@@ -76,9 +78,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		550E07A12615E1E00018699C /* StringIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringIterator.swift; sourceTree = "<group>"; };
 		5550EAAD260F6376000AF565 /* MathLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
 		5550EB01260FAF4A000AF565 /* InitialJavaScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = InitialJavaScript.js; sourceTree = "<group>"; };
 		5550EB07260FB30B000AF565 /* ScriptService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptService.swift; sourceTree = "<group>"; };
+		55621394261569600032FF00 /* StringProtocolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocolExtension.swift; sourceTree = "<group>"; };
 		556AF1E0260713380007DDDD /* ProjectRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRouter.swift; sourceTree = "<group>"; };
 		556AF1E52607147C0007DDDD /* ProjectRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRouterInput.swift; sourceTree = "<group>"; };
 		556E6F8D26148030005B2D24 /* Test.tl */ = {isa = PBXFileReference; lastKnownFileType = text; path = Test.tl; sourceTree = "<group>"; };
@@ -165,8 +169,17 @@
 				55877E702610F765000D9C8D /* Lexer.swift */,
 				55877E7526110865000D9C8D /* Preprocessor.swift */,
 				556E6F9226148113005B2D24 /* TLInterpreter.swift */,
+				550E07A12615E1E00018699C /* StringIterator.swift */,
 			);
 			path = ScriptService;
+			sourceTree = "<group>";
+		};
+		55621393261569330032FF00 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				55621394261569600032FF00 /* StringProtocolExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		556AF1DF260713190007DDDD /* Router */ = {
@@ -198,6 +211,7 @@
 		556FF7D6260D1512008021DD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				55621393261569330032FF00 /* Extensions */,
 				5550EAAD260F6376000AF565 /* MathLibrary.swift */,
 				556FF7D7260D1522008021DD /* AsyncLegacy.swift */,
 			);
@@ -576,6 +590,7 @@
 				556AF1E62607147C0007DDDD /* ProjectRouterInput.swift in Sources */,
 				556FF7D1260D12F1008021DD /* ProjectNetworkService.swift in Sources */,
 				5574947E2605FF18007E6468 /* MainViewController.swift in Sources */,
+				550E07A22615E1E00018699C /* StringIterator.swift in Sources */,
 				55AC9AE9260658AE00165003 /* MainViewInput.swift in Sources */,
 				55AC9ACE260657B900165003 /* MainPresenter.swift in Sources */,
 				557B26EF261214C500855A5A /* ViewSizeService.swift in Sources */,
@@ -594,6 +609,7 @@
 				5550EB08260FB30B000AF565 /* ScriptService.swift in Sources */,
 				55AC9AEE260658C000165003 /* MainViewOutput.swift in Sources */,
 				55AC9B652606933300165003 /* RendererProtocol.swift in Sources */,
+				55621395261569600032FF00 /* StringProtocolExtension.swift in Sources */,
 				55AC9B472606812600165003 /* ProjectInteractorOutput.swift in Sources */,
 				5550EAAE260F6377000AF565 /* MathLibrary.swift in Sources */,
 				55AC9B2B260677F500165003 /* VolumeItem.swift in Sources */,
