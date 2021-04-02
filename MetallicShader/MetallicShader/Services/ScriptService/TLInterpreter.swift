@@ -17,7 +17,7 @@ class TLInterpreter {
     
     //Intermediate values
     var functName: String!
-    var num = ""
+    var num: String?
     var functParams = [Float]()
     
     func subscribeToFunction(_ functName: String) {
@@ -76,16 +76,18 @@ extension TLInterpreter {
     }
     
     func params() {
-        if parseNumber() {
-            functParams.append((num as NSString).floatValue)
-            if match(.COMMA) {
-                params()
-                return
-            } else if match(.RIGHT_BRACKET)
-                        && match(.SEMICOLON) {
-                callToSubscribedFunct()
-                return
-            }
+        number()
+        if let number = num {
+            functParams.append((number as NSString).floatValue)
+        }
+        
+        if match(.COMMA) {
+            params()
+            return
+        } else if match(.RIGHT_BRACKET)
+                    && match(.SEMICOLON) {
+            callToSubscribedFunct()
+            return
         }
         
         print("Expression is not a function")
@@ -105,70 +107,27 @@ extension TLInterpreter {
 }
 
 /*
-number -> digit integer
-integer -> digit integer | empty
-empty -> . fraction | e
-fraction -> digit fraction | e
-digit -> 0|1|2|3|4|5|6|7|8|9
+number -> int | int fraction
+fraction -> . int | .
 */
 
 extension TLInterpreter {
     
-    func parseNumber() -> Bool {
-        stringIterator = StringIterator(str: lookahead?.value ?? "")
-        num = lookahead?.value ?? ""
-        if match(.IDENTIFIER) {
-            if number() {
-                return true
+    func number()  {
+        num = lookahead?.value ?? "0"
+        if match(.INT) {
+            fraction()
+            return
+        }
+        num = nil
+    }
+    
+    func fraction() {
+        if match(.POINT) {
+            let frac = lookahead?.value
+            if match(.INT) {
+                num! += ("." + (frac ?? "0"))
             }
         }
-        return false
-    }
-    
-    func number() -> Bool  {
-        if stringIterator.isDigit() == .digit {
-            return integer()
-        }
-        return false
-    }
-    
-    func integer() -> Bool {
-        
-        let charType = stringIterator.isDigit()
-        if charType == .digit {
-            return integer()
-        } else if charType != .empty {
-            return false
-        }
-        return empty()
-    }
-    
-    func empty() -> Bool {
-        if match(.POINT) {
-            return initFraction()
-        } else {
-            return true
-        }
-    }
-    
-    func initFraction() -> Bool {
-        let value = lookahead?.value ?? ""
-        
-        if match(.IDENTIFIER) {
-            stringIterator = StringIterator(str: value)
-            num += ("." + value)
-            return fraction()
-        }
-        return true
-    }
-    
-    func fraction() -> Bool {
-        let charType = stringIterator.isDigit()
-        if charType == .digit {
-            return fraction()
-        } else if charType != .empty {
-            return false
-        }
-        return true
     }
 }

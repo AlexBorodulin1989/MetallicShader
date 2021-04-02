@@ -32,7 +32,7 @@ extension ProjectInteractor: ProjectInteractorInput {
             let shader = try String(contentsOfFile:mtlpath!, encoding: String.Encoding.utf8)
             tempText = try String(contentsOfFile:screptpath!, encoding: String.Encoding.utf8)
             
-            renderer = Renderer(metalView: mtkView, shader: shader)
+            renderer = Renderer(metalView: mtkView, shader: shader, script: tempText)
             output.setEditingText(shader)
         } catch {
             fatalError("Initial file not found")

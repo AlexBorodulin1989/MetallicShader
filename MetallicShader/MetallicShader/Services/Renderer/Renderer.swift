@@ -38,7 +38,7 @@ class Renderer: NSObject {
     
     let viewSizeService = ViewSizeService()
     
-    init(metalView: MTKView, shader: String) {
+    init(metalView: MTKView, shader: String, script: String) {
         super.init()
         
         guard
@@ -62,7 +62,8 @@ class Renderer: NSObject {
         NotificationCenter.default.addObserver(self, selector: #selector(setViewBackground), name: NSNotification.Name(rawValue: "setViewBackground"), object: nil)
         
         ScriptService.shared.renderer = self
-        ScriptService.shared.reloadService {[weak self] in }
+        ScriptService.shared.reloadService(script: script) {
+        }
         self.setShader(shader: shader)
         self.mtkView.isPaused = false
         self.viewSizeService.setSize(self.mtkView.bounds.size)
@@ -153,7 +154,6 @@ extension Renderer: MTKViewDelegate {
 
 extension Renderer: RendererProtocol {
     func refresh(shader: String, script: String) {
-        mtkView.isPaused = true
         uniformArr = [Uniform]()
         ScriptService.shared.reloadService(script: script) {[weak self] in
         }
@@ -174,8 +174,6 @@ extension Renderer: RendererProtocol {
                 fatalError(error.localizedDescription)
             }
         }
-        
-        self.mtkView.isPaused = false
     }
 }
 
@@ -223,6 +221,8 @@ extension Renderer {
         }
         
         self.shader = preprocessor.replaceParamsToFunc(program: shader, funcName: "vertex_main", replaceParams: paramStr)
+        
+        print("Success")
     }
 }
 

@@ -29,6 +29,7 @@ enum TokenType {
     case SEMICOLON
     case COMMA
     case POINT
+    case INT
 };
 
 enum LexerError: Error {
@@ -56,26 +57,46 @@ class Lexer {
         
         var buffer = ""
         
-        let progWithEndElement = program + "?"
+        let chars = Array(program + " ")
         
         var charIndex = 0
-        for char in progWithEndElement {
+        
+        while(charIndex < chars.count) {
+            let char = chars[charIndex]
             
-            if ("\(char)".range(of: "[^a-zA-Z0-9_]", options: .regularExpression) == nil) {
+            if isDigit(char) {
                 buffer += "\(char)"
-            } else {
-                if (!buffer.isEmpty) {
-                    let endIndex = charIndex - 1
-                    let startIndex = endIndex - (buffer.count - 1)
-                    if let type = keywords[buffer] {
-                        tokens.append(Token(type: type, start: startIndex, end: endIndex, value: buffer))
-                    } else {
-                        tokens.append(Token(type: .IDENTIFIER, start: startIndex, end: endIndex, value: buffer))
-                    }
-                    
-                    buffer = ""
+                charIndex += 1
+                while charIndex < chars.count && isDigit(chars[charIndex]) {
+                    buffer += "\(chars[charIndex])"
+                    charIndex += 1
                 }
                 
+                let endIndex = charIndex - 1
+                let startIndex = endIndex - (buffer.count - 1)
+                
+                tokens.append(Token(type: .INT, start: startIndex, end: endIndex, value: buffer))
+                
+                buffer = ""
+            } else if isID("\(char)") {
+                buffer += "\(char)"
+                charIndex += 1
+                while charIndex < chars.count && isID("\(chars[charIndex])") {
+                    buffer += "\(chars[charIndex])"
+                    charIndex += 1
+                }
+                
+                let endIndex = charIndex - 1
+                let startIndex = endIndex - (buffer.count - 1)
+                
+                if let type = keywords[buffer] {
+                    tokens.append(Token(type: type, start: startIndex, end: endIndex, value: buffer))
+                } else {
+                    tokens.append(Token(type: .IDENTIFIER, start: startIndex, end: endIndex, value: buffer))
+                }
+                
+                buffer = ""
+            } else {
                 let endIndex = charIndex
                 let startIndex = endIndex - (buffer.count - 1)
                 let val = "\(char)"
@@ -102,9 +123,16 @@ class Lexer {
                         tokens.append(Token(type: .UNKNOWN, start: startIndex, end: endIndex, value: val))
                     }
                 }
+                charIndex += 1
             }
-            
-            charIndex += 1
         }
+    }
+    
+    private func isID(_ str: String) -> Bool {
+        return str.range(of: "[^a-zA-Z0-9_]", options: .regularExpression) == nil
+    }
+    
+    func isDigit(_ char: Character) -> Bool {
+        return char >= "0" && char <= "9"
     }
 }
