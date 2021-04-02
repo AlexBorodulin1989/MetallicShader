@@ -57,7 +57,7 @@ class Lexer {
         
         var buffer = ""
         
-        let chars = Array(program + " ")
+        let chars = Array(program)
         
         var charIndex = 0
         

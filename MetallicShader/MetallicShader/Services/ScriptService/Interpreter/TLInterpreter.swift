@@ -13,8 +13,6 @@ class TLInterpreter {
     
     private var subscribedFunctions = Set<String>()
     
-    var stringIterator: StringIterator!
-    
     //Intermediate values
     var functName: String!
     var num: String?
@@ -79,13 +77,13 @@ extension TLInterpreter {
         number()
         if let number = num {
             functParams.append((number as NSString).floatValue)
+            if match(.COMMA) {
+                params()
+                return
+            }
         }
-        
-        if match(.COMMA) {
-            params()
-            return
-        } else if match(.RIGHT_BRACKET)
-                    && match(.SEMICOLON) {
+        if match(.RIGHT_BRACKET)
+                && match(.SEMICOLON) {
             callToSubscribedFunct()
             return
         }

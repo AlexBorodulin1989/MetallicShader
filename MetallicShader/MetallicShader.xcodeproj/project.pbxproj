@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		550E07A22615E1E00018699C /* StringIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550E07A12615E1E00018699C /* StringIterator.swift */; };
 		5550EAAE260F6377000AF565 /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550EAAD260F6376000AF565 /* MathLibrary.swift */; };
 		5550EB02260FAF4A000AF565 /* InitialJavaScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 5550EB01260FAF4A000AF565 /* InitialJavaScript.js */; };
 		5550EB08260FB30B000AF565 /* ScriptService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550EB07260FB30B000AF565 /* ScriptService.swift */; };
@@ -58,6 +57,7 @@
 		55AC9B5526068A9400165003 /* InitialShader.txt in Resources */ = {isa = PBXBuildFile; fileRef = 55AC9B5426068A9400165003 /* InitialShader.txt */; };
 		55AC9B5D2606902900165003 /* ProjectViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B5C2606902900165003 /* ProjectViewInput.swift */; };
 		55AC9B652606933300165003 /* RendererProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B642606933300165003 /* RendererProtocol.swift */; };
+		9D15F6FB2617B3BC00D992AC /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15F6FA2617B3BC00D992AC /* Block.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +78,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		550E07A12615E1E00018699C /* StringIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringIterator.swift; sourceTree = "<group>"; };
 		5550EAAD260F6376000AF565 /* MathLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
 		5550EB01260FAF4A000AF565 /* InitialJavaScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = InitialJavaScript.js; sourceTree = "<group>"; };
 		5550EB07260FB30B000AF565 /* ScriptService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptService.swift; sourceTree = "<group>"; };
@@ -133,6 +132,7 @@
 		55AC9B5426068A9400165003 /* InitialShader.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = InitialShader.txt; sourceTree = "<group>"; };
 		55AC9B5C2606902900165003 /* ProjectViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewInput.swift; sourceTree = "<group>"; };
 		55AC9B642606933300165003 /* RendererProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererProtocol.swift; sourceTree = "<group>"; };
+		9D15F6FA2617B3BC00D992AC /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,11 +165,10 @@
 		5550EB06260FB2EC000AF565 /* ScriptService */ = {
 			isa = PBXGroup;
 			children = (
+				9D15F6F92617B39000D992AC /* Interpreter */,
 				5550EB07260FB30B000AF565 /* ScriptService.swift */,
 				55877E702610F765000D9C8D /* Lexer.swift */,
 				55877E7526110865000D9C8D /* Preprocessor.swift */,
-				556E6F9226148113005B2D24 /* TLInterpreter.swift */,
-				550E07A12615E1E00018699C /* StringIterator.swift */,
 			);
 			path = ScriptService;
 			sourceTree = "<group>";
@@ -439,6 +438,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		9D15F6F92617B39000D992AC /* Interpreter */ = {
+			isa = PBXGroup;
+			children = (
+				556E6F9226148113005B2D24 /* TLInterpreter.swift */,
+				9D15F6FA2617B3BC00D992AC /* Block.swift */,
+			);
+			path = Interpreter;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -590,7 +598,6 @@
 				556AF1E62607147C0007DDDD /* ProjectRouterInput.swift in Sources */,
 				556FF7D1260D12F1008021DD /* ProjectNetworkService.swift in Sources */,
 				5574947E2605FF18007E6468 /* MainViewController.swift in Sources */,
-				550E07A22615E1E00018699C /* StringIterator.swift in Sources */,
 				55AC9AE9260658AE00165003 /* MainViewInput.swift in Sources */,
 				55AC9ACE260657B900165003 /* MainPresenter.swift in Sources */,
 				557B26EF261214C500855A5A /* ViewSizeService.swift in Sources */,
@@ -604,6 +611,7 @@
 				55877E712610F765000D9C8D /* Lexer.swift in Sources */,
 				55AC9B3526067C6600165003 /* ProjectViewOutput.swift in Sources */,
 				55AC9B3026067C2400165003 /* ProjectPresenter.swift in Sources */,
+				9D15F6FB2617B3BC00D992AC /* Block.swift in Sources */,
 				55AC9ABA2606575C00165003 /* MainInteractor.swift in Sources */,
 				55AC9AE12606584200165003 /* MainRouter.swift in Sources */,
 				5550EB08260FB30B000AF565 /* ScriptService.swift in Sources */,
