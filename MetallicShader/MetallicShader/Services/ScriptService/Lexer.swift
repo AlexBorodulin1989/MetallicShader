@@ -43,15 +43,7 @@ class Lexer {
     
     private var currentIndex = 0
     
-    func nextToken() throws -> Token {
-        if currentIndex < tokens.count {
-            let token = tokens[currentIndex]
-            currentIndex += 1
-            return token
-        }
-        
-        throw LexerError.endTokens
-    }
+    private var currentToken: Token? //Dont set public access!
     
     init(program: String) {
         
@@ -126,6 +118,8 @@ class Lexer {
                 charIndex += 1
             }
         }
+        
+        currentToken = tokens[currentIndex]
     }
     
     private func isID(_ str: String) -> Bool {
@@ -134,5 +128,30 @@ class Lexer {
     
     func isDigit(_ char: Character) -> Bool {
         return char >= "0" && char <= "9"
+    }
+    
+    func nextToken() throws -> Token {
+        currentIndex += 1
+        if currentIndex < tokens.count {
+            let token = tokens[currentIndex]
+            return token
+        }
+        
+        throw LexerError.endTokens
+    }
+    
+    func currentValue() -> String {
+        return currentToken?.value ?? ""
+    }
+    
+    func match(_ tokenType: TokenType) -> Bool {
+        if tokenType == currentToken?.type {
+            currentToken = try? self.nextToken()
+            if currentToken?.type == .LINEBREAK {
+                let _ = match(.LINEBREAK)
+            }
+            return true
+        }
+        return false
     }
 }

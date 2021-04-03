@@ -1,17 +1,17 @@
 //
-//  Block.swift
+//  Environment.swift
 //  MetallicShader
 //
-//  Created by Aleksandr Borodulin on 02.04.2021.
+//  Created by Aleks on 03.04.2021.
 //
 
 import Foundation
 
-class Block {
+class TLEnvironment {
     private var table = [String: String]()
-    private let previous: Block?
+    private let previous: TLEnvironment?
     
-    init(prev: Block) {
+    init(prev: TLEnvironment?) {
         previous = prev
     }
     
@@ -20,7 +20,7 @@ class Block {
     }
     
     func getVarValue(id: String) -> String? {
-        var block: Block? = self
+        var block: TLEnvironment? = self
         repeat {
             let val = block?.table[id]
             if let value = val {

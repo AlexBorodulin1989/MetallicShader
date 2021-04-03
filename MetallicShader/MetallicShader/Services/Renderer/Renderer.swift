@@ -155,8 +155,7 @@ extension Renderer: MTKViewDelegate {
 extension Renderer: RendererProtocol {
     func refresh(shader: String, script: String) {
         uniformArr = [Uniform]()
-        ScriptService.shared.reloadService(script: script) {[weak self] in
-        }
+        ScriptService.shared.reloadService(script: script) {}
         self.setShader(shader: shader)
         
         if self.pipelineState == nil {
