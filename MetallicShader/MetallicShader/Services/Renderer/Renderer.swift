@@ -229,9 +229,9 @@ extension Renderer {
 
 extension Renderer {
     @objc fileprivate func setViewBackground(with notification: Notification) {
-        if let params = notification.object as? [Float] {
+        if let params = notification.object as? [Any] {
             if params.count > 2 {
-                mtkView.clearColor = MTLClearColor(red: Double(params[0]), green: Double(params[1]), blue: Double(params[2]), alpha: 1.0)
+                mtkView.clearColor = MTLClearColor(red: Double(params[0] as? Float ?? 0.0), green:  Double(params[1] as? Float ?? 0.0), blue:  Double(params[2] as? Float ?? 0.0), alpha: 1.0)
             }
         }
     }

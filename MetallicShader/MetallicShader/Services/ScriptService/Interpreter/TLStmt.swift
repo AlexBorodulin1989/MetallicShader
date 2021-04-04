@@ -12,7 +12,7 @@ class TLStmt: TLNode {
         super.init(env: env, lexer: lexer)
         let value = lexer.currentValue()
         if lexer.match(.IDENTIFIER) {
-            node = TLCall(env: env, lexer: lexer, idName: value)
+            node = TLExpression(env: env, lexer: lexer, idName: value).getInstance()
         } else {
             node = nil
         }

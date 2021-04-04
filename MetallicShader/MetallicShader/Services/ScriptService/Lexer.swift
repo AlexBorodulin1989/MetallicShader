@@ -37,7 +37,11 @@ enum LexerError: Error {
 }
 
 class Lexer {
-    let keywords: [String: TokenType] = ["vertex": .VERTEX, "fragment": .FRAGMENT, "float4": .VALUE_TYPE]
+    let keywords: [String: TokenType] = ["vertex": .VERTEX,
+                                         "fragment": .FRAGMENT,
+                                         "float4": .VALUE_TYPE,
+                                         "float": .VALUE_TYPE,
+                                         "int": .VALUE_TYPE]
     
     private var tokens = [Token]()
     

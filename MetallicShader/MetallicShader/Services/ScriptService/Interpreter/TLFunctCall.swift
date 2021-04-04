@@ -10,12 +10,14 @@ import Foundation
 class TLFunctCall: TLNode {
     let lexer: Lexer!
     
-    var functParams = [Float]()
+    var functParams = [TLObject]()
     var functName: String!
     
     init(env: TLEnvironment, lexer: Lexer, functName: String) {
         self.lexer = lexer
         super.init(env: env, lexer: lexer)
+        
+        node = self
         
         self.functName = functName
         
@@ -30,15 +32,15 @@ class TLFunctCall: TLNode {
     }
     
     func params() {
-        let intNumber = lexer.currentValue()
+        let value = lexer.currentValue()
         if lexer.match(.INT) {
-            if let flParam = TLNumber.parseNumber(lexer: lexer, intValue: intNumber) {
-                functParams.append(flParam)
-                if lexer.match(.COMMA) {
-                    params()
-                    return
-                }
+            functParams.append(TLNumber.parseNumber(lexer: lexer, intValue: value))
+            if lexer.match(.COMMA) {
+                params()
+                return
             }
+        } else if lexer.match(.IDENTIFIER) {
+            
         } else {
             print("Expected param of function")
         }
@@ -53,9 +55,15 @@ class TLFunctCall: TLNode {
     
     override func execute() {
         if TLInterpreter.subscribedFunctions.contains(functName) {
+            var params = [Any]()
+            for param in functParams {
+                if param.idName.isEmpty {
+                    params.append(param.value)
+                }
+            }
             NotificationCenter.default.post(
                 name: NSNotification.Name(rawValue: functName),
-                object: functParams,
+                object: params,
                 userInfo: nil
             )
         } else {

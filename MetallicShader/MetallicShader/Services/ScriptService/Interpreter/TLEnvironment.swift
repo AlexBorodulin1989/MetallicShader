@@ -7,19 +7,31 @@
 
 import Foundation
 
+enum TLType {
+    case INTEGER
+    case FLOAT
+    case STRING
+}
+
+struct TLObject {
+    let type: TLType
+    var value: Any
+    var idName = ""
+}
+
 class TLEnvironment {
-    private var table = [String: String]()
+    private var table = [String: TLObject]()
     private let previous: TLEnvironment?
     
     init(prev: TLEnvironment?) {
         previous = prev
     }
     
-    func setVar(id: String, value: String) {
+    func setVar(id: String, value: TLObject) {
         table[id] = value
     }
     
-    func getVarValue(id: String) -> String? {
+    func getVarValue(id: String) -> TLObject? {
         var block: TLEnvironment? = self
         repeat {
             let val = block?.table[id]
