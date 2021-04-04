@@ -8,21 +8,20 @@
 import Foundation
 
 class TLNumber {
-    static func parseNumber(lexer: Lexer, intValue: String) -> TLObject? {
-        var res = intValue
-        
-        guard lexer.match(.INT) else {
+    static func parseNumber(lexer: Lexer) -> TLObject? {
+        guard var value = lexer.currentValue(),
+              lexer.match(.INT) else {
             return nil
         }
         
         if lexer.match(.POINT) {
             let frac = lexer.currentValue()
             if lexer.match(.INT) {
-                res += ("." + (frac ?? "0"))
+                value += ("." + (frac ?? "0"))
             }
-            return TLObject(type: .FLOAT, value: (res as NSString).floatValue, idName: "")
+            return TLObject(type: .FLOAT, value: (value as NSString).floatValue)
         }
         
-        return TLObject(type: .INTEGER, value: (res as NSString).intValue, idName: "")
+        return TLObject(type: .INTEGER, value: (value as NSString).intValue)
     }
 }

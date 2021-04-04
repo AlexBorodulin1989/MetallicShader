@@ -37,15 +37,20 @@ class TLFunctCall: TLNode {
     }
     
     func params() {
-        let value = lexer.currentValue()
-        if let num = TLNumber.parseNumber(lexer: lexer, intValue: value ?? "0") {
+        let val = lexer.currentValue() ?? ""
+        if let num = TLNumber.parseNumber(lexer: lexer) {
             functParams.append(num)
             if lexer.match(.COMMA) {
                 params()
                 return
             }
-        } else if lexer.match(.IDENTIFIER) {
-            
+        } else if var variable = env.getVarValue(id: val), lexer.match(.IDENTIFIER) {
+            variable.identifier = val
+            functParams.append(variable)
+            if lexer.match(.COMMA) {
+                params()
+                return
+            }
         } else {
             print("Expected param of function")
         }
@@ -62,8 +67,14 @@ class TLFunctCall: TLNode {
         if TLInterpreter.subscribedFunctions.contains(functName) {
             var params = [Any]()
             for param in functParams {
-                if param.idName.isEmpty {
-                    params.append(param.value)
+                if param.identifier.isEmpty {
+                    if let value = param.value {
+                        params.append(value)
+                    }
+                } else {
+                    if let value = env.getVarValue(id: param.identifier)?.value {
+                        params.append(value)
+                    }
                 }
             }
             NotificationCenter.default.post(

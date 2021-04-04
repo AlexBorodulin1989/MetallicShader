@@ -42,7 +42,8 @@ class Lexer {
                                          "fragment": .FRAGMENT,
                                          "float4": .VALUE_TYPE,
                                          "float": .VALUE_TYPE,
-                                         "int": .VALUE_TYPE]
+                                         "int": .VALUE_TYPE,
+                                         "string": .VALUE_TYPE]
     
     private var tokens = [Token]()
     

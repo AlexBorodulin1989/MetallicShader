@@ -12,12 +12,13 @@ enum TLType {
     case FLOAT
     case STRING
     case FUNCT
+    case ARRAY
 }
 
 struct TLObject {
     let type: TLType
-    var value: Any
-    var idName = ""
+    var value: Any?
+    var identifier = ""
 }
 
 class TLEnvironment {
