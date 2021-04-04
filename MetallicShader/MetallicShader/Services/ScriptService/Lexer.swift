@@ -22,7 +22,6 @@ enum TokenType {
     case FRAGMENT
     case VALUE_TYPE
     case LINEBREAK
-    case LEFT_BRACKET
     case RIGHT_BRACKET
     case LEFT_CURLY_BRACE
     case RIGHT_CURLY_BRACE
@@ -64,6 +63,7 @@ class Lexer {
             
             if isDigit(char) {
                 buffer += "\(char)"
+                let startIndex = charIndex
                 charIndex += 1
                 while charIndex < chars.count && isDigit(chars[charIndex]) {
                     buffer += "\(chars[charIndex])"
@@ -71,13 +71,13 @@ class Lexer {
                 }
                 
                 let endIndex = charIndex - 1
-                let startIndex = endIndex - (buffer.count - 1)
                 
                 tokens.append(Token(type: .INT, start: startIndex, end: endIndex, value: buffer))
                 
                 buffer = ""
             } else if isID("\(char)") {
                 buffer += "\(char)"
+                let startIndex = charIndex
                 charIndex += 1
                 while charIndex < chars.count && isID("\(chars[charIndex])") {
                     buffer += "\(chars[charIndex])"
@@ -85,25 +85,28 @@ class Lexer {
                 }
                 
                 let endIndex = charIndex - 1
-                let startIndex = endIndex - (buffer.count - 1)
                 
                 if let type = keywords[buffer] {
                     tokens.append(Token(type: type, start: startIndex, end: endIndex, value: buffer))
                 } else {
-                    tokens.append(Token(type: .IDENTIFIER, start: startIndex, end: endIndex, value: buffer))
+                    while charIndex < chars.count && "\(chars[charIndex])" == " " {charIndex += 1} // check on tabs
+                    if charIndex < chars.count && "\(chars[charIndex])" == "(" {
+                        tokens.append(Token(type: .FUNCTION, start: startIndex, end: charIndex, value: buffer))
+                        charIndex += 1
+                    } else {
+                        tokens.append(Token(type: .IDENTIFIER, start: startIndex, end: endIndex, value: buffer))
+                    }
                 }
                 
                 buffer = ""
             } else {
                 let endIndex = charIndex
-                let startIndex = endIndex - (buffer.count - 1)
+                let startIndex = charIndex
                 let val = "\(char)"
                 
                 //Space will not take part in sintax
                 if (val != " ") {
-                    if (val == "(") {
-                        tokens.append(Token(type: .LEFT_BRACKET, start: startIndex, end: endIndex, value: val))
-                    } else if (val == ")") {
+                    if (val == ")") {
                         tokens.append(Token(type: .RIGHT_BRACKET, start: startIndex, end: endIndex, value: val))
                     } else if (val == "{") {
                         tokens.append(Token(type: .LEFT_CURLY_BRACE, start: startIndex, end: endIndex, value: val))

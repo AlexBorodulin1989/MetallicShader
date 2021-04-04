@@ -23,7 +23,7 @@ class TLFunctCall: TLNode {
             return
         }
         
-        if lexer.match(.IDENTIFIER) && lexer.match(.LEFT_BRACKET) {
+        if lexer.match(.FUNCTION) {
             optparams()
             node = self
         }
