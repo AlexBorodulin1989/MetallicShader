@@ -13,15 +13,18 @@ class TLFunctCall: TLNode {
     var functParams = [TLObject]()
     var functName: String!
     
-    init(env: TLEnvironment, lexer: Lexer, functName: String) {
+    override init(env: TLEnvironment, lexer: Lexer) {
         self.lexer = lexer
         super.init(env: env, lexer: lexer)
         
-        node = self
+        self.functName = lexer.currentValue()
         
-        self.functName = functName
-        
-        optparams()
+        if lexer.match(.IDENTIFIER) && lexer.match(.LEFT_BRACKET) {
+            optparams()
+            node = self
+        } else {
+            node = nil
+        }
     }
     
     func optparams() {
@@ -33,8 +36,8 @@ class TLFunctCall: TLNode {
     
     func params() {
         let value = lexer.currentValue()
-        if lexer.match(.INT) {
-            functParams.append(TLNumber.parseNumber(lexer: lexer, intValue: value))
+        if let num = TLNumber.parseNumber(lexer: lexer, intValue: value ?? "0") {
+            functParams.append(num)
             if lexer.match(.COMMA) {
                 params()
                 return

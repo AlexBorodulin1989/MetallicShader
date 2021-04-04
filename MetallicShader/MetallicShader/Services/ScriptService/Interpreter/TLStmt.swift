@@ -11,10 +11,10 @@ class TLStmt: TLNode {
     override init(env: TLEnvironment, lexer: Lexer) {
         super.init(env: env, lexer: lexer)
         let value = lexer.currentValue()
-        if lexer.match(.IDENTIFIER) {
-            node = TLExpression(env: env, lexer: lexer, idName: value).getInstance()
-        } else {
+        if value == nil {
             node = nil
+        } else {
+            node = TLExpression(env: env, lexer: lexer).getInstance()
         }
     }
 }

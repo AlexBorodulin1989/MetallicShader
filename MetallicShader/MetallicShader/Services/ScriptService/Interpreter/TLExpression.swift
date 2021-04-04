@@ -8,10 +8,11 @@
 import Foundation
 
 class TLExpression: TLNode {
-    init(env: TLEnvironment, lexer: Lexer, idName: String) {
+    override init(env: TLEnvironment, lexer: Lexer) {
         super.init(env: env, lexer: lexer)
-        if lexer.match(.LEFT_BRACKET) {
-            node = TLFunctCall(env: env, lexer: lexer, functName: idName).getInstance()
+        let value = lexer.currentValue() ?? ""
+        if lexer.lookahead() == .LEFT_BRACKET {
+            node = TLFunctCall(env: env, lexer: lexer).getInstance()
         } else {
             node = nil
         }

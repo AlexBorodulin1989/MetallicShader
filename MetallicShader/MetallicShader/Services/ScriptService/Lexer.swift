@@ -144,8 +144,8 @@ class Lexer {
         throw LexerError.endTokens
     }
     
-    func currentValue() -> String {
-        return currentToken?.value ?? ""
+    func currentValue() -> String? {
+        return currentToken?.value
     }
     
     func match(_ tokenType: TokenType) -> Bool {
@@ -157,5 +157,13 @@ class Lexer {
             return true
         }
         return false
+    }
+    
+    func lookahead() -> TokenType? {
+        let lookaheadIndex = currentIndex + 1
+        if lookaheadIndex < tokens.count {
+            return tokens[lookaheadIndex].type
+        }
+        return nil
     }
 }
