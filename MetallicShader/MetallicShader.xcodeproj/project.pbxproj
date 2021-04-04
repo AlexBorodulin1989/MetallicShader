@@ -23,6 +23,7 @@
 		556FF7D1260D12F1008021DD /* ProjectNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556FF7CF260D12F1008021DD /* ProjectNetworkService.swift */; };
 		556FF7D2260D12F1008021DD /* HTTPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556FF7D0260D12F1008021DD /* HTTPService.swift */; };
 		556FF7D8260D1522008021DD /* AsyncLegacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556FF7D7260D1522008021DD /* AsyncLegacy.swift */; };
+		557314472619E00C00EF9B8F /* TLDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557314462619E00C00EF9B8F /* TLDefine.swift */; };
 		5574947A2605FF18007E6468 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557494792605FF18007E6468 /* AppDelegate.swift */; };
 		5574947C2605FF18007E6468 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5574947B2605FF18007E6468 /* SceneDelegate.swift */; };
 		5574947E2605FF18007E6468 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5574947D2605FF18007E6468 /* MainViewController.swift */; };
@@ -101,6 +102,7 @@
 		556FF7CF260D12F1008021DD /* ProjectNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectNetworkService.swift; sourceTree = "<group>"; };
 		556FF7D0260D12F1008021DD /* HTTPService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPService.swift; sourceTree = "<group>"; };
 		556FF7D7260D1522008021DD /* AsyncLegacy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncLegacy.swift; sourceTree = "<group>"; };
+		557314462619E00C00EF9B8F /* TLDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLDefine.swift; sourceTree = "<group>"; };
 		557494762605FF18007E6468 /* MetallicShader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetallicShader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		557494792605FF18007E6468 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5574947B2605FF18007E6468 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 				5575C7112618E6CE00A6555B /* TLExpression.swift */,
 				5575C7162618E98800A6555B /* TLFunctCall.swift */,
 				5575C71B2618FA5400A6555B /* TLNumber.swift */,
+				557314462619E00C00EF9B8F /* TLDefine.swift */,
 			);
 			path = Interpreter;
 			sourceTree = "<group>";
@@ -647,6 +650,7 @@
 				55AC9B652606933300165003 /* RendererProtocol.swift in Sources */,
 				55621395261569600032FF00 /* StringProtocolExtension.swift in Sources */,
 				55AC9B472606812600165003 /* ProjectInteractorOutput.swift in Sources */,
+				557314472619E00C00EF9B8F /* TLDefine.swift in Sources */,
 				5550EAAE260F6377000AF565 /* MathLibrary.swift in Sources */,
 				55AC9B2B260677F500165003 /* VolumeItem.swift in Sources */,
 				55AC9B132606636A00165003 /* ProjectViewController.swift in Sources */,

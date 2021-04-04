@@ -18,12 +18,14 @@ class TLFunctCall: TLNode {
         super.init(env: env, lexer: lexer)
         
         self.functName = lexer.currentValue()
+        guard TLInterpreter.subscribedFunctions.contains(functName) || env.getVarValue(id: self.functName)?.type == .FUNCT else {
+            print("Defenition of function \(String(describing: functName)) is not found")
+            return
+        }
         
         if lexer.match(.IDENTIFIER) && lexer.match(.LEFT_BRACKET) {
             optparams()
             node = self
-        } else {
-            node = nil
         }
     }
     

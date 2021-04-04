@@ -30,6 +30,8 @@ enum TokenType {
     case COMMA
     case POINT
     case INT
+    case ASSIGN
+    case FUNCTION
 };
 
 enum LexerError: Error {
@@ -115,6 +117,8 @@ class Lexer {
                         tokens.append(Token(type: .POINT, start: startIndex, end: endIndex, value: val))
                     } else if (val == "\n") {
                         tokens.append(Token(type: .LINEBREAK, start: startIndex, end: endIndex, value: val))
+                    } else if (val == "=") {
+                        tokens.append(Token(type: .ASSIGN, start: startIndex, end: endIndex, value: val))
                     } else {
                         tokens.append(Token(type: .UNKNOWN, start: startIndex, end: endIndex, value: val))
                     }
@@ -163,6 +167,13 @@ class Lexer {
         let lookaheadIndex = currentIndex + 1
         if lookaheadIndex < tokens.count {
             return tokens[lookaheadIndex].type
+        }
+        return nil
+    }
+    
+    func currentType() -> TokenType? {
+        if currentIndex < tokens.count {
+            return tokens[currentIndex].type
         }
         return nil
     }
