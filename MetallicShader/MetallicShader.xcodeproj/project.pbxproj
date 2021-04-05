@@ -43,6 +43,7 @@
 		55877E672610D5C6000D9C8D /* Helper.js in Resources */ = {isa = PBXBuildFile; fileRef = 55877E662610D5C6000D9C8D /* Helper.js */; };
 		55877E712610F765000D9C8D /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55877E702610F765000D9C8D /* Lexer.swift */; };
 		55877E7626110865000D9C8D /* Preprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55877E7526110865000D9C8D /* Preprocessor.swift */; };
+		559EB36B261B0FC300F8F02A /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559EB36A261B0FC300F8F02A /* StringExtension.swift */; };
 		55AC9ABA2606575C00165003 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AB92606575C00165003 /* MainInteractor.swift */; };
 		55AC9AC32606577D00165003 /* MainInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AC22606577D00165003 /* MainInteractorInput.swift */; };
 		55AC9AC82606579100165003 /* MainInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AC72606579100165003 /* MainInteractorOutput.swift */; };
@@ -126,6 +127,7 @@
 		55877E662610D5C6000D9C8D /* Helper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Helper.js; sourceTree = "<group>"; };
 		55877E702610F765000D9C8D /* Lexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
 		55877E7526110865000D9C8D /* Preprocessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preprocessor.swift; sourceTree = "<group>"; };
+		559EB36A261B0FC300F8F02A /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		55AC9AB92606575C00165003 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		55AC9AC22606577D00165003 /* MainInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorInput.swift; sourceTree = "<group>"; };
 		55AC9AC72606579100165003 /* MainInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorOutput.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				55621394261569600032FF00 /* StringProtocolExtension.swift */,
+				559EB36A261B0FC300F8F02A /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				55065D0A2618C13F008F3657 /* TLSequence.swift in Sources */,
 				55AC9B4226067EF500165003 /* ProjectInteractorInput.swift in Sources */,
 				5575C71C2618FA5400A6555B /* TLNumber.swift in Sources */,
+				559EB36B261B0FC300F8F02A /* StringExtension.swift in Sources */,
 				556FF7D2260D12F1008021DD /* HTTPService.swift in Sources */,
 				556AF1E1260713380007DDDD /* ProjectRouter.swift in Sources */,
 				556AF1E62607147C0007DDDD /* ProjectRouterInput.swift in Sources */,

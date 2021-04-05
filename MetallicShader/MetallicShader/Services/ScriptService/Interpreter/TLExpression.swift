@@ -8,10 +8,10 @@
 import Foundation
 
 class TLExpression: TLNode {
-    override init(env: TLEnvironment, lexer: Lexer) {
-        super.init(env: env, lexer: lexer)
+    override init(env: TLEnvironment, lexer: Lexer) throws {
+        try super.init(env: env, lexer: lexer)
         if lexer.currentType() == .FUNCTION {
-            node = TLFunctCall(env: env, lexer: lexer).getInstance()
+            node = try TLFunctCall(env: env, lexer: lexer).getInstance()
         } else {
             node = nil
         }

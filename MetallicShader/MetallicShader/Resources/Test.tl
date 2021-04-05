@@ -1,2 +1,5 @@
-float f = 0.5;
-setViewBackground(1.0, 0.0, f);
+float r = 0.5;
+float g = 0.5;
+float b = 0.5;
+logger(r);
+setViewBackground(r, g, b);

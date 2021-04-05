@@ -9,11 +9,11 @@ import Foundation
 
 class TLSequence: TLNode {
     var stmt: TLNode?
-    override init(env: TLEnvironment, lexer: Lexer) {
-        super.init(env: env, lexer: lexer)
-        stmt = TLStmt(env: env, lexer: lexer).getInstance()
+    override init(env: TLEnvironment, lexer: Lexer) throws {
+        try super.init(env: env, lexer: lexer)
+        stmt = try TLStmt(env: env, lexer: lexer)
         if lexer.currentType() != nil {
-            node = TLSequence(env: env, lexer: lexer)
+            node = try TLSequence(env: env, lexer: lexer)
         }
     }
     

@@ -19,7 +19,11 @@ class TLInterpreter {
     func startInterpret(lexer: Lexer) {
         self.lexer = lexer
         let env = TLEnvironment(prev: nil)
-        let seq = TLSequence(env: env, lexer: lexer)
-        seq.execute()
+        do {
+            let seq = try TLSequence(env: env, lexer: lexer)
+            seq.execute()
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }

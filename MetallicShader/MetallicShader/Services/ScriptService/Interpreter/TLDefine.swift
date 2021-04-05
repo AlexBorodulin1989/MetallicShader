@@ -8,8 +8,8 @@
 import Foundation
 
 class TLDefine: TLNode {
-    override init(env: TLEnvironment, lexer: Lexer) {
-        super.init(env: env, lexer: lexer)
+    override init(env: TLEnvironment, lexer: Lexer) throws {
+        try super.init(env: env, lexer: lexer)
         var type = TLType.INTEGER
         switch lexer.currentValue() {
         case "int":
@@ -28,15 +28,15 @@ class TLDefine: TLNode {
                         if let floatValue = TLNumber.parseNumber(lexer: lexer),  lexer.match(.SEMICOLON){
                             env.setVar(id: identifier, value: floatValue)
                         } else {
-                            print("Not correct variable definition")
+                            throw "Not correct variable definition"
                         }
                     } else {
-                        print("Not correct type of variable")
+                        throw "Not correct type of variable"
                     }
                 } else if lexer.match(.SEMICOLON) {
                     env.setVar(id: identifier, value: TLObject(type: type, value: nil))
                 } else {
-                    print("Not correct variable definition")
+                    throw "Not correct variable definition"
                 }
             }
         }

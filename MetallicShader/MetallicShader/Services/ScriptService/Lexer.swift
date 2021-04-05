@@ -31,6 +31,7 @@ enum TokenType {
     case INT
     case ASSIGN
     case FUNCTION
+    case STRING
 };
 
 enum LexerError: Error {
@@ -62,7 +63,22 @@ class Lexer {
         while(charIndex < chars.count) {
             let char = chars[charIndex]
             
-            if isDigit(char) {
+            // This is simple case only for testing need to implement state machine for cases sach as \n, \t, \\, \"
+            if "\(char)" == "\"" {
+                let startIndex = charIndex
+                charIndex += 1
+                
+                
+                while charIndex < chars.count && "\(char)" != "\"" {
+                    buffer += "\(chars[charIndex])"
+                    charIndex += 1
+                }
+                let endIndex = charIndex
+                
+                tokens.append(Token(type: .STRING, start: startIndex, end: endIndex, value: buffer))
+                charIndex += 1
+                buffer = ""
+            } else if isDigit(char) {
                 buffer += "\(char)"
                 let startIndex = charIndex
                 charIndex += 1

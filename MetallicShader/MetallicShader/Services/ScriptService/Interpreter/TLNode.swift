@@ -16,7 +16,7 @@ class TLNode: TLNodeProtocol {
     var env: TLEnvironment!
     var node: TLNode?
     
-    init(env: TLEnvironment, lexer: Lexer) {
+    init(env: TLEnvironment, lexer: Lexer) throws {
         self.env = env
         self.node = nil
     }
@@ -26,6 +26,6 @@ class TLNode: TLNodeProtocol {
     }
     
     final func getInstance() -> TLNode? {
-        return (node != nil) ? self : nil
+        return node
     }
 }

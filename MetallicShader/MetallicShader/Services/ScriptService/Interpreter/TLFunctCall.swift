@@ -13,46 +13,45 @@ class TLFunctCall: TLNode {
     var functParams = [TLObject]()
     var functName: String!
     
-    override init(env: TLEnvironment, lexer: Lexer) {
+    override init(env: TLEnvironment, lexer: Lexer) throws {
         self.lexer = lexer
-        super.init(env: env, lexer: lexer)
+        try super.init(env: env, lexer: lexer)
         
         self.functName = lexer.currentValue()
         guard TLInterpreter.subscribedFunctions.contains(functName) || env.getVarValue(id: self.functName)?.type == .FUNCT else {
-            print("Defenition of function \(String(describing: functName)) is not found")
-            return
+            throw "Defenition of function \(String(describing: functName)) is not found"
         }
         
         if lexer.match(.FUNCTION) {
-            optparams()
+            try optparams()
             node = self
         }
     }
     
-    func optparams() {
+    func optparams() throws {
         if lexer.match(.RIGHT_BRACKET) && lexer.match(.SEMICOLON) {
             return
         }
-        params()
+        try params()
     }
     
-    func params() {
+    func params() throws {
         let val = lexer.currentValue() ?? ""
         if let num = TLNumber.parseNumber(lexer: lexer) {
             functParams.append(num)
             if lexer.match(.COMMA) {
-                params()
+                try params()
                 return
             }
         } else if var variable = env.getVarValue(id: val), lexer.match(.IDENTIFIER) {
             variable.identifier = val
             functParams.append(variable)
             if lexer.match(.COMMA) {
-                params()
+                try params()
                 return
             }
         } else {
-            print("Expected param of function")
+            throw "Expected param of function"
         }
         
         if lexer.match(.RIGHT_BRACKET)
@@ -60,7 +59,7 @@ class TLFunctCall: TLNode {
             return
         }
         
-        print("Expression is not a function")
+        throw "Expression is not a function"
     }
     
     override func execute() {
