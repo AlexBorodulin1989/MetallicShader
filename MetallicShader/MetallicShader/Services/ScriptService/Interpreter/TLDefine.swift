@@ -25,8 +25,15 @@ class TLDefine: TLNode {
                lexer.match(.IDENTIFIER) {
                 if lexer.match(.ASSIGN) {
                     if type == .FLOAT {
-                        if let floatValue = TLNumber.parseNumber(lexer: lexer),  lexer.match(.SEMICOLON){
+                        if let floatValue = TLNumber.parseNumber(lexer: lexer), lexer.match(.SEMICOLON) {
                             env.setVar(id: identifier, value: floatValue)
+                        } else {
+                            throw "Not correct variable definition"
+                        }
+                    } else if type == .STRING {
+                        let value = lexer.currentValue()
+                        if lexer.match(.STRING),  lexer.match(.SEMICOLON) {
+                            env.setVar(id: identifier, value: TLObject(type: .STRING, value: value, identifier: identifier))
                         } else {
                             throw "Not correct variable definition"
                         }

@@ -69,7 +69,7 @@ class Lexer {
                 charIndex += 1
                 
                 
-                while charIndex < chars.count && "\(char)" != "\"" {
+                while charIndex < chars.count && "\(chars[charIndex])" != "\"" {
                     buffer += "\(chars[charIndex])"
                     charIndex += 1
                 }

@@ -43,6 +43,12 @@ class TLFunctCall: TLNode {
                 try params()
                 return
             }
+        } else if lexer.match(.STRING) {
+            functParams.append(TLObject(type: .STRING, value: val, identifier: ""))
+            if lexer.match(.COMMA) {
+                try params()
+                return
+            }
         } else if var variable = env.getVarValue(id: val), lexer.match(.IDENTIFIER) {
             variable.identifier = val
             functParams.append(variable)
