@@ -13,12 +13,15 @@ class TLFunctCall: TLNode {
     var functParams = [TLObject]()
     var functName: String!
     
-    override init(env: TLEnvironment, lexer: Lexer) throws {
+    let returnIdentifier: String!
+    
+    init(env: TLEnvironment, lexer: Lexer, returnIdentifier: String) throws {
         self.lexer = lexer
+        self.returnIdentifier = returnIdentifier
         try super.init(env: env, lexer: lexer)
         
         self.functName = lexer.currentValue()
-        guard TLInterpreter.subscribedFunctions.contains(functName) || env.getVarValue(id: self.functName)?.type == .FUNCT else {
+        guard TLInterpreter.subscribedFunctions[functName] != nil || env.getVarValue(id: self.functName)?.type == .FUNCT else {
             throw "Defenition of function \(String(describing: functName)) is not found"
         }
         
@@ -68,8 +71,8 @@ class TLFunctCall: TLNode {
         throw "Expression is not a function"
     }
     
-    override func execute() {
-        if TLInterpreter.subscribedFunctions.contains(functName) {
+    override func execute() throws {
+        if let callback = TLInterpreter.subscribedFunctions[functName] {
             var params = [Any]()
             for param in functParams {
                 if param.identifier.isEmpty {
@@ -82,13 +85,18 @@ class TLFunctCall: TLNode {
                     }
                 }
             }
-            NotificationCenter.default.post(
-                name: NSNotification.Name(rawValue: functName),
-                object: params,
-                userInfo: nil
-            )
+            
+            let returnValue = callback.callback(params)
+            
+            if let envValue = env.getVarValue(id: returnIdentifier) {
+                if envValue.type == returnValue?.type {
+                    env.setVar(id: returnIdentifier, value: returnValue!)
+                } else {
+                    throw "Return type is not allowed for assigning"
+                }
+            }
         } else {
-            print("Function is not defined")
+            throw "Function is not defined"
         }
     }
 }

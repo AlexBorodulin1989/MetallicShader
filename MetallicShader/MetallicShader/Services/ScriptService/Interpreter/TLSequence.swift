@@ -17,8 +17,8 @@ class TLSequence: TLNode {
         }
     }
     
-    override func execute() {
-        stmt?.execute()
-        node?.execute()
+    override func execute() throws {
+        try stmt?.execute()
+        try node?.execute()
     }
 }

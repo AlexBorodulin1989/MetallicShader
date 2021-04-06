@@ -19,8 +19,16 @@ class ScriptService {
     static var shared: ScriptService = {
         let instance = ScriptService()
         
-        instance.subscribeToFunct("logger")
-        NotificationCenter.default.addObserver(instance, selector: #selector(logger), name: NSNotification.Name(rawValue: "logger"), object: nil)
+        let callback = TLCallbackInfo(identifier: "logger") { params -> TLObject? in
+            print(params.first ?? "")
+            return nil
+        }
+        
+        instance.addCallback(callback)
+        
+        instance.addCallback(TLCallbackInfo(identifier: "testFunc", callback: { params -> TLObject? in
+            return TLObject(type: .FLOAT, value: Float(0.5), identifier: "")
+        }))
         
         return instance
     }()
@@ -45,8 +53,8 @@ class ScriptService {
         
     }
     
-    func subscribeToFunct(_ name: String) {
-        interpreter.subscribeToFunction(name)
+    func addCallback(_ funct: TLCallbackInfo) {
+        interpreter.subscribeToFunction(funct)
     }
     
     func reloadService(script: String? = nil, completion: @escaping () -> Void){
@@ -60,15 +68,5 @@ class ScriptService {
 extension ScriptService {
     func requestFunction(name functionName: String, completion: @escaping (_ function: JSValue?) -> Void) {
         
-    }
-}
-
-// MARK:- Notifications
-
-extension ScriptService {
-    @objc fileprivate func logger(with notification: Notification) {
-        if let params = notification.object as? [Any] {
-            print(params.first ?? "")
-        }
     }
 }

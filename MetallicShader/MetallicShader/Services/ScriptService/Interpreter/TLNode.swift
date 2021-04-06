@@ -8,7 +8,7 @@
 import Foundation
 
 protocol TLNodeProtocol {
-    func execute()
+    func execute() throws
     func getInstance() -> TLNode?
 }
 
@@ -21,8 +21,8 @@ class TLNode: TLNodeProtocol {
         self.node = nil
     }
     
-    func execute() {
-        node?.execute()
+    func execute() throws {
+        try node?.execute()
     }
     
     final func getInstance() -> TLNode? {

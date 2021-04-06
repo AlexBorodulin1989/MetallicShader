@@ -44,6 +44,7 @@
 		55877E712610F765000D9C8D /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55877E702610F765000D9C8D /* Lexer.swift */; };
 		55877E7626110865000D9C8D /* Preprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55877E7526110865000D9C8D /* Preprocessor.swift */; };
 		559EB36B261B0FC300F8F02A /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559EB36A261B0FC300F8F02A /* StringExtension.swift */; };
+		559EB4B3261B939400F8F02A /* TLAssign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559EB4B2261B939400F8F02A /* TLAssign.swift */; };
 		55AC9ABA2606575C00165003 /* MainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AB92606575C00165003 /* MainInteractor.swift */; };
 		55AC9AC32606577D00165003 /* MainInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AC22606577D00165003 /* MainInteractorInput.swift */; };
 		55AC9AC82606579100165003 /* MainInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9AC72606579100165003 /* MainInteractorOutput.swift */; };
@@ -128,6 +129,7 @@
 		55877E702610F765000D9C8D /* Lexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
 		55877E7526110865000D9C8D /* Preprocessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preprocessor.swift; sourceTree = "<group>"; };
 		559EB36A261B0FC300F8F02A /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		559EB4B2261B939400F8F02A /* TLAssign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLAssign.swift; sourceTree = "<group>"; };
 		55AC9AB92606575C00165003 /* MainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractor.swift; sourceTree = "<group>"; };
 		55AC9AC22606577D00165003 /* MainInteractorInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorInput.swift; sourceTree = "<group>"; };
 		55AC9AC72606579100165003 /* MainInteractorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInteractorOutput.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				5575C7162618E98800A6555B /* TLFunctCall.swift */,
 				5575C71B2618FA5400A6555B /* TLNumber.swift */,
 				557314462619E00C00EF9B8F /* TLDefine.swift */,
+				559EB4B2261B939400F8F02A /* TLAssign.swift */,
 			);
 			path = Interpreter;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				5574947E2605FF18007E6468 /* MainViewController.swift in Sources */,
 				55AC9AE9260658AE00165003 /* MainViewInput.swift in Sources */,
 				55065D002618B262008F3657 /* TLEnvironment.swift in Sources */,
+				559EB4B3261B939400F8F02A /* TLAssign.swift in Sources */,
 				55AC9ACE260657B900165003 /* MainPresenter.swift in Sources */,
 				557B26EF261214C500855A5A /* ViewSizeService.swift in Sources */,
 				55AC9B5D2606902900165003 /* ProjectViewInput.swift in Sources */,

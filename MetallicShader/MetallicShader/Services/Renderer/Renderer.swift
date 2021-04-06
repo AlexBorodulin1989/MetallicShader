@@ -58,8 +58,14 @@ class Renderer: NSObject {
         
         setupMVP(viewSize: metalView.bounds.size)
         
-        ScriptService.shared.subscribeToFunct("setViewBackground")
-        NotificationCenter.default.addObserver(self, selector: #selector(setViewBackground), name: NSNotification.Name(rawValue: "setViewBackground"), object: nil)
+        let callback = TLCallbackInfo(identifier: "setViewBackground") {[weak self] params -> TLObject? in
+            if params.count > 2 {
+                self?.mtkView.clearColor = MTLClearColor(red: Double(params[0] as? Float ?? 0), green:  Double(params[1] as? Float ?? 0), blue: Double(params[2] as? Float ?? 0), alpha: 1.0)
+            }
+            return nil
+        }
+        
+        ScriptService.shared.addCallback(callback)
         
         ScriptService.shared.renderer = self
         ScriptService.shared.reloadService(script: script) {
@@ -222,17 +228,5 @@ extension Renderer {
         self.shader = preprocessor.replaceParamsToFunc(program: shader, funcName: "vertex_main", replaceParams: paramStr)
         
         print("Success")
-    }
-}
-
-// MARK:- Notifications
-
-extension Renderer {
-    @objc fileprivate func setViewBackground(with notification: Notification) {
-        if let params = notification.object as? [Any] {
-            if params.count > 2 {
-                mtkView.clearColor = MTLClearColor(red: Double(params[0] as? Float ?? 0.0), green:  Double(params[1] as? Float ?? 0.0), blue:  Double(params[2] as? Float ?? 0.0), alpha: 1.0)
-            }
-        }
     }
 }
