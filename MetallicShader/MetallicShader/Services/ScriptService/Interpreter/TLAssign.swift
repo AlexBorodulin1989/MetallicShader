@@ -15,7 +15,7 @@ class TLAssign: TLNode {
             throw "Variable type not found"
         }
         if lexer.match(.ASSIGN) {
-            if lexer.currentType() == .INT && type == .FLOAT {
+            if lexer.currentType() == .FLOAT && type == .FLOAT {
                 if let floatValue = TLNumber.parseNumber(lexer: lexer), lexer.match(.SEMICOLON) {
                     env.setVar(id: identifier, value: floatValue)
                 } else {

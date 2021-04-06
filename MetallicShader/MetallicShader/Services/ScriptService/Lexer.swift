@@ -28,10 +28,11 @@ enum TokenType {
     case SEMICOLON
     case COMMA
     case POINT
-    case INT
     case ASSIGN
     case FUNCTION
     case STRING
+    case FLOAT
+    case INT
 };
 
 enum LexerError: Error {
@@ -87,9 +88,20 @@ class Lexer {
                     charIndex += 1
                 }
                 
-                let endIndex = charIndex - 1
-                
-                tokens.append(Token(type: .INT, start: startIndex, end: endIndex, value: buffer))
+                if charIndex < chars.count && chars[charIndex] == "." {
+                    charIndex += 1
+                    buffer += "."
+                    while charIndex < chars.count && isDigit(chars[charIndex]) {
+                        buffer += "\(chars[charIndex])"
+                        charIndex += 1
+                    }
+                    
+                    let endIndex = charIndex - 1
+                    tokens.append(Token(type: .FLOAT, start: startIndex, end: endIndex, value: buffer))
+                } else {
+                    let endIndex = charIndex - 1
+                    tokens.append(Token(type: .INT, start: startIndex, end: endIndex, value: buffer))
+                }
                 
                 buffer = ""
             } else if isID("\(char)") {
