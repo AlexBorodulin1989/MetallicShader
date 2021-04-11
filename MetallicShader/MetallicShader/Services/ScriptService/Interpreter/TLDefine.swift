@@ -29,6 +29,20 @@ class TLDefine: TLNode {
                 } else {
                     throw "Not correct variable definition"
                 }
+            } else if lexer.match(.LEFT_SQUARE_BRACKET) && lexer.match(.RIGHT_SQUARE_BRACKET) {
+                if let identifier = lexer.currentValue(),
+                   lexer.match(.IDENTIFIER) {
+                    env.setVar(id: identifier, value: TLObject(type: .ARRAY, value: nil, identifier: identifier, subtype: type))
+                    if lexer.currentType() == .ASSIGN {
+                        node = try TLAssign(env: env, lexer: lexer, identifier: identifier).getInstance()
+                    } else if !lexer.match(.SEMICOLON) {
+                        throw "Not correct variable definition"
+                    }
+                } else {
+                    throw "Not correct variable definition"
+                }
+            } else {
+                throw "Not correct variable definition"
             }
         }
     }

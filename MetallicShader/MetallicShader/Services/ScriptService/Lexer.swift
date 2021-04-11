@@ -25,6 +25,8 @@ enum TokenType {
     case RIGHT_BRACKET
     case LEFT_CURLY_BRACE
     case RIGHT_CURLY_BRACE
+    case LEFT_SQUARE_BRACKET
+    case RIGHT_SQUARE_BRACKET
     case SEMICOLON
     case COMMA
     case POINT
@@ -151,6 +153,10 @@ class Lexer {
                         tokens.append(Token(type: .LINEBREAK, start: startIndex, end: endIndex, value: val))
                     } else if (val == "=") {
                         tokens.append(Token(type: .ASSIGN, start: startIndex, end: endIndex, value: val))
+                    } else if (val == "[") {
+                        tokens.append(Token(type: .LEFT_SQUARE_BRACKET, start: startIndex, end: endIndex, value: val))
+                    } else if (val == "]") {
+                        tokens.append(Token(type: .RIGHT_SQUARE_BRACKET, start: startIndex, end: endIndex, value: val))
                     } else {
                         tokens.append(Token(type: .UNKNOWN, start: startIndex, end: endIndex, value: val))
                     }

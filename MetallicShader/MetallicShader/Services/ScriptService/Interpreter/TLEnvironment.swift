@@ -19,6 +19,8 @@ struct TLObject {
     let type: TLType
     var value: Any?
     var identifier = ""
+    var subtype: TLType?
+    var size = 0
 }
 
 class TLEnvironment {

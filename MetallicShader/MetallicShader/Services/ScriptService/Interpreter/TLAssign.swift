@@ -28,8 +28,14 @@ class TLAssign: TLNode {
                 } else {
                     throw "Not correct variable definition"
                 }
+            } else if lexer.currentType() == .LEFT_SQUARE_BRACKET {
+                env.setVar(id: identifier, value: TLObject(type: .ARRAY, value: nil, identifier: identifier, subtype: .FLOAT, size: 0))
+                node = try TLArray(env: env, lexer: lexer, identifier: identifier).getInstance()
+                if !lexer.match(.SEMICOLON) {
+                    throw "Not correct variable definition"
+                }
             } else {
-                node = try TLExpression(env: env, lexer: lexer, identifier: identifier)
+                node = try TLExpression(env: env, lexer: lexer, identifier: identifier).getInstance()
             }
         }
     }
