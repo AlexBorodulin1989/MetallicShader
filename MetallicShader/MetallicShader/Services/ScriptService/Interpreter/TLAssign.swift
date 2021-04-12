@@ -29,8 +29,12 @@ class TLAssign: TLNode {
                     throw "Not correct variable definition"
                 }
             } else if lexer.currentType() == .LEFT_SQUARE_BRACKET {
+                guard let subtype = env.getVarValue(id: identifier)?.subtype
+                else {
+                    throw "Variable type not correct"
+                }
                 env.setVar(id: identifier, value: TLObject(type: .ARRAY, value: nil, identifier: identifier, subtype: .FLOAT, size: 0))
-                node = try TLArray(env: env, lexer: lexer, identifier: identifier).getInstance()
+                node = try TLArray(env: env, lexer: lexer, identifier: identifier, type: subtype.rawValue).getInstance()
                 if !lexer.match(.SEMICOLON) {
                     throw "Not correct variable definition"
                 }

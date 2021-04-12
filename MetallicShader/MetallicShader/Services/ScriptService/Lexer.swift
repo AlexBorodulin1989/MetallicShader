@@ -14,8 +14,11 @@ struct Token {
     var value = ""
 }
 
-enum TokenType {
+enum TokenType: Int {
     case UNKNOWN
+    case STRING
+    case FLOAT
+    case INT
     case EMPTY
     case IDENTIFIER
     case VERTEX
@@ -32,9 +35,6 @@ enum TokenType {
     case POINT
     case ASSIGN
     case FUNCTION
-    case STRING
-    case FLOAT
-    case INT
 };
 
 enum LexerError: Error {

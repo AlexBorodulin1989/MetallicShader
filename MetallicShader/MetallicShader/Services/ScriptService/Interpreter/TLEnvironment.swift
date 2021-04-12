@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum TLType {
-    case INTEGER
-    case FLOAT
-    case STRING
-    case FUNCT
+enum TLType: Int {
     case ARRAY
+    case STRING
+    case FLOAT
+    case INTEGER
+    case FUNCT
 }
 
 struct TLObject {
