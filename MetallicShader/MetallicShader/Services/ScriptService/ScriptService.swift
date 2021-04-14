@@ -30,6 +30,35 @@ class ScriptService {
             return TLObject(type: .FLOAT, value: Float(0.5), identifier: "")
         }))
         
+        instance.addCallback(TLCallbackInfo(identifier: "projectionMatrix", callback: { params -> TLObject? in
+            guard params.count == 4,
+                  let fov = params[0] as? Float,
+                  let near = params[1] as? Float,
+                  let far = params[2] as? Float,
+                  let ratio = params[3] as? Float
+            else {
+                return nil
+            }
+            let projectionMatrix = float4x4(projectionFov: Float(fov).degreesToRadians,
+                                            near: near,
+                                            far: far,
+                                            aspect: ratio)
+            
+            var resultArray = [Any]()
+            
+            for i in 0...3 {
+                var rowArray = [Any]()
+                for c in 0...3 {
+                    rowArray.append(projectionMatrix[i][c])
+                }
+                resultArray.append(rowArray)
+            }
+            
+            return TLObject(type: .ARRAY, value: resultArray, identifier: "", subtype: .FLOAT, size: 4)
+        }))
+        
+        
+        
         return instance
     }()
     

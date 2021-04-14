@@ -40,7 +40,6 @@
 		557B26EF261214C500855A5A /* ViewSizeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B26EE261214C500855A5A /* ViewSizeService.swift */; };
 		55844D2E260BC2A1006E68FF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 55844D2D260BC2A1006E68FF /* Realm */; };
 		55844D30260BC2A1006E68FF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 55844D2F260BC2A1006E68FF /* RealmSwift */; };
-		55877E5C26107EE1000D9C8D /* math.js in Resources */ = {isa = PBXBuildFile; fileRef = 55877E5B26107EE1000D9C8D /* math.js */; };
 		55877E672610D5C6000D9C8D /* Helper.js in Resources */ = {isa = PBXBuildFile; fileRef = 55877E662610D5C6000D9C8D /* Helper.js */; };
 		55877E712610F765000D9C8D /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55877E702610F765000D9C8D /* Lexer.swift */; };
 		55877E7626110865000D9C8D /* Preprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55877E7526110865000D9C8D /* Preprocessor.swift */; };
@@ -99,7 +98,7 @@
 		55621394261569600032FF00 /* StringProtocolExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocolExtension.swift; sourceTree = "<group>"; };
 		556AF1E0260713380007DDDD /* ProjectRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRouter.swift; sourceTree = "<group>"; };
 		556AF1E52607147C0007DDDD /* ProjectRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRouterInput.swift; sourceTree = "<group>"; };
-		556E6F8D26148030005B2D24 /* Test.tl */ = {isa = PBXFileReference; lastKnownFileType = text; path = Test.tl; sourceTree = "<group>"; };
+		556E6F8D26148030005B2D24 /* Test.tl */ = {isa = PBXFileReference; explicitFileType = text; path = Test.tl; sourceTree = "<group>"; };
 		556E6F9226148113005B2D24 /* TLInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLInterpreter.swift; sourceTree = "<group>"; };
 		556FF7C9260D1107008021DD /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		556FF7CF260D12F1008021DD /* ProjectNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectNetworkService.swift; sourceTree = "<group>"; };
@@ -126,7 +125,6 @@
 		557709E62609056700395B7E /* MainRouterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouterOutput.swift; sourceTree = "<group>"; };
 		5577AAB5262240B0004472E4 /* TLArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLArray.swift; sourceTree = "<group>"; };
 		557B26EE261214C500855A5A /* ViewSizeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSizeService.swift; sourceTree = "<group>"; };
-		55877E5B26107EE1000D9C8D /* math.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = math.js; sourceTree = "<group>"; };
 		55877E662610D5C6000D9C8D /* Helper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Helper.js; sourceTree = "<group>"; };
 		55877E702610F765000D9C8D /* Lexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
 		55877E7526110865000D9C8D /* Preprocessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preprocessor.swift; sourceTree = "<group>"; };
@@ -455,7 +453,6 @@
 				55AC9B5426068A9400165003 /* InitialShader.txt */,
 				5550EB01260FAF4A000AF565 /* InitialJavaScript.js */,
 				55877E662610D5C6000D9C8D /* Helper.js */,
-				55877E5B26107EE1000D9C8D /* math.js */,
 				556E6F8D26148030005B2D24 /* Test.tl */,
 			);
 			path = Resources;
@@ -595,7 +592,6 @@
 				5550EB02260FAF4A000AF565 /* InitialJavaScript.js in Resources */,
 				55AC9B5526068A9400165003 /* InitialShader.txt in Resources */,
 				55877E672610D5C6000D9C8D /* Helper.js in Resources */,
-				55877E5C26107EE1000D9C8D /* math.js in Resources */,
 				556E6F8E26148030005B2D24 /* Test.tl in Resources */,
 				557494862605FF1A007E6468 /* Assets.xcassets in Resources */,
 				557494812605FF18007E6468 /* Main.storyboard in Resources */,
