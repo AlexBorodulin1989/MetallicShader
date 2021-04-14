@@ -1,4 +1,5 @@
 float[] projMat = projectionMatrix(45.0, 0.1, 100.0, 0.5);
+setMatrix(projMat, "projection");
 float[] arr = [0.5, 0.5, 0.5];
 float r = 0.5;
 float g = 0.5;

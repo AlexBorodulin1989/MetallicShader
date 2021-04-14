@@ -9,6 +9,11 @@ import Foundation
 import MetalKit
 import JavaScriptCore
 
+struct BufferMatrix {
+    let matrix: float4x4
+    let name: String
+}
+
 enum ScriptValue {
     case notExists
     case value(JSValue)
@@ -56,8 +61,6 @@ class ScriptService {
             
             return TLObject(type: .ARRAY, value: resultArray, identifier: "", subtype: .FLOAT, size: 4)
         }))
-        
-        
         
         return instance
     }()

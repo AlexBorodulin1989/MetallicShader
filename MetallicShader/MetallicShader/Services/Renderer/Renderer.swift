@@ -67,6 +67,32 @@ class Renderer: NSObject {
         
         ScriptService.shared.addCallback(callback)
         
+        ScriptService.shared.addCallback(TLCallbackInfo(identifier: "setMatrix", callback: {[weak self] params -> TLObject? in
+            guard params.count == 2,
+                  let matrix = params[0] as? [Any],
+                  let name = params[1] as? String
+            else {
+                return nil
+            }
+            
+            var resMatrix = float4x4.identity()
+            
+            if matrix.count == 4 {
+                for i in 0...3 {
+                    guard let row = matrix[i] as? [Float] else { return nil }
+                    if row.count == 4 {
+                        for c in 0...3 {
+                            resMatrix[i][c] = Float(row[c]);
+                        }
+                    }
+                }
+            }
+            
+            self?.setMatrixBuffer(resMatrix, name)
+            
+            return nil
+        }))
+        
         ScriptService.shared.renderer = self
         ScriptService.shared.reloadService(script: script) {
         }
