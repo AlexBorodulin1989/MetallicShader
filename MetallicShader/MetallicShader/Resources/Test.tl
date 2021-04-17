@@ -1,3 +1,7 @@
+float helloFunc() {
+    string testMSG = "Hello from function";
+    logger(testMSG);
+}
 float[] projMat = projectionMatrix(45.0, 0.1, 100.0, 0.5);
 setMatrix(projMat, "projection");
 float[] arr = [0.5, 0.5, 0.5];
@@ -7,3 +11,4 @@ float b = testFunc();
 logger(projMat);
 setViewBackground(r, g, b);
 logger("Script executed");
+helloFunc();

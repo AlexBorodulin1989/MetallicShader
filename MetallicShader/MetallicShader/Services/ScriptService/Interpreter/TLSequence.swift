@@ -12,7 +12,7 @@ class TLSequence: TLNode {
     override init(env: TLEnvironment, lexer: Lexer) throws {
         try super.init(env: env, lexer: lexer)
         stmt = try TLStmt(env: env, lexer: lexer)
-        if lexer.currentType() != nil {
+        if lexer.currentType() != nil && !lexer.match(.RIGHT_CURLY_BRACE) {
             node = try TLSequence(env: env, lexer: lexer)
         }
     }
