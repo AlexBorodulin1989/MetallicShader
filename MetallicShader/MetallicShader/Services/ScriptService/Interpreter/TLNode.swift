@@ -9,23 +9,20 @@ import Foundation
 
 protocol TLNodeProtocol {
     func execute() throws
-    func getInstance() -> TLNode?
 }
 
 class TLNode: TLNodeProtocol {
     var env: TLEnvironment!
-    var node: TLNode?
+    var leftNode: TLNode?
+    var rightNode: TLNode?
     
     init(env: TLEnvironment, lexer: Lexer) throws {
         self.env = env
-        self.node = nil
+        self.leftNode = nil
     }
     
     func execute() throws {
-        try node?.execute()
-    }
-    
-    final func getInstance() -> TLNode? {
-        return node
+        try leftNode?.execute()
+        try rightNode?.execute()
     }
 }

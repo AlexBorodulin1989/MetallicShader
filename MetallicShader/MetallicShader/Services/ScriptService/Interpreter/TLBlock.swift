@@ -13,7 +13,7 @@ class TLBlock: TLNode {
         try super.init(env: environment, lexer: lexer)
         
         if lexer.match(.LEFT_CURLY_BRACE) {
-            node = try TLSequence(env: environment, lexer: lexer)
+            leftNode = try TLSequence(env: environment, lexer: lexer)
         } else {
             throw "Block difinition not correct"
         }

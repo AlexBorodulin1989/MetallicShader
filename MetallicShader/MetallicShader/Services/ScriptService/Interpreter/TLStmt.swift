@@ -12,11 +12,10 @@ class TLStmt: TLNode {
         try super.init(env: env, lexer: lexer)
         let type = lexer.currentType()
         if type == nil {
-            node = nil
         } else if type == .VALUE_TYPE {
-            node = try TLDefine(env: env, lexer: lexer).getInstance()
+            leftNode = try TLDefine(env: env, lexer: lexer)
         } else {
-            node = try TLExpression(env: env, lexer: lexer).getInstance()
+            leftNode = try TLExpression(env: env, lexer: lexer)
         }
     }
 }

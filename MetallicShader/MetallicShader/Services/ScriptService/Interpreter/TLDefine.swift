@@ -25,7 +25,7 @@ class TLDefine: TLNode {
             if lexer.match(.IDENTIFIER) {
                 if lexer.currentType() == .ASSIGN {
                     env.setVar(id: identifier, value: TLObject(type: type, value: nil))
-                    node = try TLAssign(env: env, lexer: lexer, identifier: identifier).getInstance()
+                    leftNode = try TLAssign(env: env, lexer: lexer, identifier: identifier)
                 } else {
                     throw "Not correct variable definition"
                 }
@@ -40,7 +40,7 @@ class TLDefine: TLNode {
                    lexer.match(.IDENTIFIER) {
                     env.setVar(id: identifier, value: TLObject(type: .ARRAY, value: nil, identifier: identifier, subtype: type))
                     if lexer.currentType() == .ASSIGN {
-                        node = try TLAssign(env: env, lexer: lexer, identifier: identifier).getInstance()
+                        leftNode = try TLAssign(env: env, lexer: lexer, identifier: identifier)
                     } else if !lexer.match(.SEMICOLON) {
                         throw "Not correct variable definition"
                     }

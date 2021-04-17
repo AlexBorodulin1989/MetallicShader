@@ -13,9 +13,7 @@ class TLExpression: TLNode {
         resultIdentifier = identifier ?? TLInterpreter.generateUniqueID()
         try super.init(env: env, lexer: lexer)
         if lexer.currentType() == .FUNCTION {
-            node = try TLFunctCall(env: env, lexer: lexer, returnIdentifier: resultIdentifier).getInstance()
-        } else {
-            node = nil
+            leftNode = try TLFunctCall(env: env, lexer: lexer, returnIdentifier: resultIdentifier)
         }
     }
 }

@@ -34,12 +34,12 @@ class TLAssign: TLNode {
                     throw "Variable type not correct"
                 }
                 env.setVar(id: identifier, value: TLObject(type: .ARRAY, value: nil, identifier: identifier, subtype: .FLOAT, size: 0))
-                node = try TLArray(env: env, lexer: lexer, identifier: identifier, type: subtype.rawValue).getInstance()
+                leftNode = try TLArray(env: env, lexer: lexer, identifier: identifier, type: subtype.rawValue)
                 if !lexer.match(.SEMICOLON) {
                     throw "Not correct variable definition"
                 }
             } else {
-                node = try TLExpression(env: env, lexer: lexer, identifier: identifier).getInstance()
+                leftNode = try TLExpression(env: env, lexer: lexer, identifier: identifier)
             }
         }
     }

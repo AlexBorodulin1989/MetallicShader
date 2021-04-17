@@ -27,7 +27,6 @@ class TLFunctCall: TLNode {
         
         if lexer.match(.FUNCTION) {
             try optparams()
-            node = self
         }
     }
     
@@ -72,6 +71,7 @@ class TLFunctCall: TLNode {
     }
     
     override func execute() throws {
+        try super.execute()
         if let callback = TLInterpreter.subscribedFunctions[functName] {
             var params = [Any]()
             for param in functParams {
