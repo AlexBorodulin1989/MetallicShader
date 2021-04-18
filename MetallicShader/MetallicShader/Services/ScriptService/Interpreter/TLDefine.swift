@@ -10,15 +10,7 @@ import Foundation
 class TLDefine: TLNode {
     override init(env: TLEnvironment, lexer: Lexer) throws {
         try super.init(env: env, lexer: lexer)
-        var type = TLType.INTEGER
-        switch lexer.currentValue() {
-        case "int":
-            type = .INTEGER
-        case "float":
-            type = .FLOAT
-        default:
-            type = .STRING
-        }
+        let type = lexer.valueType()
         
         if lexer.match(.VALUE_TYPE) {
             let identifier = lexer.currentValue() ?? ""
@@ -29,12 +21,8 @@ class TLDefine: TLNode {
                 } else {
                     throw "Not correct variable definition"
                 }
-            } else if lexer.match(.FUNCTION) && lexer.match(.RIGHT_BRACKET) {
-                let funcNode = try TLBlock(env: env, lexer: lexer)
-                if TLInterpreter.subscribedFunctions[identifier] != nil || env.getVarValue(id: identifier) != nil {
-                    throw "Redefenition function \(identifier)"
-                }
-                env.setVar(id: identifier, value: TLObject(type: .FUNCT, value: funcNode, identifier: identifier, subtype: nil, size: 0))
+            } else if lexer.currentType() == .FUNCTION {
+                let _ = try TLFunction(env: env, lexer: lexer)
             } else if lexer.match(.LEFT_SQUARE_BRACKET) && lexer.match(.RIGHT_SQUARE_BRACKET) {
                 if let identifier = lexer.currentValue(),
                    lexer.match(.IDENTIFIER) {

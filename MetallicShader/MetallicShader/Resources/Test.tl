@@ -1,6 +1,5 @@
-float helloFunc() {
-    string testMSG = "Hello from function";
-    logger(testMSG);
+float helloFunc(string strParam) {
+    logger(strParam);
 }
 float[] projMat = projectionMatrix(45.0, 0.1, 100.0, 0.5);
 setMatrix(projMat, "projection");
@@ -11,4 +10,4 @@ float b = testFunc();
 logger(projMat);
 setViewBackground(r, g, b);
 logger("Script executed");
-helloFunc();
+helloFunc("Funct executed");

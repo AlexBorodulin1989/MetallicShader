@@ -215,4 +215,20 @@ class Lexer {
         }
         return nil
     }
+    
+    func valueType() -> TLType {
+        var type: TLType
+        switch currentValue() {
+        case "int":
+            type = .INTEGER
+        case "float":
+            type = .FLOAT
+        case "string":
+            type = .STRING
+        default:
+            type = .UNKNOWN
+        }
+        
+        return type
+    }
 }

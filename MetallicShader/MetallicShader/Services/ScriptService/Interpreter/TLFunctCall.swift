@@ -96,6 +96,7 @@ class TLFunctCall: TLNode {
                 }
             }
         } else if let functObj = env.getVarValue(id: self.functName), functObj.type == .FUNCT {
+            try (functObj.value as? TLFunction)?.setParams(functParams)
             try (functObj.value as? TLNode)?.execute()
         } else {
             throw "Function is not defined"

@@ -13,6 +13,7 @@ enum TLType: Int {
     case FLOAT
     case INTEGER
     case FUNCT
+    case UNKNOWN
 }
 
 struct TLObject {

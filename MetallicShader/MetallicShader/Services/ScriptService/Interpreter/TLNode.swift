@@ -12,7 +12,7 @@ protocol TLNodeProtocol {
 }
 
 class TLNode: TLNodeProtocol {
-    var env: TLEnvironment!
+    private(set) var env: TLEnvironment!
     var leftNode: TLNode?
     var rightNode: TLNode?
     

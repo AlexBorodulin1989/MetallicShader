@@ -8,9 +8,13 @@
 import Foundation
 
 class TLBlock: TLNode {
-    override init(env: TLEnvironment, lexer: Lexer) throws {
+    init(env: TLEnvironment, lexer: Lexer, initialParams: [TLObject]? = nil) throws {
         let environment = TLEnvironment(prev: env)
         try super.init(env: environment, lexer: lexer)
+        
+        for value in initialParams ?? [] {
+            env.setVar(id: value.identifier, value: value)
+        }
         
         if lexer.match(.LEFT_CURLY_BRACE) {
             leftNode = try TLSequence(env: environment, lexer: lexer)
