@@ -35,6 +35,10 @@ enum TokenType: Int {
     case POINT
     case ASSIGN
     case FUNCTION
+    case PLUS
+    case MINUS
+    case MUL
+    case DIV
 };
 
 enum LexerError: Error {
@@ -157,6 +161,14 @@ class Lexer {
                         tokens.append(Token(type: .LEFT_SQUARE_BRACKET, start: startIndex, end: endIndex, value: val))
                     } else if (val == "]") {
                         tokens.append(Token(type: .RIGHT_SQUARE_BRACKET, start: startIndex, end: endIndex, value: val))
+                    }else if (val == "+") {
+                        tokens.append(Token(type: .PLUS, start: startIndex, end: endIndex, value: val))
+                    }else if (val == "-") {
+                        tokens.append(Token(type: .MINUS, start: startIndex, end: endIndex, value: val))
+                    }else if (val == "*") {
+                        tokens.append(Token(type: .MUL, start: startIndex, end: endIndex, value: val))
+                    }else if (val == "/") {
+                        tokens.append(Token(type: .DIV, start: startIndex, end: endIndex, value: val))
                     } else {
                         tokens.append(Token(type: .UNKNOWN, start: startIndex, end: endIndex, value: val))
                     }
