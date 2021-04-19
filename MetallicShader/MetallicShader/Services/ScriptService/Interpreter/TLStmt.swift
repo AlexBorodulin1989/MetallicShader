@@ -14,7 +14,7 @@ class TLStmt: TLNode {
         if type == nil {
         } else if type == .VALUE_TYPE {
             leftNode = try TLDefine(env: env, lexer: lexer)
-        } else {
+        } else if type != nil {
             leftNode = try TLExpression(env: env, lexer: lexer)
         }
     }

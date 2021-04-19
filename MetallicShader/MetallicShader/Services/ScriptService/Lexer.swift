@@ -26,6 +26,7 @@ enum TokenType: Int {
     case VALUE_TYPE
     case LINEBREAK
     case RIGHT_BRACKET
+    case LEFT_BRACKET
     case LEFT_CURLY_BRACE
     case RIGHT_CURLY_BRACE
     case LEFT_SQUARE_BRACKET
@@ -141,7 +142,9 @@ class Lexer {
                 
                 //Space will not take part in sintax
                 if (val != " ") {
-                    if (val == ")") {
+                    if (val == "(") {
+                        tokens.append(Token(type: .LEFT_BRACKET, start: startIndex, end: endIndex, value: val))
+                    } else if (val == ")") {
                         tokens.append(Token(type: .RIGHT_BRACKET, start: startIndex, end: endIndex, value: val))
                     } else if (val == "{") {
                         tokens.append(Token(type: .LEFT_CURLY_BRACE, start: startIndex, end: endIndex, value: val))
