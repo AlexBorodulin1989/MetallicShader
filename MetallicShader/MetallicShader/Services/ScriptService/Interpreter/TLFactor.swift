@@ -8,7 +8,8 @@
 import Foundation
 
 class TLFactor: TLNode {
-    var value = 0
+    var intValue: Int?
+    var floatValue: Float?
     override init(env: TLEnvironment, lexer: Lexer) throws {
         try super.init(env: env, lexer: lexer)
         guard let val = lexer.currentValue()
@@ -16,10 +17,13 @@ class TLFactor: TLNode {
             throw "Not correct value"
         }
         if lexer.match(.INT) {
-            value = (val as NSString).integerValue
+            intValue = (val as NSString).integerValue
+        } else if lexer.match(.FLOAT) {
+            floatValue = (val as NSString).floatValue
         } else if lexer.match(.LEFT_BRACKET) {
             let add = try TLAdd(env: env, lexer: lexer)
-            value = add.value
+            floatValue = add.floatValue
+            intValue = add.intValue
             if !lexer.match(.RIGHT_BRACKET) {
                 throw "Need ) after expression"
             }

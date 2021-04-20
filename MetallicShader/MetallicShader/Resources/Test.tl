@@ -11,5 +11,5 @@ logger(projMat);
 setViewBackground(r, g, b);
 logger("Script executed");
 helloFunc("Funct executed");
-int i = 5 + 2 + 3 * (3 + 2);
+float i = 5.0 + 2 + 3.8 * (3.5 + 2.2);
 logger(i);

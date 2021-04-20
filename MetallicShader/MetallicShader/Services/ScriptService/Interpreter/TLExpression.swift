@@ -16,7 +16,8 @@ factor -> num | ( add )
 
 class TLExpression: TLNode {
     //let resultIdentifier: String!
-    var value = 0
+    var intValue: Int?
+    var floatValue: Float?
     init(env: TLEnvironment, lexer: Lexer, identifier: String? = nil) throws {
         try super.init(env: env, lexer: lexer)
         if lexer.currentType() == .FUNCTION {
@@ -25,13 +26,20 @@ class TLExpression: TLNode {
         } else {
             let add = try TLAdd(env: env, lexer: lexer)
             if lexer.match(.SEMICOLON) {
-                value = add.value
+                intValue = add.intValue
+                floatValue = add.floatValue
             } else {
                 throw "Expect semicolon at the end of expression"
             }
             
             if let identif = identifier {
-                env.setVar(id: identif, value: TLObject(type: .INTEGER, value: value, identifier: identif, subtype: nil, size: 0))
+                if env.getVarValue(id: identif)?.type == .INTEGER {
+                    env.setVar(id: identif, value: TLObject(type: .INTEGER, value: intValue ?? Int(floatValue ?? 0.0), identifier: identif, subtype: nil, size: 0))
+                } else if env.getVarValue(id: identif)?.type == .FLOAT {
+                    env.setVar(id: identif, value: TLObject(type: .FLOAT, value: floatValue ?? Float(intValue ?? 0), identifier: identif, subtype: nil, size: 0))
+                } else {
+                    throw "Not correct value type"
+                }
             }
         }
     }

@@ -8,15 +8,21 @@
 import Foundation
 
 class TLTerm: TLNode {
-    var value = 0
+    var intValue: Int?
+    var floatValue: Float?
     override init(env: TLEnvironment, lexer: Lexer) throws {
         try super.init(env: env, lexer: lexer)
         let factor = try TLFactor(env: env, lexer: lexer)
         if lexer.match(.MUL) {
             let term = try TLTerm(env: env, lexer: lexer)
-            value = factor.value * term.value
+            if factor.floatValue != nil || term.floatValue != nil {
+                floatValue = (factor.floatValue ?? Float(factor.intValue ?? 0)) * (term.floatValue ?? Float(term.intValue ?? 0))
+            } else {
+                intValue = (factor.intValue ?? 0) * (term.intValue ?? 0)
+            }
         } else {
-            value = factor.value
+            floatValue = factor.floatValue
+            intValue = factor.intValue
         }
     }
 }
