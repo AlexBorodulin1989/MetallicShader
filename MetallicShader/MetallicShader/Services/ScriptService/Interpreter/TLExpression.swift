@@ -15,14 +15,15 @@ factor -> num | ( add )
 */
 
 class TLExpression: TLNode {
-    //let resultIdentifier: String!
+    let identifier: String!
     var intValue: Int?
     var floatValue: Float?
+    var resultIdentifier: String?
     init(env: TLEnvironment, lexer: Lexer, identifier: String? = nil) throws {
+        self.identifier = identifier ?? TLInterpreter.generateUniqueID()
         try super.init(env: env, lexer: lexer)
         if lexer.currentType() == .FUNCTION {
-            let resultIdentifier = identifier ?? TLInterpreter.generateUniqueID()
-            leftNode = try TLFunctCall(env: env, lexer: lexer, returnIdentifier: resultIdentifier)
+            leftNode = try TLFunctCall(env: env, lexer: lexer, returnIdentifier: self.identifier)
         } else {
             let add = try TLAdd(env: env, lexer: lexer)
             if lexer.match(.SEMICOLON) {
@@ -32,7 +33,10 @@ class TLExpression: TLNode {
                 throw "Expect semicolon at the end of expression"
             }
             
-            if let identif = identifier {
+            if add.identifier != nil {
+                leftNode = add
+                resultIdentifier = add.identifier
+            } else if let identif = self.identifier {
                 if env.getVarValue(id: identif)?.type == .INTEGER {
                     env.setVar(id: identif, value: TLObject(type: .INTEGER, value: intValue ?? Int(floatValue ?? 0.0), identifier: identif, subtype: nil, size: 0))
                 } else if env.getVarValue(id: identif)?.type == .FLOAT {
@@ -40,6 +44,20 @@ class TLExpression: TLNode {
                 } else {
                     throw "Not correct value type"
                 }
+            }
+        }
+    }
+    
+    override func execute() throws {
+        try super.execute()
+        if let resIdentif = self.resultIdentifier {
+            let value = env.getVarValue(id: resIdentif)?.value
+            if env.getVarValue(id: identifier)?.type == .INTEGER {
+                env.setVar(id: identifier, value: TLObject(type: .INTEGER, value: value as? Int ?? Int(value as? Float ?? 0.0), identifier: identifier, subtype: nil, size: 0))
+            } else if env.getVarValue(id: identifier)?.type == .FLOAT {
+                env.setVar(id: identifier, value: TLObject(type: .FLOAT, value: value as? Float ?? Float(value as? Int ?? 0), identifier: identifier, subtype: nil, size: 0))
+            } else {
+                throw "Not correct value type"
             }
         }
     }
