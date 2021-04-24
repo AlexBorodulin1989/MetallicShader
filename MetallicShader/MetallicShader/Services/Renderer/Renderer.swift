@@ -29,7 +29,7 @@ class Renderer: NSObject {
     private(set) var pipelineState: MTLRenderPipelineState!
     unowned var mtkView: MTKView!
     
-    var uniformArr = [Uniform]()
+    var uniformDict = [String: Uniform]()
     
     var timer: Float = 0
     var shader: String = ""
@@ -141,7 +141,9 @@ class Renderer: NSObject {
 
 extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        ScriptService.shared.executeFunct(name: "helloFunc", params: [TLObject(type: .STRING, value: "Hello from renderer", identifier: "helloFunc", subtype: nil, size: 0)])
+        let width = TLObject(type: .FLOAT, value: Float(size.width), identifier: "UpdateScreenSize", subtype: nil, size: 0)
+        let height = TLObject(type: .FLOAT, value: Float(size.height), identifier: "UpdateScreenSize", subtype: nil, size: 0)
+        ScriptService.shared.executeFunct(name: "UpdateScreenSize", params: [width, height])
     }
     
     func draw(in view: MTKView) {
@@ -156,7 +158,7 @@ extension Renderer: MTKViewDelegate {
 
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         
-        for (index, element) in uniformArr.enumerated() {
+        for (index, element) in uniformDict.values.enumerated() {
             renderEncoder.setVertexBuffer(element.buffer, offset: 0, index: index + 2)
         }
         
@@ -183,7 +185,7 @@ extension Renderer: MTKViewDelegate {
 
 extension Renderer: RendererProtocol {
     func refresh(shader: String, script: String) {
-        uniformArr = [Uniform]()
+        uniformDict = [String: Uniform]()
         ScriptService.shared.reloadService(script: script) {}
         self.setShader(shader: shader)
         
@@ -230,8 +232,7 @@ extension Renderer {
         if let uniformBuffer = device.makeBuffer(length: MemoryLayout<float4x4>.size,
                                                  options: []) {
             memcpy(uniformBuffer.contents(), [buffer], MemoryLayout<float4x4>.size)
-            
-            uniformArr.append(Uniform(name: name, buffer: uniformBuffer))
+            uniformDict[name] = Uniform(name: name, buffer: uniformBuffer)
         }
     }
 }
@@ -244,7 +245,7 @@ extension Renderer {
         
         var paramStr = "const VertexIn vertex_in [[stage_in]],constant Uniforms &uniforms [[buffer(1)]]"
         
-        for (index, element) in uniformArr.enumerated() {
+        for (index, element) in uniformDict.values.enumerated() {
             paramStr += ",constant matrix_float4x4 &\(element.name) [[buffer(\(index + 2))]]"
         }
         

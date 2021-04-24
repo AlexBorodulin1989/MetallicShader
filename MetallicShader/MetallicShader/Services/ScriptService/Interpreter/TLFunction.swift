@@ -17,12 +17,18 @@ class TLFunction: TLNode {
         }
         let type = lexer.valueType()
         while lexer.match(.VALUE_TYPE) {
-            guard let identifier = lexer.currentValue() else { throw "Not correct function define" }
+            guard let identifier = lexer.currentValue()
+            else {
+                throw "Not correct function define"
+            }
             if lexer.match(.IDENTIFIER) {
                 let object = TLObject(type: type, value: nil, identifier: identifier, subtype: nil, size: 0)
                 functParams.append(object)
             } else {
                 throw "Not correct function define"
+            }
+            if !lexer.match(.COMMA) {
+                break
             }
         }
         
@@ -35,7 +41,7 @@ class TLFunction: TLNode {
             }
             env.setVar(id: functIdentifier, value: TLObject(type: .FUNCT, value: self, identifier: functIdentifier, subtype: nil, size: 0))
         } else {
-            throw "Not correct function define"
+            throw "Expect ) at function definition"
         }
     }
     
