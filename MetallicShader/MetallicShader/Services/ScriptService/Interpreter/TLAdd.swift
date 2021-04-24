@@ -13,10 +13,12 @@ class TLAdd: TLNode {
     private(set) var identifier: String?
     private var leftIdentifier: String?
     private var rightIdentifier: String?
+    private var sign = TokenType.PLUS
     override init(env: TLEnvironment, lexer: Lexer) throws {
         try super.init(env: env, lexer: lexer)
         let term = try TLTerm(env: env, lexer: lexer)
-        if lexer.match(.PLUS) {
+        sign = lexer.currentType() ?? .PLUS
+        if lexer.match(.PLUS) || lexer.match(.MINUS) {
             let add = try TLAdd(env: env, lexer: lexer)
             if term.identifier != nil || add.identifier != nil {
                 identifier = identifier ?? TLInterpreter.generateUniqueID()
@@ -31,9 +33,17 @@ class TLAdd: TLNode {
                     rightNode = add
                 }
             } else if term.floatValue != nil || add.floatValue != nil {
-                floatValue = (term.floatValue ?? Float(term.intValue ?? 0)) + (add.floatValue ?? Float(add.intValue ?? 0))
+                if sign == .PLUS {
+                    floatValue = (term.floatValue ?? Float(term.intValue ?? 0)) + (add.floatValue ?? Float(add.intValue ?? 0))
+                } else {
+                    floatValue = (term.floatValue ?? Float(term.intValue ?? 0)) - (add.floatValue ?? Float(add.intValue ?? 0))
+                }
             } else {
-                intValue = (term.intValue ?? 0) + (add.intValue ?? 0)
+                if sign == .PLUS {
+                    intValue = (term.intValue ?? 0) + (add.intValue ?? 0)
+                } else {
+                    intValue = (term.intValue ?? 0) - (add.intValue ?? 0)
+                }
             }
         } else {
             floatValue = term.floatValue
@@ -51,11 +61,21 @@ class TLAdd: TLNode {
             let leftValue = env.getVarValue(id: leftIdentifier!)
             let rightValue = env.getVarValue(id: rightIdentifier!)
             if leftValue?.type == .FLOAT || rightValue?.type == .FLOAT {
-                let result = (leftValue?.value as? Float ?? Float(leftValue?.value as? Int ?? 0)) + (rightValue?.value as? Float ?? Float(rightValue?.value as? Int ?? 0))
-                env.setVar(id: identifier!, value: TLObject(type: .FLOAT, value: result, identifier: identifier!, subtype: nil, size: 0))
+                if sign == .PLUS {
+                    let result = (leftValue?.value as? Float ?? Float(leftValue?.value as? Int ?? 0)) + (rightValue?.value as? Float ?? Float(rightValue?.value as? Int ?? 0))
+                    env.setVar(id: identifier!, value: TLObject(type: .FLOAT, value: result, identifier: identifier!, subtype: nil, size: 0))
+                } else {
+                    let result = (leftValue?.value as? Float ?? Float(leftValue?.value as? Int ?? 0)) - (rightValue?.value as? Float ?? Float(rightValue?.value as? Int ?? 0))
+                    env.setVar(id: identifier!, value: TLObject(type: .FLOAT, value: result, identifier: identifier!, subtype: nil, size: 0))
+                }
             } else {
-                let result = (leftValue?.value as? Int ?? 0) + (rightValue?.value as? Int ?? 0)
-                env.setVar(id: identifier!, value: TLObject(type: .INTEGER, value: result, identifier: identifier!, subtype: nil, size: 0))
+                if sign == .PLUS {
+                    let result = (leftValue?.value as? Int ?? 0) + (rightValue?.value as? Int ?? 0)
+                    env.setVar(id: identifier!, value: TLObject(type: .INTEGER, value: result, identifier: identifier!, subtype: nil, size: 0))
+                } else {
+                    let result = (leftValue?.value as? Int ?? 0) - (rightValue?.value as? Int ?? 0)
+                    env.setVar(id: identifier!, value: TLObject(type: .INTEGER, value: result, identifier: identifier!, subtype: nil, size: 0))
+                }
             }
         }
     }

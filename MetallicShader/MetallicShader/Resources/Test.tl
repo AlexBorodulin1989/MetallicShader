@@ -16,5 +16,5 @@ int y = 3.0;
 float z = 3.8;
 float a = 3.5;
 float c = 2.2;
-float i = x + y + z * (a + c);
+float i = x + y + z * (a - c) / c;
 logger(i);

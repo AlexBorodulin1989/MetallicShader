@@ -13,10 +13,12 @@ class TLTerm: TLNode {
     private(set) var identifier: String?
     private var leftIdentifier: String?
     private var rightIdentifier: String?
+    private var sign = TokenType.MUL
     override init(env: TLEnvironment, lexer: Lexer) throws {
         try super.init(env: env, lexer: lexer)
         let factor = try TLFactor(env: env, lexer: lexer)
-        if lexer.match(.MUL) {
+        sign = lexer.currentType() ?? .MUL
+        if lexer.match(.MUL) || lexer.match(.DIV) {
             let term = try TLTerm(env: env, lexer: lexer)
             if factor.identifier != nil || term.identifier != nil {
                 identifier = identifier ?? TLInterpreter.generateUniqueID()
@@ -31,9 +33,17 @@ class TLTerm: TLNode {
                     rightNode = term
                 }
             } else if factor.floatValue != nil || term.floatValue != nil {
-                floatValue = (factor.floatValue ?? Float(factor.intValue ?? 0)) * (term.floatValue ?? Float(term.intValue ?? 0))
+                if sign == .MUL {
+                    floatValue = (factor.floatValue ?? Float(factor.intValue ?? 0)) * (term.floatValue ?? Float(term.intValue ?? 0))
+                } else {
+                    floatValue = (factor.floatValue ?? Float(factor.intValue ?? 0)) / (term.floatValue ?? Float(term.intValue ?? 0))
+                }
             } else {
-                intValue = (factor.intValue ?? 0) * (term.intValue ?? 0)
+                if sign == .MUL {
+                    intValue = (factor.intValue ?? 0) * (term.intValue ?? 0)
+                } else {
+                    intValue = (factor.intValue ?? 0) / (term.intValue ?? 0)
+                }
             }
         } else {
             floatValue = factor.floatValue
@@ -51,11 +61,21 @@ class TLTerm: TLNode {
             let leftValue = env.getVarValue(id: leftIdentifier!)
             let rightValue = env.getVarValue(id: rightIdentifier!)
             if leftValue?.type == .FLOAT || rightValue?.type == .FLOAT {
-                let result = (leftValue?.value as? Float ?? Float(leftValue?.value as? Int ?? 0)) * (rightValue?.value as? Float ?? Float(rightValue?.value as? Int ?? 0))
-                env.setVar(id: identifier!, value: TLObject(type: .FLOAT, value: result, identifier: identifier!, subtype: nil, size: 0))
+                if sign == .MUL {
+                    let result = (leftValue?.value as? Float ?? Float(leftValue?.value as? Int ?? 0)) * (rightValue?.value as? Float ?? Float(rightValue?.value as? Int ?? 0))
+                    env.setVar(id: identifier!, value: TLObject(type: .FLOAT, value: result, identifier: identifier!, subtype: nil, size: 0))
+                } else {
+                    let result = (leftValue?.value as? Float ?? Float(leftValue?.value as? Int ?? 0)) / (rightValue?.value as? Float ?? Float(rightValue?.value as? Int ?? 0))
+                    env.setVar(id: identifier!, value: TLObject(type: .FLOAT, value: result, identifier: identifier!, subtype: nil, size: 0))
+                }
             } else {
-                let result = (leftValue?.value as? Int ?? 0) * (rightValue?.value as? Int ?? 0)
-                env.setVar(id: identifier!, value: TLObject(type: .INTEGER, value: result, identifier: identifier!, subtype: nil, size: 0))
+                if sign == .MUL {
+                    let result = (leftValue?.value as? Int ?? 0) * (rightValue?.value as? Int ?? 0)
+                    env.setVar(id: identifier!, value: TLObject(type: .INTEGER, value: result, identifier: identifier!, subtype: nil, size: 0))
+                } else {
+                    let result = (leftValue?.value as? Int ?? 0) / (rightValue?.value as? Int ?? 0)
+                    env.setVar(id: identifier!, value: TLObject(type: .INTEGER, value: result, identifier: identifier!, subtype: nil, size: 0))
+                }
             }
         }
     }
