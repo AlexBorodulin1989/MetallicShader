@@ -65,8 +65,6 @@ class ScriptService {
         return instance
     }()
     
-    fileprivate var jsContext: JSContext!
-    
     var initBlockID: Int = 0
     
     weak var renderer: Renderer!
@@ -81,24 +79,15 @@ class ScriptService {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func interpretFile() {
-        
-    }
-    
     func addCallback(_ funct: TLCallbackInfo) {
         interpreter.subscribeToFunction(funct)
     }
     
     func reloadService(script: String? = nil, completion: @escaping () -> Void){
-        
         interpreter.startInterpret(lexer: Lexer(program: script ?? ""))
     }
-}
-
-// MARK:- Java Script Function handler
-
-extension ScriptService {
-    func requestFunction(name functionName: String, completion: @escaping (_ function: JSValue?) -> Void) {
-        
+    
+    func executeFunct(name: String, params: [TLObject]) {
+        interpreter.executeFunct(name: name, params: params)
     }
 }

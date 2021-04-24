@@ -37,7 +37,6 @@
 		5575C71C2618FA5400A6555B /* TLNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5575C71B2618FA5400A6555B /* TLNumber.swift */; };
 		557709E72609056700395B7E /* MainRouterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557709E62609056700395B7E /* MainRouterOutput.swift */; };
 		5577AAB6262240B0004472E4 /* TLArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5577AAB5262240B0004472E4 /* TLArray.swift */; };
-		557B26EF261214C500855A5A /* ViewSizeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B26EE261214C500855A5A /* ViewSizeService.swift */; };
 		55844D2E260BC2A1006E68FF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 55844D2D260BC2A1006E68FF /* Realm */; };
 		55844D30260BC2A1006E68FF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 55844D2F260BC2A1006E68FF /* RealmSwift */; };
 		55877E672610D5C6000D9C8D /* Helper.js in Resources */ = {isa = PBXBuildFile; fileRef = 55877E662610D5C6000D9C8D /* Helper.js */; };
@@ -128,7 +127,6 @@
 		5575C71B2618FA5400A6555B /* TLNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLNumber.swift; sourceTree = "<group>"; };
 		557709E62609056700395B7E /* MainRouterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouterOutput.swift; sourceTree = "<group>"; };
 		5577AAB5262240B0004472E4 /* TLArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLArray.swift; sourceTree = "<group>"; };
-		557B26EE261214C500855A5A /* ViewSizeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSizeService.swift; sourceTree = "<group>"; };
 		55877E662610D5C6000D9C8D /* Helper.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Helper.js; sourceTree = "<group>"; };
 		55877E702610F765000D9C8D /* Lexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
 		55877E7526110865000D9C8D /* Preprocessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preprocessor.swift; sourceTree = "<group>"; };
@@ -297,14 +295,6 @@
 			path = MetallicShaderUITests;
 			sourceTree = "<group>";
 		};
-		557B26ED261213B400855A5A /* ViewSizeService */ = {
-			isa = PBXGroup;
-			children = (
-				557B26EE261214C500855A5A /* ViewSizeService.swift */,
-			);
-			path = ViewSizeService;
-			sourceTree = "<group>";
-		};
 		55AC9AAE2606543200165003 /* MainModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,7 +425,6 @@
 		55AC9B4B2606885700165003 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				557B26ED261213B400855A5A /* ViewSizeService */,
 				5550EB06260FB2EC000AF565 /* ScriptService */,
 				556FF7CE260D12F1008021DD /* Network */,
 				55AC9B1C260668F400165003 /* Renderer */,
@@ -648,7 +637,6 @@
 				55065D002618B262008F3657 /* TLEnvironment.swift in Sources */,
 				559EB4B3261B939400F8F02A /* TLAssign.swift in Sources */,
 				55AC9ACE260657B900165003 /* MainPresenter.swift in Sources */,
-				557B26EF261214C500855A5A /* ViewSizeService.swift in Sources */,
 				55AC9B5D2606902900165003 /* ProjectViewInput.swift in Sources */,
 				55AC9AF9260658EE00165003 /* MainRouterInput.swift in Sources */,
 				55AC9B262606766000165003 /* ProjectAssembler.swift in Sources */,

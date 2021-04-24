@@ -25,6 +25,8 @@ struct TLCallbackInfo: Hashable {
 class TLInterpreter {
     var lexer: Lexer!
     
+    var environment: TLEnvironment!
+    
     private static var uniqueID = 0
     
     static private(set) var subscribedFunctions = [String: TLCallbackInfo]()
@@ -40,12 +42,20 @@ class TLInterpreter {
     
     func startInterpret(lexer: Lexer) {
         self.lexer = lexer
-        let env = TLEnvironment(prev: nil)
+        environment = TLEnvironment(prev: nil)
         do {
-            let seq = try TLSequence(env: env, lexer: lexer)
+            let seq = try TLSequence(env: environment, lexer: lexer)
             try seq.execute()
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func executeFunct(name: String, params: [TLObject]) {
+        let funcObj = environment.getVarValue(id: name)
+        if funcObj?.type == .FUNCT {
+            try? (funcObj?.value as? TLFunction)?.setParams(params)
+            try? (funcObj?.value as? TLFunction)?.execute()
         }
     }
 }

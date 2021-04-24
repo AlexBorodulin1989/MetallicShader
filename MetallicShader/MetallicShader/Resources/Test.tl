@@ -11,6 +11,7 @@ logger(projMat);
 setViewBackground(r, g, b);
 logger("Script executed");
 helloFunc("Funct executed");
+helloFunc("Funct executed 1");
 float x = 5.0;
 int y = 3.0;
 float z = 3.8;
