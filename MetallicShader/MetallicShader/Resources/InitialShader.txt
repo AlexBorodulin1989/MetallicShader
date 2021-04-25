@@ -2,12 +2,6 @@
 #import <simd/simd.h>
 using namespace metal;
 
-typedef struct {
-    matrix_float4x4 modelMatrix;
-    matrix_float4x4 viewMatrix;
-    matrix_float4x4 projectionMatrix;
-} Uniforms;
-
 struct VertexIn {
     float4 position [[ attribute(0) ]];
 };

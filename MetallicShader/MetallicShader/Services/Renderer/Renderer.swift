@@ -10,12 +10,6 @@ import Foundation
 import MetalKit
 import simd
 
-struct Uniforms {
-    let modelMatrix: float4x4
-    let viewMatrix: float4x4
-    let projectionMatrix: float4x4
-}
-
 struct Uniform {
     let name: String
     let buffer: MTLBuffer
@@ -33,8 +27,6 @@ class Renderer: NSObject {
     
     var timer: Float = 0
     var shader: String = ""
-    
-    var uniforms: Uniforms!
     
     var shaderInitialized = false
     
@@ -55,8 +47,6 @@ class Renderer: NSObject {
         mtkView = metalView
         mtkView.isPaused = true
         mtkView.delegate = self
-        
-        setupMVP(viewSize: metalView.bounds.size)
         
         setScriptSystemFunctions()
         
@@ -120,14 +110,12 @@ extension Renderer: MTKViewDelegate {
               let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
         else { return }
         
-        renderEncoder.setVertexBytes(&uniforms, length: MemoryLayout<Uniforms>.stride, index: 1)
-        
         renderEncoder.setRenderPipelineState(pipelineState)
 
         renderEncoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         
         for (index, element) in uniformDict.values.enumerated() {
-            renderEncoder.setVertexBuffer(element.buffer, offset: 0, index: index + 2)
+            renderEncoder.setVertexBuffer(element.buffer, offset: 0, index: index + 1)
         }
         
         for submesh in mesh.submeshes {
@@ -176,24 +164,6 @@ extension Renderer: RendererProtocol {
     }
 }
 
-// MARK:- Setup MVP
-
-extension Renderer {
-    func setupMVP(viewSize: CGSize) {
-        let translation = float4x4(translation: [0, -0.3, 0])
-        let rotation = float4x4(rotation: [0, Float(45).degreesToRadians, 0])
-        let modelMatrix = translation * rotation;
-        let viewMatrix = float4x4(translation: [0.0, 0, -3]).inverse
-        let ratio = Float(viewSize.width) / Float(viewSize.height)
-        let projectionMatrix = float4x4(projectionFov: Float(45).degreesToRadians,
-                                        near: 0.1,
-                                        far: 100,
-                                        aspect: ratio)
-        
-        uniforms = Uniforms(modelMatrix: modelMatrix, viewMatrix: viewMatrix, projectionMatrix: projectionMatrix)
-    }
-}
-
 // MARK:- Set Matrix buffer
 
 extension Renderer {
@@ -228,10 +198,10 @@ extension Renderer {
     func setShader(shader: String) {
         let preprocessor = Preprocessor()
         
-        var paramStr = "const VertexIn vertex_in [[stage_in]],constant Uniforms &uniforms [[buffer(1)]]"
+        var paramStr = "const VertexIn vertex_in [[stage_in]]"
         
         for (index, element) in uniformDict.values.enumerated() {
-            paramStr += ",constant matrix_float4x4 &\(element.name) [[buffer(\(index + 2))]]"
+            paramStr += ",constant matrix_float4x4 &\(element.name) [[buffer(\(index + 1))]]"
         }
         
         self.shader = preprocessor.replaceParamsToFunc(program: shader, funcName: "vertex_main", replaceParams: paramStr)
