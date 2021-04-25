@@ -7,3 +7,8 @@ void UpdateScreenSize(float width, float height) {
     float[] projMat = projectionMatrix(45.0, 0.1, 100.0, ratio);
     setMatrix(projMat, "projection");
 }
+
+float a = 10;
+float b = 11;
+logger(a);
+logger(b);
