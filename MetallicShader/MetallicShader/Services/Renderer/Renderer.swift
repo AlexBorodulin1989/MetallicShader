@@ -36,6 +36,8 @@ class Renderer: NSObject {
     
     var uniforms: Uniforms!
     
+    var shaderInitialized = false
+    
     init(metalView: MTKView, shader: String, script: String) {
         super.init()
         
@@ -56,14 +58,51 @@ class Renderer: NSObject {
         
         setupMVP(viewSize: metalView.bounds.size)
         
-        let callback = TLCallbackInfo(identifier: "setViewBackground") {[weak self] params -> TLObject? in
+        setScriptSystemFunctions()
+        
+        ScriptService.shared.reloadService(script: script) {
+        }
+        self.setShader(shader: shader)
+        self.mtkView.isPaused = false
+        do {
+            self.addMesh()
+            self.addVertexBuffer()
+            try self.createPipeline()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func setScriptSystemFunctions() {
+        
+        ScriptService.shared.addCallback(TLCallbackInfo(identifier: "logger") { params -> TLObject? in
+            print(params.first ?? "")
+            return nil
+        })
+        
+        ScriptService.shared.addCallback(TLCallbackInfo(identifier: "setViewBackground") {[weak self] params -> TLObject? in
             if params.count > 2 {
                 self?.mtkView.clearColor = MTLClearColor(red: Double(params[0] as? Float ?? 0), green:  Double(params[1] as? Float ?? 0), blue: Double(params[2] as? Float ?? 0), alpha: 1.0)
             }
             return nil
-        }
+        })
         
-        ScriptService.shared.addCallback(callback)
+        let matrixToArray = {(_ matrix: float4x4) -> [Any] in
+            var resultArray = [Any]()
+            for i in 0...3 {
+                var rowArray = [Any]()
+                for c in 0...3 {
+                    rowArray.append(matrix[i][c])
+                }
+                resultArray.append(rowArray)
+            }
+            
+            return resultArray
+        }
         
         ScriptService.shared.addCallback(TLCallbackInfo(identifier: "setMatrix", callback: {[weak self] params -> TLObject? in
             guard params.count == 2,
@@ -91,22 +130,66 @@ class Renderer: NSObject {
             return nil
         }))
         
-        ScriptService.shared.renderer = self
-        ScriptService.shared.reloadService(script: script) {
-        }
-        self.setShader(shader: shader)
-        self.mtkView.isPaused = false
-        do {
-            self.addMesh()
-            self.addVertexBuffer()
-            try self.createPipeline()
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+        ScriptService.shared.addCallback(TLCallbackInfo(identifier: "resetMatrix", callback: {[weak self] params -> TLObject? in
+            guard params.count == 2,
+                  let matrix = params[0] as? [Any],
+                  let name = params[1] as? String
+            else {
+                return nil
+            }
+            
+            var resMatrix = float4x4.identity()
+            
+            if matrix.count == 4 {
+                for i in 0...3 {
+                    guard let row = matrix[i] as? [Float] else { return nil }
+                    if row.count == 4 {
+                        for c in 0...3 {
+                            resMatrix[i][c] = Float(row[c]);
+                        }
+                    }
+                }
+            }
+            
+            self?.resetMatrixBuffer(resMatrix, name)
+            
+            return nil
+        }))
+        
+        ScriptService.shared.addCallback(TLCallbackInfo(identifier: "projectionMatrix", callback: { params -> TLObject? in
+            guard params.count == 4,
+                  let fov = params[0] as? Float,
+                  let near = params[1] as? Float,
+                  let far = params[2] as? Float,
+                  let ratio = params[3] as? Float
+            else {
+                return nil
+            }
+            let projectionMatrix = float4x4(projectionFov: Float(fov).degreesToRadians,
+                                            near: near,
+                                            far: far,
+                                            aspect: ratio)
+            
+            let resultArray = matrixToArray(projectionMatrix)
+            
+            return TLObject(type: .ARRAY, value: resultArray, identifier: "", subtype: .FLOAT, size: 4)
+        }))
+        
+        ScriptService.shared.addCallback(TLCallbackInfo(identifier: "viewMatrix", callback: { params -> TLObject? in
+            guard params.count == 3
+            else {
+                print("Not correct number of params");
+                return nil
+            }
+            let x = params[0] as? Float ?? Float(params[0] as? Int ?? 0)
+            let y = params[1] as? Float ?? Float(params[1] as? Int ?? 0)
+            let z = params[2] as? Float ?? Float(params[2] as? Int ?? 0)
+            let viewMatrix = float4x4(translation: [x, y, z])
+            
+            let resultArray = matrixToArray(viewMatrix)
+            
+            return TLObject(type: .ARRAY, value: resultArray, identifier: "", subtype: .FLOAT, size: 4)
+        }))
     }
     
     func addMesh() {
@@ -186,6 +269,7 @@ extension Renderer: MTKViewDelegate {
 extension Renderer: RendererProtocol {
     func refresh(shader: String, script: String) {
         uniformDict = [String: Uniform]()
+        shaderInitialized = false
         ScriptService.shared.reloadService(script: script) {}
         self.setShader(shader: shader)
         
@@ -229,9 +313,25 @@ extension Renderer {
 
 extension Renderer {
     func setMatrixBuffer(_ buffer: float4x4, _ name : String) {
+        if shaderInitialized {
+            print("Set matrix not available after init")
+            return
+        }
         if let uniformBuffer = device.makeBuffer(length: MemoryLayout<float4x4>.size,
                                                  options: []) {
             memcpy(uniformBuffer.contents(), [buffer], MemoryLayout<float4x4>.size)
+            uniformDict[name] = Uniform(name: name, buffer: uniformBuffer)
+        }
+    }
+    
+    func resetMatrixBuffer(_ buffer: float4x4, _ name : String) {
+        if let uniformBuffer = device.makeBuffer(length: MemoryLayout<float4x4>.size,
+                                                 options: []) {
+            memcpy(uniformBuffer.contents(), [buffer], MemoryLayout<float4x4>.size)
+            if uniformDict[name] == nil {
+                print("No value to reset")
+                return
+            }
             uniformDict[name] = Uniform(name: name, buffer: uniformBuffer)
         }
     }
@@ -250,5 +350,6 @@ extension Renderer {
         }
         
         self.shader = preprocessor.replaceParamsToFunc(program: shader, funcName: "vertex_main", replaceParams: paramStr)
+        shaderInitialized = true
     }
 }

@@ -15,7 +15,7 @@ class TLNumber {
         }
         
         if lexer.match(.INT) {
-            return TLObject(type: .INTEGER, value: (value as NSString).intValue)
+            return TLObject(type: .INTEGER, value: (value as NSString).integerValue)
         }
         
         if lexer.match(.FLOAT) {
