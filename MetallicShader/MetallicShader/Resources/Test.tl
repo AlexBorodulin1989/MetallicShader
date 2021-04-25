@@ -4,6 +4,12 @@ setMatrix(projMat, "projection");
 float[] viewMat = viewMatrix(0, 0, 3);
 setMatrix(viewMat, "view");
 
+float[] translateMat = translateMatrix(0, 0, 0);
+setMatrix(translateMat, "translate");
+
+float[] rotateMat = rotateMatrix(0, 45, 0);
+setMatrix(rotateMat, "rotate");
+
 setViewBackground(0.5, 0.5, 0.5);
 
 void UpdateScreenSize(float width, float height) {

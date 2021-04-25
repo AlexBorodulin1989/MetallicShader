@@ -15,8 +15,8 @@ struct VertexIn {
 vertex float4 vertex_main() {
     float4 position = projection *
                     view *
-                    uniforms.modelMatrix *
-                    vertex_in.position;
+                    translate *
+                    rotate * vertex_in.position;
     return position;
 }
 
