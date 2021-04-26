@@ -13,44 +13,44 @@ class TLAdd: TLNode {
     private(set) var identifier: String?
     private var leftIdentifier: String?
     private var rightIdentifier: String?
-    private var sign = TokenType.PLUS
+    private var op = TokenType.PLUS
     override init(env: TLEnvironment, lexer: Lexer) throws {
         try super.init(env: env, lexer: lexer)
-        let term = try TLTerm(env: env, lexer: lexer)
-        sign = lexer.currentType() ?? .PLUS
+        let sign = try TLSign(env: env, lexer: lexer)
+        op = lexer.currentType() ?? .PLUS
         if lexer.match(.PLUS) || lexer.match(.MINUS) {
             let add = try TLAdd(env: env, lexer: lexer)
-            if term.identifier != nil || add.identifier != nil {
+            if sign.identifier != nil || add.identifier != nil {
                 identifier = identifier ?? TLInterpreter.generateUniqueID()
-                leftIdentifier = term.identifier
+                leftIdentifier = sign.identifier
                 rightIdentifier = add.identifier
-                intValue = term.intValue ?? add.intValue
-                floatValue = term.floatValue ?? add.floatValue
-                if term.identifier != nil {
-                    leftNode = term
+                intValue = sign.intValue ?? add.intValue
+                floatValue = sign.floatValue ?? add.floatValue
+                if sign.identifier != nil {
+                    leftNode = sign
                 }
                 if add.identifier != nil {
                     rightNode = add
                 }
-            } else if term.floatValue != nil || add.floatValue != nil {
-                if sign == .PLUS {
-                    floatValue = (term.floatValue ?? Float(term.intValue ?? 0)) + (add.floatValue ?? Float(add.intValue ?? 0))
+            } else if sign.floatValue != nil || add.floatValue != nil {
+                if op == .PLUS {
+                    floatValue = (sign.floatValue ?? Float(sign.intValue ?? 0)) + (add.floatValue ?? Float(add.intValue ?? 0))
                 } else {
-                    floatValue = (term.floatValue ?? Float(term.intValue ?? 0)) - (add.floatValue ?? Float(add.intValue ?? 0))
+                    floatValue = (sign.floatValue ?? Float(sign.intValue ?? 0)) - (add.floatValue ?? Float(add.intValue ?? 0))
                 }
             } else {
-                if sign == .PLUS {
-                    intValue = (term.intValue ?? 0) + (add.intValue ?? 0)
+                if op == .PLUS {
+                    intValue = (sign.intValue ?? 0) + (add.intValue ?? 0)
                 } else {
-                    intValue = (term.intValue ?? 0) - (add.intValue ?? 0)
+                    intValue = (sign.intValue ?? 0) - (add.intValue ?? 0)
                 }
             }
         } else {
-            floatValue = term.floatValue
-            intValue = term.intValue
-            identifier = term.identifier
+            floatValue = sign.floatValue
+            intValue = sign.intValue
+            identifier = sign.identifier
             if identifier != nil {
-                leftNode = term
+                leftNode = sign
             }
         }
     }
@@ -61,7 +61,7 @@ class TLAdd: TLNode {
             let leftValue = env.getVarValue(id: leftIdentifier!)
             let rightValue = env.getVarValue(id: rightIdentifier!)
             if leftValue?.type == .FLOAT || rightValue?.type == .FLOAT {
-                if sign == .PLUS {
+                if op == .PLUS {
                     let result = (leftValue?.value as? Float ?? Float(leftValue?.value as? Int ?? 0)) + (rightValue?.value as? Float ?? Float(rightValue?.value as? Int ?? 0))
                     env.setVar(id: identifier!, value: TLObject(type: .FLOAT, value: result, identifier: identifier!, subtype: nil, size: 0))
                 } else {
@@ -69,7 +69,7 @@ class TLAdd: TLNode {
                     env.setVar(id: identifier!, value: TLObject(type: .FLOAT, value: result, identifier: identifier!, subtype: nil, size: 0))
                 }
             } else {
-                if sign == .PLUS {
+                if op == .PLUS {
                     let result = (leftValue?.value as? Int ?? 0) + (rightValue?.value as? Int ?? 0)
                     env.setVar(id: identifier!, value: TLObject(type: .INTEGER, value: result, identifier: identifier!, subtype: nil, size: 0))
                 } else {

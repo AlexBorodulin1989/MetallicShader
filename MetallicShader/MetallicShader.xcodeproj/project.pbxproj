@@ -67,6 +67,7 @@
 		55AC9B5D2606902900165003 /* ProjectViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B5C2606902900165003 /* ProjectViewInput.swift */; };
 		55AC9B652606933300165003 /* RendererProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B642606933300165003 /* RendererProtocol.swift */; };
 		9D15F6FB2617B3BC00D992AC /* TLBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15F6FA2617B3BC00D992AC /* TLBlock.swift */; };
+		9D735585263755A700A79A23 /* TLSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D735584263755A700A79A23 /* TLSign.swift */; };
 		BC44E392262E02C7001C1C2F /* TLAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC44E391262E02C7001C1C2F /* TLAdd.swift */; };
 		BC476080262B35A5007E6D23 /* TLFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC47607F262B35A5007E6D23 /* TLFunction.swift */; };
 		BC5A06AA262D523600753AB7 /* TLTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5A06A9262D523600753AB7 /* TLTerm.swift */; };
@@ -155,6 +156,7 @@
 		55AC9B5C2606902900165003 /* ProjectViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewInput.swift; sourceTree = "<group>"; };
 		55AC9B642606933300165003 /* RendererProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererProtocol.swift; sourceTree = "<group>"; };
 		9D15F6FA2617B3BC00D992AC /* TLBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLBlock.swift; sourceTree = "<group>"; };
+		9D735584263755A700A79A23 /* TLSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLSign.swift; sourceTree = "<group>"; };
 		BC44E391262E02C7001C1C2F /* TLAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLAdd.swift; sourceTree = "<group>"; };
 		BC47607F262B35A5007E6D23 /* TLFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLFunction.swift; sourceTree = "<group>"; };
 		BC5A06A9262D523600753AB7 /* TLTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLTerm.swift; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				BC47607F262B35A5007E6D23 /* TLFunction.swift */,
 				5575C7112618E6CE00A6555B /* TLExpression.swift */,
 				BC44E391262E02C7001C1C2F /* TLAdd.swift */,
+				9D735584263755A700A79A23 /* TLSign.swift */,
 				BC5A06A9262D523600753AB7 /* TLTerm.swift */,
 				BC5A06AE262D524500753AB7 /* TLFactor.swift */,
 			);
@@ -635,6 +638,7 @@
 				5574947E2605FF18007E6468 /* MainViewController.swift in Sources */,
 				55AC9AE9260658AE00165003 /* MainViewInput.swift in Sources */,
 				55065D002618B262008F3657 /* TLEnvironment.swift in Sources */,
+				9D735585263755A700A79A23 /* TLSign.swift in Sources */,
 				559EB4B3261B939400F8F02A /* TLAssign.swift in Sources */,
 				55AC9ACE260657B900165003 /* MainPresenter.swift in Sources */,
 				55AC9B5D2606902900165003 /* ProjectViewInput.swift in Sources */,

@@ -8,8 +8,9 @@
 import Foundation
 
 /*
-expr -> func | add ;
-add -> term + add | term
+expr -> func | add
+add -> sign + add | sign
+sign -> term | -term | +term
 term -> factor * term | factor
 factor -> num | ( add )
 */
@@ -26,23 +27,19 @@ class TLExpression: TLNode {
             leftNode = try TLFunctCall(env: env, lexer: lexer, returnIdentifier: self.identifier)
         } else {
             let add = try TLAdd(env: env, lexer: lexer)
-            if lexer.match(.SEMICOLON) {
-                intValue = add.intValue
-                floatValue = add.floatValue
-            } else {
-                throw "Expect semicolon at the end of expression"
-            }
             
             if add.identifier != nil {
                 leftNode = add
                 resultIdentifier = add.identifier
             } else if let identif = self.identifier {
+                floatValue = add.floatValue
+                intValue = add.intValue
                 if env.getVarValue(id: identif)?.type == .INTEGER {
                     env.setVar(id: identif, value: TLObject(type: .INTEGER, value: intValue ?? Int(floatValue ?? 0.0), identifier: identif, subtype: nil, size: 0))
                 } else if env.getVarValue(id: identif)?.type == .FLOAT {
                     env.setVar(id: identif, value: TLObject(type: .FLOAT, value: floatValue ?? Float(intValue ?? 0), identifier: identif, subtype: nil, size: 0))
                 } else {
-                    throw "Not correct value type"
+                    env.setVar(id: identif, value: TLObject(type: floatValue != nil ? .FLOAT : .INTEGER, value: floatValue ?? intValue, identifier: identif, subtype: nil, size: 0))
                 }
             }
         }
@@ -52,9 +49,10 @@ class TLExpression: TLNode {
         try super.execute()
         if let resIdentif = self.resultIdentifier {
             let value = env.getVarValue(id: resIdentif)?.value
-            if env.getVarValue(id: identifier)?.type == .INTEGER {
+            let retValueType = env.getVarValue(id: identifier)?.type
+            if retValueType == .INTEGER {
                 env.setVar(id: identifier, value: TLObject(type: .INTEGER, value: value as? Int ?? Int(value as? Float ?? 0.0), identifier: identifier, subtype: nil, size: 0))
-            } else if env.getVarValue(id: identifier)?.type == .FLOAT {
+            } else if retValueType == .FLOAT {
                 env.setVar(id: identifier, value: TLObject(type: .FLOAT, value: value as? Float ?? Float(value as? Int ?? 0), identifier: identifier, subtype: nil, size: 0))
             } else {
                 throw "Not correct value type"

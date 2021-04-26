@@ -4,7 +4,7 @@ setMatrix(projMat, "projection");
 float[] viewMat = viewMatrix(0, 0, 3);
 setMatrix(viewMat, "view");
 
-float[] translateMat = translateMatrix(0, 0, 0);
+float[] translateMat = translateMatrix(0, -0.3, 0);
 setMatrix(translateMat, "translate");
 
 float[] rotateMat = rotateMatrix(0, 45, 0);
@@ -19,7 +19,7 @@ void UpdateScreenSize(float width, float height) {
     resetMatrix(projMat, "projection");
 }
 
-float a = 10;
-float b = 11;
+float a = -10.0 * 2.0 + (-2.0) / 3.0;
+float b = 10.0 / 3;
 logger(a);
 logger(b);

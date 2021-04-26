@@ -16,6 +16,9 @@ class TLStmt: TLNode {
             leftNode = try TLDefine(env: env, lexer: lexer)
         } else if type != nil {
             leftNode = try TLExpression(env: env, lexer: lexer)
+            if !lexer.match(.SEMICOLON) {
+                throw "; need at the end of expression"
+            }
         }
     }
 }

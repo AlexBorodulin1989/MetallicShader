@@ -31,7 +31,7 @@ class TLFunctCall: TLNode {
     }
     
     func optparams() throws {
-        if lexer.match(.RIGHT_BRACKET) && lexer.match(.SEMICOLON) {
+        if lexer.match(.RIGHT_BRACKET) {
             return
         }
         try params()
@@ -59,11 +59,18 @@ class TLFunctCall: TLNode {
                 return
             }
         } else {
-            throw "Expected param of function"
+            let identifier = TLInterpreter.generateUniqueID()
+            let variable = TLObject(type: .UNKNOWN, value: nil, identifier: identifier, subtype: nil, size: 0)
+            env.setVar(id: identifier, value: variable)
+            try leftNode = TLExpression(env: env, lexer: lexer, identifier: identifier)
+            functParams.append(variable)
+            if lexer.match(.COMMA) {
+                try params()
+                return
+            }
         }
         
-        if lexer.match(.RIGHT_BRACKET)
-            && lexer.match(.SEMICOLON) {
+        if lexer.match(.RIGHT_BRACKET) {
             return
         }
         

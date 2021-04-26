@@ -34,6 +34,9 @@ class TLAssign: TLNode {
                 }
             } else {
                 leftNode = try TLExpression(env: env, lexer: lexer, identifier: identifier)
+                if !lexer.match(.SEMICOLON) {
+                    throw "; need at the end of expression"
+                }
             }
         }
     }
