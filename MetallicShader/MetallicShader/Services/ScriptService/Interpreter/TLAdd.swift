@@ -77,6 +77,44 @@ class TLAdd: TLNode {
                     env.setVar(id: identifier!, value: TLObject(type: .INTEGER, value: result, identifier: identifier!, subtype: nil, size: 0))
                 }
             }
+        } else if leftIdentifier != nil {
+            let leftValue = env.getVarValue(id: leftIdentifier!)
+            if leftValue?.type == .FLOAT || floatValue != nil {
+                if op == .PLUS {
+                    let result = (leftValue?.value as? Float ?? Float(leftValue?.value as? Int ?? 0)) + (floatValue ?? Float(intValue ?? 0))
+                    env.setVar(id: identifier!, value: TLObject(type: .FLOAT, value: result, identifier: identifier!, subtype: nil, size: 0))
+                } else {
+                    let result = (leftValue?.value as? Float ?? Float(leftValue?.value as? Int ?? 0)) - (floatValue ?? Float(intValue ?? 0))
+                    env.setVar(id: identifier!, value: TLObject(type: .FLOAT, value: result, identifier: identifier!, subtype: nil, size: 0))
+                }
+            } else {
+                if op == .PLUS {
+                    let result = (leftValue?.value as? Int ?? 0) + (intValue ?? 0)
+                    env.setVar(id: identifier!, value: TLObject(type: .INTEGER, value: result, identifier: identifier!, subtype: nil, size: 0))
+                } else {
+                    let result = (leftValue?.value as? Int ?? 0) - (intValue ?? 0)
+                    env.setVar(id: identifier!, value: TLObject(type: .INTEGER, value: result, identifier: identifier!, subtype: nil, size: 0))
+                }
+            }
+        } else if rightIdentifier != nil {
+            let rightValue = env.getVarValue(id: rightIdentifier!)
+            if rightValue?.type == .FLOAT || rightValue?.type == .FLOAT {
+                if op == .PLUS {
+                    let result = (floatValue ?? Float(intValue ?? 0)) + (rightValue?.value as? Float ?? Float(rightValue?.value as? Int ?? 0))
+                    env.setVar(id: identifier!, value: TLObject(type: .FLOAT, value: result, identifier: identifier!, subtype: nil, size: 0))
+                } else {
+                    let result = (floatValue ?? Float(intValue ?? 0)) - (rightValue?.value as? Float ?? Float(rightValue?.value as? Int ?? 0))
+                    env.setVar(id: identifier!, value: TLObject(type: .FLOAT, value: result, identifier: identifier!, subtype: nil, size: 0))
+                }
+            } else {
+                if op == .PLUS {
+                    let result = (intValue ?? 0) + (rightValue?.value as? Int ?? 0)
+                    env.setVar(id: identifier!, value: TLObject(type: .INTEGER, value: result, identifier: identifier!, subtype: nil, size: 0))
+                } else {
+                    let result = (intValue ?? 0) / (rightValue?.value as? Int ?? 0)
+                    env.setVar(id: identifier!, value: TLObject(type: .INTEGER, value: result, identifier: identifier!, subtype: nil, size: 0))
+                }
+            }
         }
     }
 }
