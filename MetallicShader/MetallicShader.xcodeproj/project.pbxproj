@@ -72,6 +72,7 @@
 		BC476080262B35A5007E6D23 /* TLFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC47607F262B35A5007E6D23 /* TLFunction.swift */; };
 		BC5A06AA262D523600753AB7 /* TLTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5A06A9262D523600753AB7 /* TLTerm.swift */; };
 		BC5A06AF262D524500753AB7 /* TLFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5A06AE262D524500753AB7 /* TLFactor.swift */; };
+		BCFA4F9926396D4E0033F5BA /* Renderer+Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCFA4F9826396D4E0033F5BA /* Renderer+Script.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +162,7 @@
 		BC47607F262B35A5007E6D23 /* TLFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLFunction.swift; sourceTree = "<group>"; };
 		BC5A06A9262D523600753AB7 /* TLTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLTerm.swift; sourceTree = "<group>"; };
 		BC5A06AE262D524500753AB7 /* TLFactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLFactor.swift; sourceTree = "<group>"; };
+		BCFA4F9826396D4E0033F5BA /* Renderer+Script.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Renderer+Script.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -420,6 +422,7 @@
 				55AC9B642606933300165003 /* RendererProtocol.swift */,
 				55AC9B1D2606693A00165003 /* Renderer.swift */,
 				55AC9B2A260677F500165003 /* VolumeItem.swift */,
+				BCFA4F9826396D4E0033F5BA /* Renderer+Script.swift */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				55AC9B5D2606902900165003 /* ProjectViewInput.swift in Sources */,
 				55AC9AF9260658EE00165003 /* MainRouterInput.swift in Sources */,
 				55AC9B262606766000165003 /* ProjectAssembler.swift in Sources */,
+				BCFA4F9926396D4E0033F5BA /* Renderer+Script.swift in Sources */,
 				55AC9B0226065CF700165003 /* MainAssembler.swift in Sources */,
 				55AC9B3A26067D7300165003 /* ProjectInteractor.swift in Sources */,
 				5574947A2605FF18007E6468 /* AppDelegate.swift in Sources */,

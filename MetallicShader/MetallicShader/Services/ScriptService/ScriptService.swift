@@ -23,6 +23,12 @@ class ScriptService {
     
     static var shared: ScriptService = {
         let instance = ScriptService()
+        
+        instance.addCallback(TLCallbackInfo(identifier: "logger") { params -> TLObject? in
+            print(params.first ?? "")
+            return nil
+        })
+        
         return instance
     }()
     
