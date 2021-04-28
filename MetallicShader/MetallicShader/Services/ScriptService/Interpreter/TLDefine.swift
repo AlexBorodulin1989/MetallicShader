@@ -16,7 +16,7 @@ class TLDefine: TLNode {
             let identifier = lexer.currentValue() ?? ""
             if lexer.match(.IDENTIFIER) {
                 if lexer.currentType() == .ASSIGN {
-                    if env.getVarValue(id: identifier) != nil {
+                    if env.getLocalVarValue(id: identifier) != nil {
                         throw "Variable redifinition"
                     }
                     env.setVar(id: identifier, value: TLObject(type: type, value: nil))

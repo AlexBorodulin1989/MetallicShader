@@ -48,4 +48,13 @@ class TLEnvironment {
         
         return nil
     }
+    
+    func getLocalVarValue(id: String) -> TLObject? {
+        let val = self.table[id]
+        if let value = val {
+            return value
+        }
+        
+        return nil
+    }
 }
