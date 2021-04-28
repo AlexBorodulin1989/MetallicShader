@@ -1,8 +1,7 @@
 float w = getScreenWidth();
 float h = getScreenHeight();
-float rat = w / h;
 
-float[] projMat = projectionMatrix(45.0, 0.1, 100.0, rat);
+float[] projMat = projectionMatrix(45.0, 0.1, 100.0, w/h);
 setMatrix(projMat, "projection");
 
 float[] viewMat = viewMatrix(0, 0, 3);

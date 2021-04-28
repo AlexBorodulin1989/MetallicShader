@@ -12,7 +12,7 @@ expr -> func | add
 add -> sign + add | sign
 sign -> term | -term | +term
 term -> factor * term | factor
-factor -> num | ( add )
+factor -> num | ( add ) | id
 */
 
 class TLExpression: TLNode {
@@ -47,15 +47,15 @@ class TLExpression: TLNode {
     
     override func execute() throws {
         try super.execute()
-        if let resIdentif = self.resultIdentifier {
-            let value = env.getVarValue(id: resIdentif)?.value
+        if let resIdentif = self.resultIdentifier, let resVariable = env.getVarValue(id: resIdentif) {
+            let value = resVariable.value
             let retValueType = env.getVarValue(id: identifier)?.type
             if retValueType == .INTEGER {
                 env.setVar(id: identifier, value: TLObject(type: .INTEGER, value: value as? Int ?? Int(value as? Float ?? 0.0), identifier: identifier, subtype: nil, size: 0))
             } else if retValueType == .FLOAT {
                 env.setVar(id: identifier, value: TLObject(type: .FLOAT, value: value as? Float ?? Float(value as? Int ?? 0), identifier: identifier, subtype: nil, size: 0))
             } else {
-                throw "Not correct value type"
+                env.setVar(id: identifier, value: resVariable)
             }
         }
     }

@@ -51,13 +51,6 @@ class TLFunctCall: TLNode {
                 try params()
                 return
             }
-        } else if var variable = env.getVarValue(id: val), lexer.match(.IDENTIFIER) {
-            variable.identifier = val
-            functParams.append(variable)
-            if lexer.match(.COMMA) {
-                try params()
-                return
-            }
         } else {
             let identifier = TLInterpreter.generateUniqueID()
             let variable = TLObject(type: .UNKNOWN, value: nil, identifier: identifier, subtype: nil, size: 0)
