@@ -24,7 +24,6 @@ enum TokenType: Int {
     case VERTEX
     case FRAGMENT
     case VALUE_TYPE
-    case LINEBREAK
     case RIGHT_BRACKET
     case LEFT_BRACKET
     case LEFT_CURLY_BRACE
@@ -141,8 +140,8 @@ class Lexer {
                 let startIndex = charIndex
                 let val = "\(char)"
                 
-                //Space will not take part in sintax
-                if (val != " ") {
+                //Space linebreak will not take part in sintax
+                if (val != " " && val != "\n") {
                     if (val == "(") {
                         tokens.append(Token(type: .LEFT_BRACKET, start: startIndex, end: endIndex, value: val))
                     } else if (val == ")") {
@@ -155,23 +154,21 @@ class Lexer {
                         tokens.append(Token(type: .SEMICOLON, start: startIndex, end: endIndex, value: val))
                     } else if (val == ",") {
                         tokens.append(Token(type: .COMMA, start: startIndex, end: endIndex, value: val))
-                    }else if (val == ".") {
+                    } else if (val == ".") {
                         tokens.append(Token(type: .POINT, start: startIndex, end: endIndex, value: val))
-                    } else if (val == "\n") {
-                        tokens.append(Token(type: .LINEBREAK, start: startIndex, end: endIndex, value: val))
                     } else if (val == "=") {
                         tokens.append(Token(type: .ASSIGN, start: startIndex, end: endIndex, value: val))
                     } else if (val == "[") {
                         tokens.append(Token(type: .LEFT_SQUARE_BRACKET, start: startIndex, end: endIndex, value: val))
                     } else if (val == "]") {
                         tokens.append(Token(type: .RIGHT_SQUARE_BRACKET, start: startIndex, end: endIndex, value: val))
-                    }else if (val == "+") {
+                    } else if (val == "+") {
                         tokens.append(Token(type: .PLUS, start: startIndex, end: endIndex, value: val))
-                    }else if (val == "-") {
+                    } else if (val == "-") {
                         tokens.append(Token(type: .MINUS, start: startIndex, end: endIndex, value: val))
-                    }else if (val == "*") {
+                    } else if (val == "*") {
                         tokens.append(Token(type: .MUL, start: startIndex, end: endIndex, value: val))
-                    }else if (val == "/") {
+                    } else if (val == "/") {
                         tokens.append(Token(type: .DIV, start: startIndex, end: endIndex, value: val))
                     } else {
                         tokens.append(Token(type: .UNKNOWN, start: startIndex, end: endIndex, value: val))
@@ -209,9 +206,6 @@ class Lexer {
     func match(_ tokenType: TokenType) -> Bool {
         if tokenType == currentToken?.type {
             currentToken = try? self.nextToken()
-            if currentToken?.type == .LINEBREAK {
-                let _ = match(.LINEBREAK)
-            }
             return true
         }
         return false
