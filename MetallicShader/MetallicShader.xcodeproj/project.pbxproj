@@ -68,6 +68,7 @@
 		55AC9B652606933300165003 /* RendererProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AC9B642606933300165003 /* RendererProtocol.swift */; };
 		9D15F6FB2617B3BC00D992AC /* TLBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D15F6FA2617B3BC00D992AC /* TLBlock.swift */; };
 		9D735585263755A700A79A23 /* TLSign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D735584263755A700A79A23 /* TLSign.swift */; };
+		9DEC359B263B43C2003C598A /* LiteralRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEC359A263B43C2003C598A /* LiteralRecognizer.swift */; };
 		BC44E392262E02C7001C1C2F /* TLAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC44E391262E02C7001C1C2F /* TLAdd.swift */; };
 		BC476080262B35A5007E6D23 /* TLFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC47607F262B35A5007E6D23 /* TLFunction.swift */; };
 		BC5A06AA262D523600753AB7 /* TLTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5A06A9262D523600753AB7 /* TLTerm.swift */; };
@@ -158,6 +159,7 @@
 		55AC9B642606933300165003 /* RendererProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RendererProtocol.swift; sourceTree = "<group>"; };
 		9D15F6FA2617B3BC00D992AC /* TLBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLBlock.swift; sourceTree = "<group>"; };
 		9D735584263755A700A79A23 /* TLSign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLSign.swift; sourceTree = "<group>"; };
+		9DEC359A263B43C2003C598A /* LiteralRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteralRecognizer.swift; sourceTree = "<group>"; };
 		BC44E391262E02C7001C1C2F /* TLAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLAdd.swift; sourceTree = "<group>"; };
 		BC47607F262B35A5007E6D23 /* TLFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLFunction.swift; sourceTree = "<group>"; };
 		BC5A06A9262D523600753AB7 /* TLTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLTerm.swift; sourceTree = "<group>"; };
@@ -195,9 +197,9 @@
 		5550EB06260FB2EC000AF565 /* ScriptService */ = {
 			isa = PBXGroup;
 			children = (
+				9DEC359C263B46C6003C598A /* Lexer */,
 				9D15F6F92617B39000D992AC /* Interpreter */,
 				5550EB07260FB30B000AF565 /* ScriptService.swift */,
-				55877E702610F765000D9C8D /* Lexer.swift */,
 				55877E7526110865000D9C8D /* Preprocessor.swift */,
 			);
 			path = ScriptService;
@@ -484,6 +486,15 @@
 			path = Interpreter;
 			sourceTree = "<group>";
 		};
+		9DEC359C263B46C6003C598A /* Lexer */ = {
+			isa = PBXGroup;
+			children = (
+				55877E702610F765000D9C8D /* Lexer.swift */,
+				9DEC359A263B43C2003C598A /* LiteralRecognizer.swift */,
+			);
+			path = Lexer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -652,6 +663,7 @@
 				55AC9B3A26067D7300165003 /* ProjectInteractor.swift in Sources */,
 				5574947A2605FF18007E6468 /* AppDelegate.swift in Sources */,
 				5575C7172618E98800A6555B /* TLFunctCall.swift in Sources */,
+				9DEC359B263B43C2003C598A /* LiteralRecognizer.swift in Sources */,
 				5575C7122618E6CE00A6555B /* TLExpression.swift in Sources */,
 				55065CFB2618B1D0008F3657 /* TLNode.swift in Sources */,
 				55AC9AC82606579100165003 /* MainInteractorOutput.swift in Sources */,

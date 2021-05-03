@@ -60,75 +60,71 @@ class Lexer {
     
     private var currentToken: Token? //Dont set public access!
     
+    let programText: [String.Element]
+    private var currentSymbolIndex = 0
+    
     init(program: String) {
+        programText = Array(program)
         
         var buffer = ""
-        
         let chars = Array(program)
         
-        var charIndex = 0
-        
-        while(charIndex < chars.count) {
-            let char = chars[charIndex]
-            
+        while(!endProgram()) {
             // This is simple case only for testing need to implement state machine for cases sach as \n, \t, \\, \"
-            if "\(char)" == "\"" {
-                let startIndex = charIndex
-                charIndex += 1
+            if match("\"") {
+                let literalSM = LiteralStateMachine()
+                let startIndex = currentSymbolIndex - 1
                 
-                
-                while charIndex < chars.count && "\(chars[charIndex])" != "\"" {
-                    buffer += "\(chars[charIndex])"
-                    charIndex += 1
+                while !endProgram() && !match("\"") {
+                    buffer += "\(currentSymbol())"
+                    let _ = match(currentSymbol())
                 }
-                let endIndex = charIndex
+                let endIndex = currentSymbolIndex - 1
                 
                 tokens.append(Token(type: .STRING, start: startIndex, end: endIndex, value: buffer))
-                charIndex += 1
                 buffer = ""
-            } else if isDigit(char) {
-                buffer += "\(char)"
-                let startIndex = charIndex
-                charIndex += 1
-                while charIndex < chars.count && isDigit(chars[charIndex]) {
-                    buffer += "\(chars[charIndex])"
-                    charIndex += 1
+            } else if isDigit(currentSymbol()) {
+                buffer += "\(currentSymbol())"
+                let startIndex = currentSymbolIndex - 1
+                let _ = match(currentSymbol())
+                while !endProgram() && isDigit(currentSymbol()) {
+                    buffer += "\(currentSymbol())"
+                    let _ = match(currentSymbol())
                 }
                 
-                if charIndex < chars.count && chars[charIndex] == "." {
-                    charIndex += 1
+                if !endProgram() && match(".") {
                     buffer += "."
-                    while charIndex < chars.count && isDigit(chars[charIndex]) {
-                        buffer += "\(chars[charIndex])"
-                        charIndex += 1
+                    while !endProgram() && isDigit(currentSymbol()) {
+                        buffer += "\(currentSymbol())"
+                        let _ = match(currentSymbol())
                     }
                     
-                    let endIndex = charIndex - 1
+                    let endIndex = currentSymbolIndex - 1
                     tokens.append(Token(type: .FLOAT, start: startIndex, end: endIndex, value: buffer))
                 } else {
-                    let endIndex = charIndex - 1
+                    let endIndex = currentSymbolIndex - 1
                     tokens.append(Token(type: .INT, start: startIndex, end: endIndex, value: buffer))
                 }
                 
                 buffer = ""
-            } else if isID("\(char)") {
-                buffer += "\(char)"
-                let startIndex = charIndex
-                charIndex += 1
-                while charIndex < chars.count && isID("\(chars[charIndex])") {
-                    buffer += "\(chars[charIndex])"
-                    charIndex += 1
+            } else if isID("\(currentSymbol())") {
+                buffer += "\(currentSymbol())"
+                let startIndex = currentSymbolIndex
+                let _ = match(currentSymbol())
+                while !endProgram() && isID("\(currentSymbol())") {
+                    buffer += "\(currentSymbol())"
+                    let _ = match(currentSymbol())
                 }
                 
-                let endIndex = charIndex - 1
+                let endIndex = currentSymbolIndex - 1
                 
                 if let type = keywords[buffer] {
                     tokens.append(Token(type: type, start: startIndex, end: endIndex, value: buffer))
                 } else {
-                    while charIndex < chars.count && "\(chars[charIndex])" == " " {charIndex += 1} // check on tabs
-                    if charIndex < chars.count && "\(chars[charIndex])" == "(" {
-                        tokens.append(Token(type: .FUNCTION, start: startIndex, end: charIndex, value: buffer))
-                        charIndex += 1
+                    while !endProgram() && "\(currentSymbol())" == " " {let _ = match(currentSymbol())} // check on tabs
+                    if !endProgram() && "\(currentSymbol())" == "(" {
+                        tokens.append(Token(type: .FUNCTION, start: startIndex, end: currentSymbolIndex, value: buffer))
+                        let _ = match(currentSymbol())
                     } else {
                         tokens.append(Token(type: .IDENTIFIER, start: startIndex, end: endIndex, value: buffer))
                     }
@@ -136,9 +132,9 @@ class Lexer {
                 
                 buffer = ""
             } else {
-                let endIndex = charIndex
-                let startIndex = charIndex
-                let val = "\(char)"
+                let endIndex = currentSymbolIndex
+                let startIndex = currentSymbolIndex
+                let val = "\(currentSymbol())"
                 
                 //Space linebreak will not take part in sintax
                 if (val != " " && val != "\n") {
@@ -174,11 +170,38 @@ class Lexer {
                         tokens.append(Token(type: .UNKNOWN, start: startIndex, end: endIndex, value: val))
                     }
                 }
-                charIndex += 1
+                let _ = match(currentSymbol())
             }
         }
         
         currentToken = tokens[currentIndex]
+    }
+    
+    func match(_ symbol: String.Element) -> Bool {
+        if endProgram() {
+            return false
+        }
+        let currentSymbol = programText[currentSymbolIndex]
+        if currentSymbol == symbol {
+            currentSymbolIndex += 1
+            return true
+        }
+        return false
+    }
+    
+    func currentSymbol() -> String.Element {
+        if endProgram() {
+            return "\u{1F1F7}\u{1F1FA}"
+        }
+        let currentSymbol = programText[currentSymbolIndex]
+        return currentSymbol
+    }
+    
+    func endProgram() -> Bool {
+        if currentSymbolIndex >= programText.count {
+            return true
+        }
+        return false
     }
     
     private func isID(_ str: String) -> Bool {
