@@ -11,6 +11,11 @@
 		55065D002618B262008F3657 /* TLEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55065CFF2618B262008F3657 /* TLEnvironment.swift */; };
 		55065D052618BCF1008F3657 /* TLStmt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55065D042618BCF1008F3657 /* TLStmt.swift */; };
 		55065D0A2618C13F008F3657 /* TLSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55065D092618C13F008F3657 /* TLSequence.swift */; };
+		550B6371263FCA7A001DCD44 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B6370263FCA7A001DCD44 /* AuthService.swift */; };
+		550B638C264040ED001DCD44 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550B638A264040ED001DCD44 /* Start.storyboard */; };
+		550B638D264040ED001DCD44 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B638B264040ED001DCD44 /* StartViewController.swift */; };
+		550B639E26404936001DCD44 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550B639D26404936001DCD44 /* Login.storyboard */; };
+		550B63A326404DB8001DCD44 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550B63A226404DB8001DCD44 /* LoginViewController.swift */; };
 		5550EAAE260F6377000AF565 /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550EAAD260F6376000AF565 /* MathLibrary.swift */; };
 		5550EB02260FAF4A000AF565 /* InitialJavaScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 5550EB01260FAF4A000AF565 /* InitialJavaScript.js */; };
 		5550EB08260FB30B000AF565 /* ScriptService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5550EB07260FB30B000AF565 /* ScriptService.swift */; };
@@ -97,6 +102,11 @@
 		55065CFF2618B262008F3657 /* TLEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLEnvironment.swift; sourceTree = "<group>"; };
 		55065D042618BCF1008F3657 /* TLStmt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLStmt.swift; sourceTree = "<group>"; };
 		55065D092618C13F008F3657 /* TLSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLSequence.swift; sourceTree = "<group>"; };
+		550B6370263FCA7A001DCD44 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		550B638A264040ED001DCD44 /* Start.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
+		550B638B264040ED001DCD44 /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		550B639D26404936001DCD44 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		550B63A226404DB8001DCD44 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5550EAAD260F6376000AF565 /* MathLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
 		5550EB01260FAF4A000AF565 /* InitialJavaScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = InitialJavaScript.js; sourceTree = "<group>"; };
 		5550EB07260FB30B000AF565 /* ScriptService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptService.swift; sourceTree = "<group>"; };
@@ -192,6 +202,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		550B636F263FCA1B001DCD44 /* AuthService */ = {
+			isa = PBXGroup;
+			children = (
+				550B6370263FCA7A001DCD44 /* AuthService.swift */,
+			);
+			path = AuthService;
+			sourceTree = "<group>";
+		};
+		550B6378263FCE7F001DCD44 /* StartModule */ = {
+			isa = PBXGroup;
+			children = (
+				550B63972640471D001DCD44 /* ModelView */,
+				550B6379263FCE9B001DCD44 /* View */,
+			);
+			path = StartModule;
+			sourceTree = "<group>";
+		};
+		550B6379263FCE9B001DCD44 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				550B638B264040ED001DCD44 /* StartViewController.swift */,
+				550B638A264040ED001DCD44 /* Start.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		550B63972640471D001DCD44 /* ModelView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModelView;
+			sourceTree = "<group>";
+		};
+		550B639B264048E8001DCD44 /* LoginModule */ = {
+			isa = PBXGroup;
+			children = (
+				550B639C2640490B001DCD44 /* View */,
+			);
+			path = LoginModule;
+			sourceTree = "<group>";
+		};
+		550B639C2640490B001DCD44 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				550B639D26404936001DCD44 /* Login.storyboard */,
+				550B63A226404DB8001DCD44 /* LoginViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5550EB06260FB2EC000AF565 /* ScriptService */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,6 +490,7 @@
 		55AC9B4B2606885700165003 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				550B636F263FCA1B001DCD44 /* AuthService */,
 				5550EB06260FB2EC000AF565 /* ScriptService */,
 				556FF7CE260D12F1008021DD /* Network */,
 				55AC9B1C260668F400165003 /* Renderer */,
@@ -440,6 +501,8 @@
 		55AC9B4C2606886600165003 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				550B639B264048E8001DCD44 /* LoginModule */,
+				550B6378263FCE7F001DCD44 /* StartModule */,
 				55AC9AAE2606543200165003 /* MainModule */,
 				55AC9B0C260662CB00165003 /* ProjectModule */,
 			);
@@ -594,6 +657,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550B638C264040ED001DCD44 /* Start.storyboard in Resources */,
 				55AC9B18260663CE00165003 /* Project.storyboard in Resources */,
 				557494892605FF1A007E6468 /* LaunchScreen.storyboard in Resources */,
 				5550EB02260FAF4A000AF565 /* InitialJavaScript.js in Resources */,
@@ -601,6 +665,7 @@
 				55877E672610D5C6000D9C8D /* Helper.js in Resources */,
 				556E6F8E26148030005B2D24 /* Test.tl in Resources */,
 				557494862605FF1A007E6468 /* Assets.xcassets in Resources */,
+				550B639E26404936001DCD44 /* Login.storyboard in Resources */,
 				557494812605FF18007E6468 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -653,6 +718,7 @@
 				5574947A2605FF18007E6468 /* AppDelegate.swift in Sources */,
 				5575C7172618E98800A6555B /* TLFunctCall.swift in Sources */,
 				5575C7122618E6CE00A6555B /* TLExpression.swift in Sources */,
+				550B6371263FCA7A001DCD44 /* AuthService.swift in Sources */,
 				55065CFB2618B1D0008F3657 /* TLNode.swift in Sources */,
 				55AC9AC82606579100165003 /* MainInteractorOutput.swift in Sources */,
 				55877E712610F765000D9C8D /* Lexer.swift in Sources */,
@@ -667,6 +733,7 @@
 				55AC9AEE260658C000165003 /* MainViewOutput.swift in Sources */,
 				55AC9B652606933300165003 /* RendererProtocol.swift in Sources */,
 				55621395261569600032FF00 /* StringProtocolExtension.swift in Sources */,
+				550B63A326404DB8001DCD44 /* LoginViewController.swift in Sources */,
 				55AC9B472606812600165003 /* ProjectInteractorOutput.swift in Sources */,
 				557314472619E00C00EF9B8F /* TLDefine.swift in Sources */,
 				5550EAAE260F6377000AF565 /* MathLibrary.swift in Sources */,
@@ -677,6 +744,7 @@
 				BC44E392262E02C7001C1C2F /* TLAdd.swift in Sources */,
 				55AC9B1E2606693B00165003 /* Renderer.swift in Sources */,
 				BC5A06AA262D523600753AB7 /* TLTerm.swift in Sources */,
+				550B638D264040ED001DCD44 /* StartViewController.swift in Sources */,
 				5574947C2605FF18007E6468 /* SceneDelegate.swift in Sources */,
 				55877E7626110865000D9C8D /* Preprocessor.swift in Sources */,
 				556FF7CA260D1107008021DD /* Project.swift in Sources */,
@@ -785,7 +853,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -840,7 +908,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
