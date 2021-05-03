@@ -215,7 +215,6 @@
 		550B6378263FCE7F001DCD44 /* StartModule */ = {
 			isa = PBXGroup;
 			children = (
-				550B63972640471D001DCD44 /* ModelView */,
 				550B6379263FCE9B001DCD44 /* View */,
 			);
 			path = StartModule;
@@ -228,13 +227,6 @@
 				550B638A264040ED001DCD44 /* Start.storyboard */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		550B63972640471D001DCD44 /* ModelView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ModelView;
 			sourceTree = "<group>";
 		};
 		550B639B264048E8001DCD44 /* LoginModule */ = {
