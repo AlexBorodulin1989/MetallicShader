@@ -41,6 +41,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Registration"/>
+                                        <connections>
+                                            <segue destination="U2X-Z9-8UB" kind="show" id="etj-hW-zl4"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BSL-mg-4dA">
                                         <rect key="frame" x="0.0" y="43.5" width="240" height="1"/>
@@ -97,6 +100,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z0E-zj-ZJ3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1190.5797101449277" y="52.901785714285715"/>
+        </scene>
+        <!--Registration-->
+        <scene sceneID="KU7-2X-ADW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Registration" id="U2X-Z9-8UB" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="ZLD-ec-fou"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xUZ-86-his" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1192" y="225"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xNu-7V-PxV">
