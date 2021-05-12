@@ -8,46 +8,63 @@
 import Foundation
 import GameplayKit
 
-class LiteralStateMachine: GKStateMachine {
-    init() {
-        super.init(states: [Start(), End(), Symbol(), BackSlashActive(), BackSlashInactive()])
-        self.enter(Start.self)
-    }
-    override init(states: [GKState]) {
-        super.init(states: states)
-    }
+enum FunctType {
+    case nextChar
+    case none
 }
 
-class Start: GKState {
-    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass == Symbol.self ||
-            stateClass == End.self
-    }
+struct State {
+    let input: String
+    let fail: Int
+    let success: Int
+    let failFunct: FunctType
+    let successFunct: FunctType
 }
 
-class End: GKState {
-    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return false
+class StringLiteralStateMachine {
+    static let stateTable =
+        [State(input: "", fail: 0, success: 0, failFunct: .none, successFunct: .none),
+         State(input: "\"", fail: 0, success: 2, failFunct: .none, successFunct: .nextChar),
+         State(input: "\"", fail: 3, success: 0, failFunct: .none, successFunct: .none),
+         State(input: "\\", fail: 2, success: 4, failFunct: .nextChar, successFunct: .nextChar),
+         State(input: "\\", fail: 2, success: 5, failFunct: .nextChar, successFunct: .nextChar),
+         State(input: "\\", fail: 6, success: 4, failFunct: .none, successFunct: .nextChar),
+         State(input: "\"", fail: 2, success: 0, failFunct: .none, successFunct: .none)]
+    
+    class func getStringLiteral(lexer: Lexer) -> Token? {
+        
+        let start = lexer.currentSymbolIndex
+        
+        var currentState = 1
+        
+        while !lexer.endProgram() && currentState != 0 {
+            let stateItem = stateTable[currentState]
+            if stateItem.input == "\(lexer.currentSymbol())" {
+                currentState = stateItem.success
+                startFunct(type: stateItem.successFunct, lexer: lexer)
+            } else {
+                currentState = stateItem.fail
+                startFunct(type: stateItem.failFunct, lexer: lexer)
+            }
+        }
+        
+        let end = lexer.currentSymbolIndex
+        
+        if end - start > 0 {
+            lexer.nextChar()
+            let val = lexer.getText(from: start + 1, to: end - 1)
+            return Token(type: .STRING, start: start, end: end, value: val)
+        }
+        
+        return nil
     }
-}
-
-class Symbol: GKState {
-    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass == BackSlashActive.self ||
-            stateClass == End.self
-    }
-}
-
-class BackSlashActive: GKState {
-    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass == BackSlashInactive.self ||
-            stateClass == Symbol.self
-    }
-}
-
-class BackSlashInactive: GKState {
-    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        return stateClass == Symbol.self ||
-            stateClass == End.self
+    
+    class func startFunct(type: FunctType, lexer: Lexer) {
+        switch type {
+        case .nextChar:
+            lexer.nextChar()
+        default:
+            break
+        }
     }
 }

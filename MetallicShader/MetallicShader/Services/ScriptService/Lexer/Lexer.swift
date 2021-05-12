@@ -61,29 +61,20 @@ class Lexer {
     private var currentToken: Token? //Dont set public access!
     
     let programText: [String.Element]
-    private var currentSymbolIndex = 0
+    private(set) var currentSymbolIndex = 0
     
     init(program: String) {
         programText = Array(program)
         
         var buffer = ""
-        let chars = Array(program)
         
         while(!endProgram()) {
             // This is simple case only for testing need to implement state machine for cases sach as \n, \t, \\, \"
-            if match("\"") {
-                let literalSM = LiteralStateMachine()
-                let startIndex = currentSymbolIndex - 1
-                
-                while !endProgram() && !match("\"") {
-                    buffer += "\(currentSymbol())"
-                    let _ = match(currentSymbol())
-                }
-                let endIndex = currentSymbolIndex - 1
-                
-                tokens.append(Token(type: .STRING, start: startIndex, end: endIndex, value: buffer))
-                buffer = ""
-            } else if isDigit(currentSymbol()) {
+            
+            while let token = StringLiteralStateMachine.getStringLiteral(lexer: self) {
+                tokens.append(token)
+            }
+            if isDigit(currentSymbol()) {
                 buffer += "\(currentSymbol())"
                 let startIndex = currentSymbolIndex - 1
                 let _ = match(currentSymbol())
@@ -189,12 +180,30 @@ class Lexer {
         return false
     }
     
+    func nextChar() {
+        let _ = match(currentSymbol())
+    }
+    
     func currentSymbol() -> String.Element {
         if endProgram() {
             return "\u{1F1F7}\u{1F1FA}"
         }
         let currentSymbol = programText[currentSymbolIndex]
         return currentSymbol
+    }
+    
+    func getText(from: Int, to: Int) -> String {
+        if from > to {
+            return ""
+        }
+        
+        var resText = ""
+        
+        for index in from...to {
+            resText += "\(programText[index])"
+        }
+        
+        return resText
     }
     
     func endProgram() -> Bool {

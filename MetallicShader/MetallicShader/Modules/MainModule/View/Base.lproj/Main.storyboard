@@ -25,10 +25,19 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTm-Mj-WJZ">
+                                        <rect key="frame" x="366" y="6" width="32" height="32"/>
+                                        <state key="normal" image="add_icon"/>
+                                        <connections>
+                                            <action selector="newProjectAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XQs-O5-8ra"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.4823529411764706" green="0.56470588235294117" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="742-Zb-HhC"/>
+                                    <constraint firstItem="UTm-Mj-WJZ" firstAttribute="centerY" secondItem="n5x-sn-75m" secondAttribute="centerY" id="NEG-Kz-9HB"/>
+                                    <constraint firstAttribute="trailing" secondItem="UTm-Mj-WJZ" secondAttribute="trailing" constant="16" id="WaT-3s-LOn"/>
                                     <constraint firstItem="Y96-Ai-iNd" firstAttribute="centerX" secondItem="n5x-sn-75m" secondAttribute="centerX" id="k2g-Yp-9Wg"/>
                                     <constraint firstItem="Y96-Ai-iNd" firstAttribute="top" secondItem="n5x-sn-75m" secondAttribute="top" constant="10" id="qc6-TX-lCU"/>
                                 </constraints>
@@ -80,4 +89,7 @@
             <point key="canvasLocation" x="1718.840579710145" y="78.348214285714278"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="add_icon" width="32" height="32"/>
+    </resources>
 </document>
