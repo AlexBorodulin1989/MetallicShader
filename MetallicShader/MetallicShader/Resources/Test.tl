@@ -1,4 +1,8 @@
 
+string test = "\nhello";
+
+logger(test);
+
 float width = getScreenWidth();
 float height = getScreenHeight();
 

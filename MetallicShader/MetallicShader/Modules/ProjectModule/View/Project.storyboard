@@ -20,16 +20,22 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GAe-B3-lOY" userLabel="Navigation">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgz-D4-T35">
-                                        <rect key="frame" x="50" y="0.0" width="53" height="44"/>
-                                        <state key="normal" title="Refresh"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bgz-D4-T35">
+                                        <rect key="frame" x="60" y="0.0" width="40" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="Rqg-MO-XHd"/>
+                                        </constraints>
+                                        <state key="normal" image="arrow.clockwise" catalog="system"/>
                                         <connections>
                                             <action selector="refreshPressed:" destination="AFt-qy-9OM" eventType="touchUpInside" id="TqS-Bc-VY6"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ch1-se-D8s">
-                                        <rect key="frame" x="8" y="0.0" width="34" height="44"/>
-                                        <state key="normal" title="Back"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ch1-se-D8s">
+                                        <rect key="frame" x="8" y="0.0" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="K0U-GH-Gpu"/>
+                                        </constraints>
+                                        <state key="normal" image="arrow.backward" catalog="system"/>
                                         <connections>
                                             <action selector="backPressed:" destination="AFt-qy-9OM" eventType="touchUpInside" id="Tbi-Bt-APo"/>
                                         </connections>
@@ -62,9 +68,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPF-1g-SOG" userLabel="ButtonsContainer">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwu-vp-w2C">
-                                                <rect key="frame" x="355" y="0.0" width="51" height="44"/>
-                                                <state key="normal" title="Expand"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwu-vp-w2C">
+                                                <rect key="frame" x="362" y="0.0" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="Kcu-fz-UXL"/>
+                                                </constraints>
+                                                <state key="normal" image="expand_icon"/>
                                                 <connections>
                                                     <action selector="resizeEditorPressed:" destination="AFt-qy-9OM" eventType="touchUpInside" id="tGk-yF-dYW"/>
                                                 </connections>
@@ -159,6 +168,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="98"/>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
+        <image name="expand_icon" width="32" height="32"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

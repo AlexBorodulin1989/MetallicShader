@@ -10,6 +10,7 @@ import GameplayKit
 
 enum FunctType {
     case nextChar
+    case writeChar
     case none
 }
 
@@ -22,17 +23,19 @@ struct State {
 }
 
 class StringLiteralStateMachine {
+    static var buffer = ""
+    
     static let stateTable =
         [State(input: "", fail: 0, success: 0, failFunct: .none, successFunct: .none),
          State(input: "\"", fail: 0, success: 2, failFunct: .none, successFunct: .nextChar),
          State(input: "\"", fail: 3, success: 0, failFunct: .none, successFunct: .none),
-         State(input: "\\", fail: 2, success: 4, failFunct: .nextChar, successFunct: .nextChar),
+         State(input: "\\", fail: 2, success: 4, failFunct: .writeChar, successFunct: .nextChar),
          State(input: "\\", fail: 2, success: 5, failFunct: .nextChar, successFunct: .nextChar),
          State(input: "\\", fail: 6, success: 4, failFunct: .none, successFunct: .nextChar),
          State(input: "\"", fail: 2, success: 0, failFunct: .none, successFunct: .none)]
     
     class func getStringLiteral(lexer: Lexer) -> Token? {
-        
+        buffer = ""
         let start = lexer.currentSymbolIndex
         
         var currentState = 1
@@ -52,8 +55,7 @@ class StringLiteralStateMachine {
         
         if end - start > 0 {
             lexer.nextChar()
-            let val = lexer.getText(from: start + 1, to: end - 1)
-            return Token(type: .STRING, start: start, end: end, value: val)
+            return Token(type: .STRING, start: start, end: end, value: buffer)
         }
         
         return nil
@@ -63,8 +65,15 @@ class StringLiteralStateMachine {
         switch type {
         case .nextChar:
             lexer.nextChar()
+        case .writeChar:
+            self.writeLetter(letter: "\(lexer.currentSymbol())", lexer: lexer)
         default:
             break
         }
+    }
+    
+    class func writeLetter(letter: String, lexer: Lexer) {
+        buffer += letter
+        lexer.nextChar()
     }
 }

@@ -56,7 +56,7 @@ extension ProjectViewController: ProjectViewInput {
                 self?.view.layoutIfNeeded()
             },
             completion: nil)
-        editorResizeBtn.setTitle("Collapse", for: .normal)
+        editorResizeBtn.setImage(UIImage(named: "collapse_icon"), for: .normal)
     }
     
     func collapseEditor() {
@@ -67,7 +67,7 @@ extension ProjectViewController: ProjectViewInput {
                 self?.view.layoutIfNeeded()
             },
             completion: nil)
-        editorResizeBtn.setTitle("Expand", for: .normal)
+        editorResizeBtn.setImage(UIImage(named: "expand_icon"), for: .normal)
     }
 }
 

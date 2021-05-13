@@ -192,20 +192,6 @@ class Lexer {
         return currentSymbol
     }
     
-    func getText(from: Int, to: Int) -> String {
-        if from > to {
-            return ""
-        }
-        
-        var resText = ""
-        
-        for index in from...to {
-            resText += "\(programText[index])"
-        }
-        
-        return resText
-    }
-    
     func endProgram() -> Bool {
         if currentSymbolIndex >= programText.count {
             return true
