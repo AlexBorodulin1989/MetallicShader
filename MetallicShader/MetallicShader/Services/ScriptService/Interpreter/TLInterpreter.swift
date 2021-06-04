@@ -45,6 +45,14 @@ class TLInterpreter {
         environment = TLEnvironment(prev: nil)
         do {
             let seq = try TLSequence(env: environment, lexer: lexer)
+            
+            let d = try TLNode(env: environment, lexer: lexer)
+            d.leftNode = try TLNode(env: environment, lexer: lexer)
+            d.rightNode = try TLNode(env: environment, lexer: lexer)
+            d.rightNode?.rightNode = try TLNode(env: environment, lexer: lexer)
+            
+            //seq.debug()
+            //seq.printDebug()
             try seq.execute()
         } catch {
             print(error.localizedDescription)

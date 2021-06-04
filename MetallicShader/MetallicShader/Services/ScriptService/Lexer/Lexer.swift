@@ -39,6 +39,7 @@ enum TokenType: Int {
     case MINUS
     case MUL
     case DIV
+    case RETURN
 };
 
 enum LexerError: Error {
@@ -52,7 +53,8 @@ class Lexer {
                                          "float": .VALUE_TYPE,
                                          "int": .VALUE_TYPE,
                                          "string": .VALUE_TYPE,
-                                         "void": .VALUE_TYPE]
+                                         "void": .VALUE_TYPE,
+                                         "return": .RETURN]
     
     private var tokens = [Token]()
     

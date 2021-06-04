@@ -27,6 +27,8 @@ void UpdateScreenSize(float width, float height) {
     logger(ratio);
     float[] projMat = projectionMatrix(45.0, 0.1, 100.0, ratio);
     resetMatrix(projMat, "projection");
+    return;
+    logger("Return working");
 }
 
 float b = 10.0 / 3;

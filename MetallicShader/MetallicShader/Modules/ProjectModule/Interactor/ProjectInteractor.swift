@@ -14,7 +14,7 @@ class ProjectInteractor {
     var editorFullSize = false
     
     var textInputShader = true
-    var tempText: String!
+    var script: String!
     
     deinit {
         unsubscribeKeyboardNotify()
@@ -27,12 +27,12 @@ extension ProjectInteractor: ProjectInteractorInput {
         subscribeKeyboardNotify()
         
         let mtlpath = Bundle.main.path(forResource: "InitialShader", ofType: "txt")
-        let screptpath = Bundle.main.path(forResource: "Test", ofType: "tl")
+        let scriptpath = Bundle.main.path(forResource: "Test", ofType: "tl")
         do {
             let shader = try String(contentsOfFile:mtlpath!, encoding: String.Encoding.utf8)
-            tempText = try String(contentsOfFile:screptpath!, encoding: String.Encoding.utf8)
+            script = try String(contentsOfFile:scriptpath!, encoding: String.Encoding.utf8)
             
-            renderer = Renderer(metalView: mtkView, shader: shader, script: tempText)
+            renderer = Renderer(metalView: mtkView, shader: shader, script: script)
             output.setEditingText(shader)
         } catch {
             fatalError("Initial file not found")
@@ -41,9 +41,9 @@ extension ProjectInteractor: ProjectInteractorInput {
     
     func refreshProject(_ currentText: String) {
         if textInputShader {
-            renderer.refresh(shader: currentText, script: tempText)
+            renderer.refresh(shader: currentText, script: script)
         } else {
-            renderer.refresh(shader: tempText, script: currentText)
+            renderer.refresh(shader: script, script: currentText)
         }
     }
     
@@ -54,8 +54,8 @@ extension ProjectInteractor: ProjectInteractorInput {
     
     func switchTextSource(_ currentText: String) {
         textInputShader = !textInputShader
-        output.setEditingText(tempText)
-        tempText = currentText
+        output.setEditingText(script)
+        script = currentText
     }
 }
 

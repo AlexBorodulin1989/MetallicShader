@@ -17,7 +17,19 @@ class TLBlock: TLNode {
         }
         
         if lexer.match(.LEFT_CURLY_BRACE) {
-            leftNode = try TLSequence(env: environment, lexer: lexer)
+            do {
+                leftNode = try TLSequence(env: environment, lexer: lexer)
+            } catch CodeThrow.Return {
+                
+                while lexer.currentType() != .RIGHT_CURLY_BRACE {
+                    if lexer.currentType() == nil {
+                        throw "Expect } at the end of block"
+                    }
+                    let _ = lexer.match(lexer.currentType()!)
+                }
+                let _ = lexer.match(.RIGHT_CURLY_BRACE)
+                return
+            }
         } else {
             throw "Block difinition not correct"
         }
