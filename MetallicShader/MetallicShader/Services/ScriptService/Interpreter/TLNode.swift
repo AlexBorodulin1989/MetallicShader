@@ -37,10 +37,6 @@ class TextArray {
     }
 }
 
-enum CodeThrow: Error {
-    case Return
-}
-
 class TLNode: TLNodeProtocol {
     private(set) var env: TLEnvironment!
     var leftNode: TLNode?
