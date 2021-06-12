@@ -9,6 +9,9 @@ import Foundation
 
 class TLFunction: TLNode {
     var functParams = [TLObject]()
+    
+    private var blockEnvironment: TLEnvironment?
+    
     override init(env: TLEnvironment, lexer: Lexer) throws {
         guard let functIdentifier = lexer.currentValue(),
               lexer.match(.FUNCTION)
@@ -39,6 +42,7 @@ class TLFunction: TLNode {
             if TLInterpreter.subscribedFunctions[functIdentifier] != nil || env.getVarValue(id: functIdentifier) != nil {
                 throw "Redefenition function \(functIdentifier)"
             }
+            blockEnvironment = leftNode?.env
             env.setVar(id: functIdentifier, value: TLObject(type: .FUNCT, value: self, identifier: functIdentifier, subtype: nil, size: 0))
         } else {
             throw "Expect ) at function definition"
@@ -54,6 +58,9 @@ class TLFunction: TLNode {
                 throw "Params not coincide"
             }
         }
-        
+    }
+    
+    func getReturnValue() -> TLObject? {
+        return blockEnvironment?.getLocalVarValue(id: returnValueKey)
     }
 }

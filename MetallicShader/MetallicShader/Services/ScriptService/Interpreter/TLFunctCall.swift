@@ -95,9 +95,12 @@ class TLFunctCall: TLNode {
                     throw "Return type is not allowed for assigning"
                 }
             }
-        } else if let functObj = env.getVarValue(id: self.functName), functObj.type == .FUNCT {
-            try (functObj.value as? TLFunction)?.setParams(functParams)
-            try (functObj.value as? TLNode)?.execute()
+        } else if let functObj = env.getVarValue(id: self.functName), let funct = functObj.value as? TLFunction {
+            try funct.setParams(functParams)
+            try funct.execute()
+            if let retValue = funct.getReturnValue() {
+                env.setVar(id: returnIdentifier, value: retValue)
+            }
         } else {
             throw "Function is not defined"
         }

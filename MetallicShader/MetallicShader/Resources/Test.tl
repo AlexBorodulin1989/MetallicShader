@@ -28,11 +28,17 @@ void UpdateScreenSize(float width, float height) {
     float[] projMat = projectionMatrix(45.0, 0.1, 100.0, ratio);
     resetMatrix(projMat, "projection");
     return;
-    logger("Return working");
+    logger("Return not working");
 }
 
-float b = 10.0 / 3;
-float a = -b * 2.0 + (-2.0) / b;
+void testReturn() {
+    float returnValue = 1.4;
+    return returnValue;
+}
+
+float retVal = testReturn();
+
+float a = -2 * 2.0 + (-2.0) / 5;
 
 logger(a);
-logger(b);
+logger(retVal);
