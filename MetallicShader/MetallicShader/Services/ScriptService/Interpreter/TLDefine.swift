@@ -24,8 +24,6 @@ class TLDefine: TLNode {
                 } else {
                     throw "Not correct variable definition"
                 }
-            } else if lexer.currentType() == .FUNCTION {
-                let _ = try TLFunction(env: env, lexer: lexer)
             } else if lexer.match(.LEFT_SQUARE_BRACKET) && lexer.match(.RIGHT_SQUARE_BRACKET) {
                 if let identifier = lexer.currentValue(),
                    lexer.match(.IDENTIFIER) {

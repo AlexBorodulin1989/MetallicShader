@@ -77,7 +77,7 @@
 		BC1EFB9026412CAF0011F9A5 /* Registration.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC1EFB8F26412CAF0011F9A5 /* Registration.storyboard */; };
 		BC1EFB9226412CC80011F9A5 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC1EFB9126412CC80011F9A5 /* RegistrationViewController.swift */; };
 		BC44E392262E02C7001C1C2F /* TLAdd.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC44E391262E02C7001C1C2F /* TLAdd.swift */; };
-		BC476080262B35A5007E6D23 /* TLFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC47607F262B35A5007E6D23 /* TLFunction.swift */; };
+		BC476080262B35A5007E6D23 /* TLFunct.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC47607F262B35A5007E6D23 /* TLFunct.swift */; };
 		BC5A06AA262D523600753AB7 /* TLTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5A06A9262D523600753AB7 /* TLTerm.swift */; };
 		BC5A06AF262D524500753AB7 /* TLFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5A06AE262D524500753AB7 /* TLFactor.swift */; };
 		BC749393264D376C007A91AD /* TLReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC749392264D376C007A91AD /* TLReturn.swift */; };
@@ -176,7 +176,7 @@
 		BC1EFB8F26412CAF0011F9A5 /* Registration.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Registration.storyboard; sourceTree = "<group>"; };
 		BC1EFB9126412CC80011F9A5 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		BC44E391262E02C7001C1C2F /* TLAdd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLAdd.swift; sourceTree = "<group>"; };
-		BC47607F262B35A5007E6D23 /* TLFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLFunction.swift; sourceTree = "<group>"; };
+		BC47607F262B35A5007E6D23 /* TLFunct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLFunct.swift; sourceTree = "<group>"; };
 		BC5A06A9262D523600753AB7 /* TLTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLTerm.swift; sourceTree = "<group>"; };
 		BC5A06AE262D524500753AB7 /* TLFactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLFactor.swift; sourceTree = "<group>"; };
 		BC749392264D376C007A91AD /* TLReturn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLReturn.swift; sourceTree = "<group>"; };
@@ -538,7 +538,7 @@
 				557314462619E00C00EF9B8F /* TLDefine.swift */,
 				559EB4B2261B939400F8F02A /* TLAssign.swift */,
 				5577AAB5262240B0004472E4 /* TLArray.swift */,
-				BC47607F262B35A5007E6D23 /* TLFunction.swift */,
+				BC47607F262B35A5007E6D23 /* TLFunct.swift */,
 				5575C7112618E6CE00A6555B /* TLExpression.swift */,
 				BC44E391262E02C7001C1C2F /* TLAdd.swift */,
 				9D735584263755A700A79A23 /* TLSign.swift */,
@@ -753,7 +753,7 @@
 				55065CFB2618B1D0008F3657 /* TLNode.swift in Sources */,
 				55AC9AC82606579100165003 /* MainInteractorOutput.swift in Sources */,
 				55877E712610F765000D9C8D /* Lexer.swift in Sources */,
-				BC476080262B35A5007E6D23 /* TLFunction.swift in Sources */,
+				BC476080262B35A5007E6D23 /* TLFunct.swift in Sources */,
 				55AC9B3526067C6600165003 /* ProjectViewOutput.swift in Sources */,
 				55AC9B3026067C2400165003 /* ProjectPresenter.swift in Sources */,
 				BC5A06AF262D524500753AB7 /* TLFactor.swift in Sources */,

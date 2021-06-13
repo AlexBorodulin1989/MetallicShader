@@ -95,7 +95,7 @@ class TLFunctCall: TLNode {
                     throw "Return type is not allowed for assigning"
                 }
             }
-        } else if let functObj = env.getVarValue(id: self.functName), let funct = functObj.value as? TLFunction {
+        } else if let functObj = env.getVarValue(id: self.functName), let funct = functObj.value as? TLFunct {
             try funct.setParams(functParams)
             try funct.execute()
             if let retValue = funct.getReturnValue() {

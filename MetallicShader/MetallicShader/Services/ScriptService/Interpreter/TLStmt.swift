@@ -14,6 +14,8 @@ class TLStmt: TLNode {
         if type == nil {
         } else if type == .VALUE_TYPE {
             leftNode = try TLDefine(env: env, lexer: lexer)
+        } else if lexer.match(.FUNCT), lexer.currentType() == .FUNCTION {
+            let _ = try TLFunct(env: env, lexer: lexer)
         } else if type != nil {
             leftNode = try TLExpression(env: env, lexer: lexer)
             if !lexer.match(.SEMICOLON) {

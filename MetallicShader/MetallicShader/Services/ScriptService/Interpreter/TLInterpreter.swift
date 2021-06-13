@@ -62,8 +62,8 @@ class TLInterpreter {
     func executeFunct(name: String, params: [TLObject]) {
         let funcObj = environment.getVarValue(id: name)
         if funcObj?.type == .FUNCT {
-            try? (funcObj?.value as? TLFunction)?.setParams(params)
-            try? (funcObj?.value as? TLFunction)?.execute()
+            try? (funcObj?.value as? TLFunct)?.setParams(params)
+            try? (funcObj?.value as? TLFunct)?.execute()
         }
     }
 }

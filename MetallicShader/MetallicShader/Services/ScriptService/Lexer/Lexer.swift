@@ -15,15 +15,15 @@ struct Token {
 }
 
 enum TokenType: Int {
-    case UNKNOWN
+    case ASSIGN
+    case EMPTY
+    case FUNCT
     case STRING
     case FLOAT
     case INT
-    case EMPTY
     case IDENTIFIER
     case VERTEX
     case FRAGMENT
-    case VALUE_TYPE
     case RIGHT_BRACKET
     case LEFT_BRACKET
     case LEFT_CURLY_BRACE
@@ -33,13 +33,14 @@ enum TokenType: Int {
     case SEMICOLON
     case COMMA
     case POINT
-    case ASSIGN
     case FUNCTION
     case PLUS
     case MINUS
     case MUL
     case DIV
     case RETURN
+    case UNKNOWN
+    case VALUE_TYPE
 };
 
 enum LexerError: Error {
@@ -53,7 +54,7 @@ class Lexer {
                                          "float": .VALUE_TYPE,
                                          "int": .VALUE_TYPE,
                                          "string": .VALUE_TYPE,
-                                         "void": .VALUE_TYPE,
+                                         "funct": .FUNCT,
                                          "return": .RETURN]
     
     private var tokens = [Token]()

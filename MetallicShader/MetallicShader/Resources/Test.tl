@@ -22,7 +22,7 @@ setMatrix(rotateMat, "rotate");
 
 setViewBackground(0.5, 0.5, 0.5);
 
-void UpdateScreenSize(float width, float height) {
+funct UpdateScreenSize(float width, float height) {
     float ratio = width / height;
     logger(ratio);
     float[] projMat = projectionMatrix(45.0, 0.1, 100.0, ratio);
@@ -31,7 +31,7 @@ void UpdateScreenSize(float width, float height) {
     logger("Return not working");
 }
 
-void testReturn() {
+funct testReturn() {
     float returnValue = 1.4;
     return returnValue;
 }

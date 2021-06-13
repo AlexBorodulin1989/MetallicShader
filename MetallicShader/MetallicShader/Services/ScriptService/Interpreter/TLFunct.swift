@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TLFunction: TLNode {
+class TLFunct: TLNode {
     var functParams = [TLObject]()
     
     private var blockEnvironment: TLEnvironment?
